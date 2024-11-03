@@ -1,0 +1,9 @@
+/.idea
+/vendor
+
+/composer.lock
+
+.git
+
+.DS_Store
+Thumbs.db

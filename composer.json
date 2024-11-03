@@ -1,0 +1,23 @@
+{
+    "name": "empaphy/rephine",
+    "description": "Provides useful classes and functions that extend the standard functionality of PHP.",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.2",
+        "empaphy/polyphill-php": "^1"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2",
+        "pestphp/pest": "^3"
+    },
+    "autoload": {
+        "psr-4": {
+            "empaphy\\rephine\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}

@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Pest" type="PestRunConfigurationType">
+    <option name="pestRunnerSettings">
+      <PestRunner directory="$PROJECT_DIR$" method="" />
+    </option>
+    <option name="runnerSettings">
+      <PhpTestRunnerSettings directory="$PROJECT_DIR$" method="" />
+    </option>
+    <method v="2" />
+  </configuration>
+</component>
