@@ -35,3 +35,19 @@ function array_interchange(array $array, int|string $key1, int|string $key2): ar
         $key2 => $array[$key1],
     ];
 }
+
+/**
+ * Finds whether the given variable is a
+ * {@link https://www.php.net/types.resource resource} that has been closed.
+ *
+ * @template T
+ *
+ * @param  T  $value  The variable being evaluated.
+ * @return (T is resource ? bool : false) Returns `true` if **value** is a
+ *                                        <u>resource</u> variable that has been
+ *                                        closed, `false` otherwise.
+ */
+function is_closed_resource(mixed $value): bool
+{
+    return Type::ClosedResource->is($value);
+}

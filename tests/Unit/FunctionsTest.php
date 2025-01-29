@@ -53,3 +53,13 @@ describe('array_interchange()', function () {
         ],
     ]);
 });
+
+
+describe('is_closed_resource()', function () {
+    it('correctly returns whether value is a closed resource', function ($value, $type) {
+        $isClosed = rephine\is_closed_resource($value);
+        $expected = rephine\Type::ClosedResource === $type;
+
+        expect($isClosed)->toBe($expected);
+    })->with('types / test cases');
+});
