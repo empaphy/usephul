@@ -11,6 +11,9 @@
         "pestphp/pest": "^3"
     },
     "autoload": {
+        "files": [
+            "src/constants.php"
+        ],
         "psr-4": {
             "empaphy\\rephine\\": "src/"
         }
