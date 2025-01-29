@@ -63,3 +63,24 @@ describe('is_closed_resource()', function () {
         expect($isClosed)->toBe($expected);
     })->with('types / test cases');
 });
+
+describe('seq()', function () {
+    test('properly sequences values', function ($data, $expected) {
+        $array = [];
+
+        foreach (rephine\seq($data) as $key => $value) {
+            $array[$key] = $value;
+        }
+
+        expect($array)->toBe($expected);
+    })->with([
+        'true  => [true]'          => [true, [true]],
+        'false => [false]'         => [false, [false]],
+        'null  => [null]'          => [null, [null]],
+        '1     => [1]'             => [1, [1]],
+        '"1"   => [1]'             => ['1', ['1']],
+        '"abc" => ["a", "b", "c"]' => ['abc', ['a', 'b', 'c']],
+        '[1, 2, 3] => [1, 2, 3]'   => [[1, 2, 3], [0 => 1, 1 => 2, 2 => 3]],
+        '{a: 1, b: 2} => ["a" => 1, "b" => 2]' => [(object) ['a' => 1, 'b' => 2], ['a' => 1, 'b' => 2]],
+    ]);
+});
