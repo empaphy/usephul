@@ -59,6 +59,8 @@ function is_closed_resource(mixed $value): bool
 /**
  * Finds whether the given number is (sufficiently close to) 0.
  *
+ * @package Types
+ *
  * @param  int|float   $value      The number being evaluated.
  * @param  float|null  $tolerance  Tolerance allowed when evaluating the number.
  * @return bool Returns <u>true</u> if **value** is (sufficiently close to) 0,

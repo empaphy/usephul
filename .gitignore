@@ -1,9 +1,10 @@
 /.idea
+/build
+/var
 /vendor
 
 /composer.lock
 
-.git
-
 .DS_Store
+.git
 Thumbs.db

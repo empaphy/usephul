@@ -1,0 +1,6 @@
+services:
+  phpdoc:
+    image: phpdoc/phpdoc:3
+    init: true
+    volumes:
+      - { type: bind, source: ./, target: /data }

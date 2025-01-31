@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor
+        configVersion="3"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://www.phpdoc.org"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/phpDocumentor/phpDocumentor/master/data/xsd/phpdoc.xsd"
+>
+    <title>Rephine</title>
+
+    <paths>
+        <output>build/website/docs</output>
+        <cache>var/cache/phpdoc</cache>
+    </paths>
+
+    <version number="latest">
+        <folder>latest</folder>
+        <api>
+            <source dsn="."><path>src</path></source>
+            <ignore hidden="true" symlinks="true">
+                <path>tests/**/*</path>
+                <path>build/**/*</path>
+                <path>var/**/*</path>
+                <path>vendor/**/*</path>
+            </ignore>
+            <extensions>
+                <extension>php</extension>
+            </extensions>
+            <ignore-tags>
+                <ignore-tag>extends</ignore-tag>
+                <ignore-tag>implements</ignore-tag>
+                <ignore-tag>noinspection</ignore-tag>
+                <ignore-tag>template</ignore-tag>
+                <ignore-tag>template-extends</ignore-tag>
+                <ignore-tag>template-implements</ignore-tag>
+                <ignore-tag>throws</ignore-tag>
+            </ignore-tags>
+        </api>
+<!--        <guide>-->
+<!--            <source dsn=".">-->
+<!--                <path>docs</path>-->
+<!--            </source>-->
+<!--            <output>/guide</output>-->
+<!--        </guide>-->
+    </version>
+    <setting name="guides.enabled" value="true"/>
+</phpdocumentor>
