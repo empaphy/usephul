@@ -57,6 +57,19 @@ function is_closed_resource(mixed $value): bool
 }
 
 /**
+ * Finds whether the given number is (sufficiently close to) 0.
+ *
+ * @param  int|float   $value      The number being evaluated.
+ * @param  float|null  $tolerance  Tolerance allowed when evaluating the number.
+ * @return bool Returns <u>true</u> if **value** is (sufficiently close to) 0,
+ *              <u>false</u> otherwise.
+ */
+function is_zero(int | float $value, ?float $tolerance = PHP_ZERO_TOLERANCE): bool
+{
+    return 0 === $value || 0.0 === $value || (null !== $tolerance && \abs($value) <= $tolerance);
+}
+
+/**
  * Sequences a value into a {@see \Generator}.
  *
  * @package Generators

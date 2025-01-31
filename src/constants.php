@@ -15,3 +15,8 @@ namespace empaphy\rephine;
  * This mask matches every possible past and future PHP error level.
  */
 const E_EVERYTHING = 0x7FFFFFFF;
+
+/**
+ * Default error tolerance.
+ */
+const PHP_ZERO_TOLERANCE = 0.00000000001;
