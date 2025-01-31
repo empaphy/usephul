@@ -4,7 +4,7 @@
  * @author    Alwin Garside <alwin@garsi.de>
  * @copyright 2025 The Empaphy Project
  * @license   MIT
- * @package   empaphy\rephine
+ * @package   Arrays\Sorting
  */
 
 declare(strict_types=1);

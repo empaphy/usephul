@@ -4,7 +4,7 @@
  * @author    Alwin Garside <alwin@garsi.de>
  * @copyright 2025 The Empaphy Project
  * @license   MIT
- * @package   empaphy\rephine
+ * @package   Arrays\Functions
  */
 
 declare(strict_types=1);
@@ -12,17 +12,19 @@ declare(strict_types=1);
 namespace empaphy\rephine;
 
 /**
- * Interchange the values of two elements of an **array**.
+ * Interchange the values of two elements of an array.
  *
  * If a **key** doesn't exist in the **array**, then the other key will be set
  * to `null`, and a warning will be thrown.
  *
+ * @package Arrays
+ *
  * @template TKey of array-key
  * @template TValue
  *
- * @param array<TKey, TValue>  $array
- * @param TKey                 $key1
- * @param TKey                 $key2
+ * @param  array<TKey, TValue>  $array
+ * @param  TKey                 $key1
+ * @param  TKey                 $key2
  * @return array<TKey, TValue>
  *
  * @noinspection PhpDocSignatureInspection
@@ -40,6 +42,8 @@ function array_interchange(array $array, int|string $key1, int|string $key2): ar
  * Finds whether the given variable is a
  * {@link https://www.php.net/types.resource resource} that has been closed.
  *
+ * @package Types
+ *
  * @template T
  *
  * @param  T  $value  The variable being evaluated.
@@ -54,6 +58,8 @@ function is_closed_resource(mixed $value): bool
 
 /**
  * Sequences a value into a {@see \Generator}.
+ *
+ * @package Generators
  *
  * @param  mixed  $value  The value to sequence.
  * @return \Generator<string|int>

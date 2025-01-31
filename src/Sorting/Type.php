@@ -4,7 +4,7 @@
  * @author    Alwin Garside <alwin@garsi.de>
  * @copyright 2025 The Empaphy Project
  * @license   MIT
- * @package   empaphy\rephine
+ * @package   Arrays\Sorting
  */
 
 declare(strict_types=1);
@@ -51,7 +51,7 @@ enum Type: int
     case LocaleString = SORT_LOCALE_STRING;
 
     /**
-     * Compare items as strings using "natural ordering" like {@see natsort()}.
+     * Compare items as strings using "natural ordering" like `natsort()`.
      */
     case Natural = SORT_NATURAL;
 }
