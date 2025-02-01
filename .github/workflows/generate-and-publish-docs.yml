@@ -31,7 +31,7 @@ jobs:
         id: phpdocumentor-cache
         uses: actions/cache@v4
         with:
-          path: .phpdoc/cache
+          path: var/cache/phpdoc
           key: ${{ runner.os }}-phpdocumentor-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-phpdocumentor-
