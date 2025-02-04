@@ -1,4 +1,4 @@
-name: Generate and publish docs to GitHub Pages
+name: Publish to GitHub Pages
 
 on:
   release:
@@ -15,36 +15,13 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  publish:
+    name: Generate & Publish PHPDoc
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.publish-phpdoc.outputs.page-url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Cache phpDocumentor build files
-        id: phpdocumentor-cache
-        uses: actions/cache@v4
-        with:
-          path: var/cache/phpdoc
-          key: ${{ runner.os }}-phpdocumentor-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-phpdocumentor-
-
-      - name: Generate docs with phpDocumentor
-        #language=bash
-        run: docker compose run --rm phpdoc
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: 'build/website/docs'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Publish PHPDoc
+        id:   publish-phpdoc
+        uses: empaphy/dev/actions/publish-phpdoc@v1
