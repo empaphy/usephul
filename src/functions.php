@@ -4,7 +4,7 @@
  * @author    Alwin Garside <alwin@garsi.de>
  * @copyright 2025 The Empaphy Project
  * @license   MIT
- * @package   Arrays\Functions
+ * @package   Arrays
  */
 
 declare(strict_types=1);
@@ -124,4 +124,34 @@ function seq(mixed $value): \Generator
             // supporting them for now.
             throw new \RangeException('Sequencing resources is not supported.');
     }
+}
+
+/**
+ * Checks whether an object or class uses a given trait.
+ *
+ * @package Types
+ *
+ * @param  object|string $object_or_class  A class name or an object instance.
+ * @param  string        $trait            The trait name.
+ * @param  bool          $allow_string     If this parameter set to false,
+ *                                         string class name as object_or_class
+ *                                         is not allowed. This also prevents
+ *                                         from calling autoloader if the class
+ *                                         doesn't exist.
+ * @return bool
+ */
+function uses(
+    object|string $object_or_class,
+    string $trait,
+    bool $allow_string = true
+): bool {
+    if (false === $allow_string && \is_string($object_or_class)) {
+        return false;
+    }
+
+    return \in_array(
+        $trait,
+        \class_uses($object_or_class, $allow_string),
+        true,
+    );
 }
