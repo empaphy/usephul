@@ -4,14 +4,14 @@
  * @author    Alwin Garside <alwin@garsi.de>
  * @copyright 2025 The Empaphy Project
  * @license   MIT
- * @package   empaphy\rephine
+ * @package   empaphy\usephul
  *
  * @noinspection StaticClosureCanBeUsedInspection
  */
 
 declare(strict_types=1);
 
-use empaphy\rephine\Enumerations\EnumDynamicity;
+use empaphy\usephul\Enumerations\EnumDynamicity;
 
 
 describe('EnumDynamicity::try()', function () {

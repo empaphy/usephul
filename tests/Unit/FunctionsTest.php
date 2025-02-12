@@ -4,18 +4,18 @@
  * @author    Alwin Garside <alwin@garsi.de>
  * @copyright 2025 The Empaphy Project
  * @license   MIT
- * @package   empaphy\rephine
+ * @package   empaphy\usephul
  *
  * @noinspection StaticClosureCanBeUsedInspection
  */
 
 declare(strict_types=1);
 
-use empaphy\rephine;
+use empaphy\usephul;
 
 describe('array_interchange()', function () {
     it('interchanges array elements', function ($array, $key1, $key2, $expected) {
-        $result = rephine\array_interchange($array, $key1, $key2);
+        $result = usephul\array_interchange($array, $key1, $key2);
 
         expect($result)->toBe($expected);
     })->with([
@@ -56,8 +56,8 @@ describe('array_interchange()', function () {
 
 describe('is_closed_resource()', function () {
     it('correctly returns whether value is a closed resource', function ($value, $type) {
-        $isClosed = rephine\is_closed_resource($value);
-        $expected = rephine\Type::ClosedResource === $type;
+        $isClosed = usephul\is_closed_resource($value);
+        $expected = usephul\Type::ClosedResource === $type;
 
         expect($isClosed)->toBe($expected);
     })->with('types / test cases');
@@ -65,23 +65,23 @@ describe('is_closed_resource()', function () {
 
 describe('is_zero()', function () {
     test('returns true if value is (close to) 0', function ($value, $tolerance) {
-        $isZero = rephine\is_zero($value, $tolerance);
+        $isZero = usephul\is_zero($value, $tolerance);
 
         expect($isZero)->toBeTrue();
     })->with([
         [0, null],
         [0.0, null],
-        [PHP_FLOAT_MIN, rephine\PHP_ZERO_TOLERANCE],
+        [PHP_FLOAT_MIN, usephul\PHP_ZERO_TOLERANCE],
         [PHP_FLOAT_MIN, PHP_FLOAT_MIN],
     ]);
 
     test('returns false if value is not (close to) 0', function ($value, $tolerance) {
-        $isZero = rephine\is_zero($value, $tolerance);
+        $isZero = usephul\is_zero($value, $tolerance);
 
         expect($isZero)->toBeFalse();
     })->with([
-        [1, rephine\PHP_ZERO_TOLERANCE],
-        [1.0, rephine\PHP_ZERO_TOLERANCE],
+        [1, usephul\PHP_ZERO_TOLERANCE],
+        [1.0, usephul\PHP_ZERO_TOLERANCE],
         [PHP_FLOAT_EPSILON, PHP_FLOAT_MIN],
         [PHP_FLOAT_MIN, null],
     ]);
@@ -91,7 +91,7 @@ describe('seq()', function () {
     test('properly sequences values', function ($data, $expected) {
         $array = [];
 
-        foreach (rephine\seq($data) as $key => $value) {
+        foreach (usephul\seq($data) as $key => $value) {
             $array[$key] = $value;
         }
 

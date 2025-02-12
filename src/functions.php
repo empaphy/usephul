@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace empaphy\rephine;
+namespace empaphy\usephul;
 
 /**
  * Interchange the values of two elements of an array.

@@ -4,12 +4,12 @@
  * @author    Alwin Garside <alwin@garsi.de>
  * @copyright 2025 The Empaphy Project
  * @license   MIT
- * @package   empaphy\rephine
+ * @package   empaphy\usephul
  */
 
 declare(strict_types=1);
 
-use empaphy\rephine\Type;
+use empaphy\usephul\Type;
 
 $closedResource = fopen(__FILE__, 'rb');
 fclose($closedResource);

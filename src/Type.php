@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace empaphy\rephine;
+namespace empaphy\usephul;
 
-use empaphy\rephine\Enumerations\EnumDynamicity;
+use empaphy\usephul\Enumerations\EnumDynamicity;
 
 /**
  * Possible types as returned by {@see gettype()}.

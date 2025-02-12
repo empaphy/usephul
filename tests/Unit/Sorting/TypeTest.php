@@ -4,14 +4,14 @@
  * @author    Alwin Garside <alwin@garsi.de>
  * @copyright 2025 The Empaphy Project
  * @license   MIT
- * @package   empaphy\rephine
+ * @package   empaphy\usephul
  *
  * @noinspection StaticClosureCanBeUsedInspection
  */
 
 declare(strict_types=1);
 
-use empaphy\rephine\Sorting\Type;
+use empaphy\usephul\Sorting\Type;
 
 describe('Sorting Type enum', function () {
     test('has correct values', function (Type $sortingType, $value) {

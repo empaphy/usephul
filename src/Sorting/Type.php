@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace empaphy\rephine\Sorting;
+namespace empaphy\usephul\Sorting;
 
-use empaphy\rephine\Enumerations\EnumDynamicity;
+use empaphy\usephul\Enumerations\EnumDynamicity;
 
 /**
  * Sorting type flags: used by various sort functions.

@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace empaphy\rephine;
+namespace empaphy\usephul;
 
 /**
  * This mask matches every possible past and future PHP error level.

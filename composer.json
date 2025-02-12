@@ -1,5 +1,5 @@
 {
-    "name": "empaphy/rephine",
+    "name": "empaphy/usephul",
     "description": "Provides useful classes and functions that extend the standard functionality of PHP.",
     "license": "MIT",
     "require": {
@@ -15,7 +15,7 @@
             "src/functions.php"
         ],
         "psr-4": {
-            "empaphy\\rephine\\": "src/"
+            "empaphy\\usephul\\": "src/"
         }
     },
     "config": {

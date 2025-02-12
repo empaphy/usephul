@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace empaphy\rephine\Enumerations;
+namespace empaphy\usephul\Enumerations;
 
 /**
  * Adds dynamicity of case names to PHP Enumerations.

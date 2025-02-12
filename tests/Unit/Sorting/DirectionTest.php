@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-use empaphy\rephine\Sorting\Direction;
+use empaphy\usephul\Sorting\Direction;
 
 describe('Sorting Direction enum', function () {
     test('has correct values', function (Direction $direction, $expected) {
