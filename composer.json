@@ -1,7 +1,19 @@
 {
     "name": "empaphy/usephul",
     "description": "Provides useful classes and functions that extend the standard functionality of PHP.",
+    "type": "library",
+    "keywords": ["useful", "helpers"],
+    "homepage": "https://usephul.empaphy.org/",
     "license": "MIT",
+    "authors": [
+        { "name": "Alwin Garside", "email": "alwin@garsi.de",  "homepage": "https://yogarine.net" }
+    ],
+    "support": {
+        "issues": "https://github.com/empaphy/usephul/issues",
+        "source": "https://github.com/empaphy/usephul",
+        "docs": "https://usephul.empaphy.org/",
+        "rss": "https://github.com/empaphy/usephul/releases.atom"
+    },
     "require": {
         "php": ">=8.1",
         "empaphy/polyphill-php": "^1"
