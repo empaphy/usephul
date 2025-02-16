@@ -24,6 +24,7 @@
     "autoload": {
         "files": [
             "src/constants.php",
+            "src/filesystem.php",
             "src/functions.php",
             "src/other.php"
         ],

@@ -9,6 +9,13 @@
   - [array_interchange()](https://usephul.empaphy.org/packages/Arrays.html#function_array_interchange)
     — Return the traits used by the parent classes of the given class.
 
+### Filesystem Functions
+
+  - [filename()](https://usephul.empaphy.org/packages/Filesystem.html#function_filename)
+    — Returns the name component of path without the extension.
+  - [extension()](https://usephul.empaphy.org/packages/Filesystem.html#function_extension)
+    — Returns the extension component of path without the extension.
+
 ### Generator Functions
 
   - [seq()](https://usephul.empaphy.org/packages/Generators.html#function_seq)
@@ -34,6 +41,13 @@
     — Return the traits used by the parent classes of the given class, recursively.
   - [class_traits_uses()](https://usephul.empaphy.org/packages/Other-SPL.html#function_class_traits_uses)
     — Return the traits used by the given class or trait, recursively.
+
+## Classes
+
+### Filesystem
+
+  - [PathInfo](http://localhost:63342/usephul/.phpdoc/build/classes/empaphy-usephul-Filesystem-PathInfo.html)
+    — Provides information about a file path.
 
 ## Traits
 
