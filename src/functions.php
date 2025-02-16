@@ -129,7 +129,7 @@ function seq(mixed $value): \Generator
 /**
  * Checks whether an object or class uses a given trait.
  *
- * @package Types
+ * @package Types\Traits
  *
  * @param  object|string $object_or_class  A class name or an object instance.
  * @param  string        $trait            The trait name.
@@ -138,7 +138,10 @@ function seq(mixed $value): \Generator
  *                                         is not allowed. This also prevents
  *                                         from calling autoloader if the class
  *                                         doesn't exist.
- * @return bool
+ * @return bool This function returns
+ *              {@link https://php.net/reserved.constants#constant.true true} if
+ *              the **object_or_class**, or any of its traits, uses **trait** or
+ *              if any of its parents, or its parents' traits, use **trait**.
  */
 function uses(
     object|string $object_or_class,
@@ -149,9 +152,6 @@ function uses(
         return false;
     }
 
-    return \in_array(
-        $trait,
-        \class_uses($object_or_class, $allow_string),
-        true,
-    );
+    return isset(class_traits_uses($object_or_class, $allow_string)[$trait])
+        || isset(class_parents_traits_uses($object_or_class, $allow_string)[$trait]);
 }

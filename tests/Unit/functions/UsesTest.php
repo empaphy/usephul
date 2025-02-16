@@ -15,41 +15,76 @@ namespace empaphy\usephul\tests\Unit\functions\UsesTest;
 use empaphy\usephul;
 
 describe('uses()', function () {
-    trait MockTrait {}
+    trait SuperMockTrait {}
+
+    trait MockTrait
+    {
+        use SuperMockTrait;
+    }
+
+    trait ParentSuperMockTrait {}
+
+    trait ParentMockTrait
+    {
+        use ParentSuperMockTrait;
+    }
 
     trait OtherMockTrait {}
+
+    class DoesntUseTrait {}
 
     class UsesMockTrait
     {
         use MockTrait;
     }
 
-    test('returns true when a class uses a trait', function () {
+    class ParentClassUsesParentMockTrait
+    {
+        use ParentMockTrait;
+    }
+
+    class ClassExtendsParentClass extends ParentClassUsesParentMockTrait {}
+
+    class ClassExtendsParentClassUsesOtherMockTrait extends ParentClassUsesParentMockTrait
+    {
+        use OtherMockTrait;
+    }
+
+    test('returns true when a class uses a specific trait', function () {
         $class = UsesMockTrait::class;
         $uses = usephul\uses($class, MockTrait::class);
+        $usesOther = usephul\uses($class, OtherMockTrait::class);
 
-        expect($uses)->toBeTrue();
+        expect($uses)->toBeTrue()
+            ->and($usesOther)->toBeFalse();
     });
 
     test('returns false when a class does not use a trait', function () {
-        $class = UsesMockTrait::class;
-        $uses = usephul\uses($class, OtherMockTrait::class);
+        $class = DoesntUseTrait::class;
+        $uses = usephul\uses($class, MockTrait::class);
+        $usesOther = usephul\uses($class, OtherMockTrait::class);
 
-        expect($uses)->toBeFalse();
+        expect($uses)->toBeFalse()
+            ->and($usesOther)->toBeFalse();
     });
 
     test('returns false with a class while allow_string = false', function () {
         $class = UsesMockTrait::class;
-        $uses = usephul\uses($class, MockTrait::class, false);
+        $object = new $class();
+        $classUses = usephul\uses($class, MockTrait::class, false);
+        $objectUses = usephul\uses($object, MockTrait::class, false);
 
-        expect($uses)->toBeFalse();
+        expect($classUses)->toBeFalse()
+            ->and($objectUses)->toBeTrue();
     });
 
-    test('returns true when an object uses a trait', function () {
+    test('returns true when an object uses a specific trait', function () {
         $object = new UsesMockTrait();
         $uses = usephul\uses($object, MockTrait::class);
+        $usesOther = usephul\uses($object, OtherMockTrait::class);
 
-        expect($uses)->toBeTrue();
+        expect($uses)->toBeTrue()
+            ->and($usesOther)->toBeFalse();
     });
 
     test('returns false when an object does not use a trait', function () {
@@ -59,10 +94,37 @@ describe('uses()', function () {
         expect($uses)->toBeFalse();
     });
 
-    test('returns true with an object while allow_string = false', function () {
-        $object = new UsesMockTrait();
-        $uses = usephul\uses($object, MockTrait::class, false);
+    test('returns true when a parent class uses a trait', function () {
+        $class = ClassExtendsParentClass::class;
+        $object = new $class();
+        $classUses = usephul\uses($class, ParentMockTrait::class);
+        $objectUses = usephul\uses($object, ParentMockTrait::class);
 
-        expect($uses)->toBeTrue();
+        expect($classUses)->toBeTrue()
+            ->and($objectUses)->toBeTrue();
+    });
+
+    test("returns true when a class' with a parent class that uses another trait", function () {
+        $class = ClassExtendsParentClassUsesOtherMockTrait::class;
+        $object = new $class();
+        $classUses = usephul\uses($class, OtherMockTrait::class);
+        $objectUses = usephul\uses($object, OtherMockTrait::class);
+        $classUsesParent = usephul\uses($class, ParentMockTrait::class);
+        $objectUsesParent = usephul\uses($object, ParentMockTrait::class);
+
+        expect($classUses)->toBeTrue()
+            ->and($classUsesParent)->toBeTrue()
+            ->and($objectUses)->toBeTrue()
+            ->and($objectUsesParent)->toBeTrue();
+    });
+
+    test("returns true when a class' trait uses a trait", function () {
+        $class = ParentClassUsesParentMockTrait::class;
+        $object = new $class();
+        $classUses = usephul\uses($class, ParentSuperMockTrait::class);
+        $objectUses = usephul\uses($object, ParentSuperMockTrait::class);
+
+        expect($classUses)->toBeTrue()
+            ->and($objectUses)->toBeTrue();
     });
 });
