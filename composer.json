@@ -23,6 +23,7 @@
     },
     "autoload": {
         "files": [
+            "src/array.php",
             "src/constants.php",
             "src/filesystem.php",
             "src/functions.php",

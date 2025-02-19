@@ -7,7 +7,11 @@
 ### Array Functions
 
   - [array_interchange()](https://usephul.empaphy.org/packages/Arrays.html#function_array_interchange)
-    — Return the traits used by the parent classes of the given class.
+    — Interchange the values of two elements of an array.
+  - [array_remap()](https://usephul.empaphy.org/packages/Arrays.html#function_array_remap)
+    — Applies a (generator) callback to the elements of a given array, allowing the remapping of its keys in the process.
+  - [array_zip()](https://usephul.empaphy.org/packages/Arrays.html#function_array_zip)
+    — Perform a zip operation on multiple arrays.
 
 ### Filesystem Functions
 
