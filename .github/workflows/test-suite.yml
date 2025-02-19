@@ -1,4 +1,4 @@
-name: Run PHP CI
+name: Test Suite
 
 on:
   push:
