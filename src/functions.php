@@ -42,7 +42,7 @@ function array_interchange(array $array, int|string $key1, int|string $key2): ar
  * Finds whether the given variable is a
  * {@link https://www.php.net/types.resource resource} that has been closed.
  *
- * @package Types
+ * @package Variables
  *
  * @template T
  *
@@ -59,7 +59,7 @@ function is_closed_resource(mixed $value): bool
 /**
  * Finds whether the given number is (sufficiently close to) 0.
  *
- * @package Types
+ * @package Variables
  *
  * @param  int|float   $value      The number being evaluated.
  * @param  float|null  $tolerance  Tolerance allowed when evaluating the number.

@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace empaphy\usephul;
 
+use empaphy\usephul\Array\Map;
+
 /**
  * Applies a (generator) callback to the elements of a given array, allowing the
  * remapping of its keys in the process.
@@ -80,4 +82,16 @@ function array_zip(array $array, array ...$arrays): array
     }
 
     return \array_map(null, $array, ...$arrays);
+}
+
+/**
+ * @template K of array-key
+ * @template V
+ *
+ * @param array<K, V> $array
+ * @return Map<K, V>
+ */
+function map(array $array): Map
+{
+    return new Map($array);
 }
