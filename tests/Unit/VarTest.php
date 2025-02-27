@@ -11,15 +11,12 @@
 
 declare(strict_types=1);
 
-namespace empaphy\usephul\test\var;
-
-use empaphy\usephul\Type;
 use empaphy\usephul\var;
 
 describe('is_closed_resource()', function () {
     it('correctly returns whether value is a closed resource', function ($value, $type) {
         $isClosed = var\is_closed_resource($value);
-        $expected = Type::ClosedResource === $type;
+        $expected = var\Type::ClosedResource === $type;
 
         expect($isClosed)->toBe($expected);
     })->with('types / test cases');

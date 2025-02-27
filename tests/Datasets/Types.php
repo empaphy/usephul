@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-use empaphy\usephul\Type;
+use empaphy\usephul\var\Type;
 
 $closedResource = fopen(__FILE__, 'rb');
 fclose($closedResource);

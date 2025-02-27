@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace empaphy\usephul;
 
+use empaphy\usephul\var\Type;
+
 /**
  * Interchange the values of two elements of an array.
  *

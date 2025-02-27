@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace empaphy\usephul;
+namespace empaphy\usephul\var;
 
 use empaphy\usephul\Enumerations\EnumDynamicity;
 

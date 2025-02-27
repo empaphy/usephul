@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace empaphy\usephul\var;
 
-use empaphy\usephul\Type;
-
 /**
  * Default error tolerance.
  */

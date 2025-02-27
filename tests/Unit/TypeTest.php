@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-use empaphy\usephul\Type;
+use empaphy\usephul\var\Type;
 
 describe('Type', function () {
     it('has the appropriate cases', function ($case, $expected) {
