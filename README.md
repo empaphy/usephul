@@ -32,6 +32,18 @@
     — Finds whether the given variable is a [resource](https://www.php.net/types.resource) that has been closed.
   - [is_non_empty_string()](https://usephul.empaphy.org/packages/Types-Variables.html#function_is_non_empty_string)
     — Find whether a variable is a non-empty string.
+  - [is_negative_int()](https://usephul.empaphy.org/packages/Types-Variables.html#function_is_negative_int)
+    — Find whether a variable is an integer and less than zero.
+  - [is_non_negative_int()](https://usephul.empaphy.org/packages/Types-Variables.html#function_is_non_negative_int)
+    — Find whether a variable is an integer and not less than zero.
+  - [is_non_positive_int()](https://usephul.empaphy.org/packages/Types-Variables.html#function_is_non_positive_int)
+    — Find whether a variable is an integer and not greater than zero.
+  - [is_non_zero_int()](https://usephul.empaphy.org/packages/Types-Variables.html#function_is_non_zero_int)
+    — Find whether a variable is an integer and not zero.
+  - [is_number()](https://usephul.empaphy.org/packages/Types-Variables.html#function_is_number)
+    — Find whether a variable is a number (either an integer or a float).
+  - [is_positive_int()](https://usephul.empaphy.org/packages/Types-Variables.html#function_is_positive_int)
+    — Find whether a variable is an integer and greater than zero.
   - [is_zero()](https://usephul.empaphy.org/packages/Types-Variables.html#function_is_zero)
     — Finds whether the given number is (sufficiently close to) 0.
 

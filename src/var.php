@@ -34,6 +34,21 @@ function is_closed_resource(mixed $value): bool
 }
 
 /**
+ * Find whether a variable is an integer and less than zero.
+ *
+ * @param  mixed  $value
+ *   The variable being evaluated.
+ *
+ * @return ($value is negative-int ? true : false)
+ *   Returns <u>true</u> if **value** is a negative <u>integer</u>,
+ *   <u>false</u> otherwise.
+ */
+function is_negative_int(mixed $value): bool
+{
+    return \is_int($value) && $value < 0;
+}
+
+/**
  * Find whether a variable is a non-empty string.
  *
  * @param  mixed  $value
@@ -45,6 +60,83 @@ function is_closed_resource(mixed $value): bool
 function is_non_empty_string(mixed $value): bool
 {
     return ! empty($value) && \is_string($value);
+}
+
+/**
+ * Find whether a variable is an integer and not less than zero.
+ *
+ * @param  mixed  $value
+ *   The variable being evaluated.
+ *
+ * @return ($value is non-negative-int ? true : false)
+ *   Returns <u>true</u> if **value** is a non-negative <u>integer</u>,
+ *   <u>false</u> otherwise.
+ */
+function is_non_negative_int(mixed $value): bool
+{
+    return \is_int($value) && $value >= 0;
+}
+
+/**
+ * Find whether a variable is an integer and not greater than zero.
+ *
+ * @param  mixed  $value
+ *   The variable being evaluated.
+ *
+ * @return ($value is non-positive-int ? true : false)
+ *   Returns <u>true</u> if **value** is a non-positive <u>integer</u>,
+ *   <u>false</u> otherwise.
+ */
+function is_non_positive_int(mixed $value): bool
+{
+    return \is_int($value) && $value <= 0;
+}
+
+/**
+ * Find whether a variable is an integer and not zero.
+ *
+ * @param  mixed  $value
+ *   The variable being evaluated.
+ *
+ * @return ($value is non-zero-int ? true : false)
+ *   Returns <u>true</u> if **value** is a non-zero <u>integer</u>, <u>false</u>
+ *   otherwise.
+ *
+ * @noinspection PhpUndefinedClassInspection
+ */
+function is_non_zero_int(mixed $value): bool
+{
+    return \is_int($value) && $value !== 0;
+}
+
+/**
+ * Find whether a variable is a number (either an integer or a float).
+ *
+ * @param  mixed  $value
+ *   The variable being evaluated.
+ *
+ * @return ($value is number ? true : false)
+ *   Returns <u>true</u> if **value** is an <u>integer</u> or a <u>float</u>,
+ *   <u>false</u> otherwise.
+ */
+function is_number(mixed $value): bool
+{
+    return \is_int($value) || \is_float($value);
+}
+
+/**
+ * Find whether a variable is an integer and greater than zero.
+ *
+ * @param  mixed  $value
+ *   The variable being evaluated.
+ *
+ * @return ($value is positive-int ? true : false)
+ *   Returns <u>true</u> if **value** is a positive <u>integer</u>, <u>false</u>
+ *   otherwise.
+ */
+function is_positive_int(mixed $value): bool
+{
+    return \is_int($value) && $value > 0;
 }
 
 /**

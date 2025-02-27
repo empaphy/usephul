@@ -22,6 +22,28 @@ describe('is_closed_resource()', function () {
     })->with('types / test cases');
 });
 
+describe('is_negative_int()', function () {
+    test('returns true', function ($value) {
+        $result = var\is_negative_int($value);
+
+        expect($result)->toBeTrue();
+    })->with([[-1]]);
+
+    test('returns false', function ($value) {
+        $result = var\is_negative_int($value);
+
+        expect($result)->toBeFalse();
+    })->with([
+        [0],
+        [1],
+        [-0.1],
+        ['-1'],
+        [[-1]],
+        [new stdClass()],
+        [null],
+    ]);
+});
+
 describe('is_non_empty_string()', function() {
     test('returns true', function ($value) {
         $result = var\is_non_empty_string($value);
@@ -36,13 +58,134 @@ describe('is_non_empty_string()', function() {
 
         expect($result)->toBeFalse();
     })->with([
-        [1337],
-        [1.337],
+        [1],
+        [0.1],
         [['foo']],
         [new stdClass()],
         [''],
         [null],
         [[]],
+    ]);
+});
+
+describe('is_number()', function () {
+    test('returns true', function ($value) {
+        $result = var\is_number($value);
+
+        expect($result)->toBeTrue();
+    })->with([
+        [1],
+        [0],
+        [-1],
+        [0.1],
+        [\NAN],
+    ]);
+
+    test('returns false', function ($value) {
+        $result = var\is_number($value);
+
+        expect($result)->toBeFalse();
+    })->with([
+        ['1'],
+        ['0'],
+        ['-1'],
+        [new stdClass()],
+        [null],
+        [[]],
+    ]);
+});
+
+describe('is_non_negative_int()', function () {
+    test('returns true', function ($value) {
+        $result = var\is_non_negative_int($value);
+
+        expect($result)->toBeTrue();
+    })->with([
+        [0],
+        [1],
+    ]);
+
+    test('returns false', function ($value) {
+        $result = var\is_non_negative_int($value);
+
+        expect($result)->toBeFalse();
+    })->with([
+        [-1],
+        [1.0],
+        ['1'],
+        [[1]],
+        [new stdClass()],
+        [null],
+    ]);
+});
+
+describe('is_non_positive_int()', function () {
+    test('returns true', function ($value) {
+        $result = var\is_non_positive_int($value);
+
+        expect($result)->toBeTrue();
+    })->with([
+        [0],
+        [-1],
+    ]);
+
+    test('returns false', function ($value) {
+        $result = var\is_non_positive_int($value);
+
+        expect($result)->toBeFalse();
+    })->with([
+        [1],
+        [-1.0],
+        ['-1'],
+        [[-1]],
+        [new stdClass()],
+        [null],
+    ]);
+});
+
+describe('is_non_zero_int()', function () {
+    test('returns true', function ($value) {
+        $result = var\is_non_zero_int($value);
+
+        expect($result)->toBeTrue();
+    })->with([
+        [1],
+        [-1],
+    ]);
+
+    test('returns false', function ($value) {
+        $result = var\is_non_zero_int($value);
+
+        expect($result)->toBeFalse();
+    })->with([
+        [0],
+        [1.0],
+        ['1'],
+        [[1]],
+        [new stdClass()],
+        [null],
+    ]);
+});
+
+describe('is_positive_int()', function () {
+    test('returns true', function ($value) {
+        $result = var\is_positive_int($value);
+
+        expect($result)->toBeTrue();
+    })->with([[1]]);
+
+    test('returns false', function ($value) {
+        $result = var\is_positive_int($value);
+
+        expect($result)->toBeFalse();
+    })->with([
+        [0],
+        [-1],
+        [0.1],
+        ['1'],
+        [[1]],
+        [new stdClass()],
+        [null],
     ]);
 });
 
