@@ -34,6 +34,20 @@ function is_closed_resource(mixed $value): bool
 }
 
 /**
+ * Find whether a variable is a non-empty string.
+ *
+ * @param  mixed  $value
+ *   The variable being evaluated.
+ *
+ * @return ($value is non-empty-string ? true : false)
+ *   Returns <u>true</u> if value is a non-empty string, <u>false</u> otherwise.
+ */
+function is_non_empty_string(mixed $value): bool
+{
+    return ! empty($value) && \is_string($value);
+}
+
+/**
  * Finds whether the given number is (sufficiently close to) 0.
  *
  * @param  int|float   $value

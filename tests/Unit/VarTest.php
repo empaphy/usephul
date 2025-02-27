@@ -22,6 +22,30 @@ describe('is_closed_resource()', function () {
     })->with('types / test cases');
 });
 
+describe('is_non_empty_string()', function() {
+    test('returns true', function ($value) {
+        $result = var\is_non_empty_string($value);
+
+        expect($result)->toBeTrue();
+    })->with([
+        ['foo']
+    ]);
+
+    test('returns false', function ($value) {
+        $result = var\is_non_empty_string($value);
+
+        expect($result)->toBeFalse();
+    })->with([
+        [1337],
+        [1.337],
+        [['foo']],
+        [new stdClass()],
+        [''],
+        [null],
+        [[]],
+    ]);
+});
+
 describe('is_zero()', function () {
     test('returns true if value is (close to) 0', function ($value, $tolerance) {
         $isZero = var\is_zero($value, $tolerance);

@@ -28,9 +28,11 @@
 
 ### Variable handling Functions
 
-  - [is_closed_resource()](https://usephul.empaphy.org/packages/Types.html#function_is_closed_resource)
+  - [is_closed_resource()](https://usephul.empaphy.org/packages/Types-Variables.html#function_is_closed_resource)
     — Finds whether the given variable is a [resource](https://www.php.net/types.resource) that has been closed.
-  - [is_zero()](https://usephul.empaphy.org/packages/Types.html#function_is_zero)
+  - [is_non_empty_string()](https://usephul.empaphy.org/packages/Types-Variables.html#function_is_non_empty_string)
+    — Find whether a variable is a non-empty string.
+  - [is_zero()](https://usephul.empaphy.org/packages/Types-Variables.html#function_is_zero)
     — Finds whether the given number is (sufficiently close to) 0.
 
 ### Trait Functions
