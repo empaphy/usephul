@@ -39,39 +39,6 @@ function array_interchange(array $array, int|string $key1, int|string $key2): ar
 }
 
 /**
- * Finds whether the given variable is a
- * {@link https://www.php.net/types.resource resource} that has been closed.
- *
- * @package Types
- *
- * @template T
- *
- * @param  T  $value  The variable being evaluated.
- * @return (T is resource ? bool : false) Returns `true` if **value** is a
- *                                        <u>resource</u> variable that has been
- *                                        closed, `false` otherwise.
- */
-function is_closed_resource(mixed $value): bool
-{
-    return Type::ClosedResource->is($value);
-}
-
-/**
- * Finds whether the given number is (sufficiently close to) 0.
- *
- * @package Types
- *
- * @param  int|float   $value      The number being evaluated.
- * @param  float|null  $tolerance  Tolerance allowed when evaluating the number.
- * @return bool Returns <u>true</u> if **value** is (sufficiently close to) 0,
- *              <u>false</u> otherwise.
- */
-function is_zero(int | float $value, ?float $tolerance = PHP_ZERO_TOLERANCE): bool
-{
-    return 0 === $value || 0.0 === $value || (null !== $tolerance && \abs($value) <= $tolerance);
-}
-
-/**
  * Sequences a value into a {@see \Generator}.
  *
  * @package Generators

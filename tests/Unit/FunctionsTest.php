@@ -54,39 +54,6 @@ describe('array_interchange()', function () {
     ]);
 });
 
-describe('is_closed_resource()', function () {
-    it('correctly returns whether value is a closed resource', function ($value, $type) {
-        $isClosed = usephul\is_closed_resource($value);
-        $expected = usephul\Type::ClosedResource === $type;
-
-        expect($isClosed)->toBe($expected);
-    })->with('types / test cases');
-});
-
-describe('is_zero()', function () {
-    test('returns true if value is (close to) 0', function ($value, $tolerance) {
-        $isZero = usephul\is_zero($value, $tolerance);
-
-        expect($isZero)->toBeTrue();
-    })->with([
-        [0, null],
-        [0.0, null],
-        [PHP_FLOAT_MIN, usephul\PHP_ZERO_TOLERANCE],
-        [PHP_FLOAT_MIN, PHP_FLOAT_MIN],
-    ]);
-
-    test('returns false if value is not (close to) 0', function ($value, $tolerance) {
-        $isZero = usephul\is_zero($value, $tolerance);
-
-        expect($isZero)->toBeFalse();
-    })->with([
-        [1, usephul\PHP_ZERO_TOLERANCE],
-        [1.0, usephul\PHP_ZERO_TOLERANCE],
-        [PHP_FLOAT_EPSILON, PHP_FLOAT_MIN],
-        [PHP_FLOAT_MIN, null],
-    ]);
-});
-
 describe('seq()', function () {
     test('properly sequences values', function ($data, $expected) {
         $array = [];

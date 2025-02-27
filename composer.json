@@ -27,7 +27,8 @@
             "src/constants.php",
             "src/filesystem.php",
             "src/functions.php",
-            "src/other.php"
+            "src/other.php",
+            "src/var.php"
         ],
         "psr-4": {
             "empaphy\\usephul\\": "src/"
