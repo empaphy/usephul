@@ -11,6 +11,49 @@ declare(strict_types=1);
 namespace empaphy\usephul;
 
 use empaphy\usephul\var\Type;
+use ReflectionAttribute;
+use ReflectionClass;
+use ReflectionObject;
+
+/**
+ * Finds whether an attribute has been applied to a given object, class,
+ * interface, or trait.
+ *
+ * @package Types\Attributes
+ *
+ * @param  object|class-string  $object_or_class
+ *   A class name or an object instance.
+ *
+ * @param  class-string  $attribute
+ *   The attribute name.
+ *
+ * @return bool
+ *   `true` if the attribute has been applied to the given object or class.
+ *   `false` otherwise.
+ */
+function applies(object|string $object_or_class, string $attribute): bool
+{
+    $type = Type::of($object_or_class);
+
+    try {
+        $reflector = match ($type) {
+            Type::Object => new ReflectionObject($object_or_class),
+            Type::String => new ReflectionClass($object_or_class),
+            default => null,
+        };
+    } catch (\ReflectionException $e) {
+        return false;
+    }
+
+    if (null === $reflector) {
+        return false;
+    }
+
+    return ! empty($reflector->getAttributes(
+        $attribute,
+        ReflectionAttribute::IS_INSTANCEOF
+    ));
+}
 
 /**
  * Sequences a value into a {@see \Generator}.
