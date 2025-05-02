@@ -47,6 +47,11 @@
   - [is_zero()](https://usephul.empaphy.org/packages/Types-Variables.html#function_is_zero)
     — Finds whether the given number is (sufficiently close to) 0.
 
+### Attribute Functions
+
+  - [applies()](https://usephul.empaphy.org/packages/Types-Attributes.html#function_applies)
+    — Finds whether an attribute has been applied to a given object, class, interface, or trait.
+
 ### Trait Functions
 
   - [uses()](https://usephul.empaphy.org/packages/Types-Traits.html#function_uses)
