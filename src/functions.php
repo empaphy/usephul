@@ -4,7 +4,6 @@
  * @author    Alwin Garside <alwin@garsi.de>
  * @copyright 2025 The Empaphy Project
  * @license   MIT
- * @package   Arrays
  */
 
 declare(strict_types=1);
@@ -73,17 +72,21 @@ function seq(mixed $value): \Generator
  *
  * @package Types\Traits
  *
- * @param  object|string $object_or_class  A class name or an object instance.
- * @param  string        $trait            The trait name.
- * @param  bool          $allow_string     If this parameter set to false,
- *                                         string class name as object_or_class
- *                                         is not allowed. This also prevents
- *                                         from calling autoloader if the class
- *                                         doesn't exist.
- * @return bool This function returns
- *              {@link https://php.net/reserved.constants#constant.true true} if
- *              the **object_or_class**, or any of its traits, uses **trait** or
- *              if any of its parents, or its parents' traits, use **trait**.
+ * @param  object|string  $object_or_class
+ *   A class name or an object instance.
+ *
+ * @param  string  $trait
+ *   The trait name.
+ *
+ * @param  bool  $allow_string
+ *   If this parameter is set to `false`, a string class name as
+ *   __object_or_class__ is not allowed. This also prevents from calling
+ *   autoloader if the class doesn't exist.
+ *
+ * @return bool
+ *   This function returns `true` if __object_or_class__, any of its traits,
+ *   any of its parents, or its parents' traits, use __trait__. `false`
+ *   otherwise.
  */
 function uses(
     object|string $object_or_class,
