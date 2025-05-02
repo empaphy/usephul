@@ -38,10 +38,10 @@ namespace empaphy\usephul;
  *           **callback** function to the corresponding key-value pair of
  *           **array** used as arguments for the callback.
 */
-function array_remap(callable $callback, iterable $array): array
+function array_remap(callable $callback, array $array): array
 {
     return [...(
-        static function (iterable $array) use ($callback) {
+        static function (array $array) use ($callback) {
             foreach ($array as $key => $value) {
                 $result = $callback($key, $value);
 
