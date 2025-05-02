@@ -14,33 +14,6 @@ namespace empaphy\usephul;
 use empaphy\usephul\var\Type;
 
 /**
- * Interchange the values of two elements of an array.
- *
- * If a **key** doesn't exist in the **array**, then the other key will be set
- * to `null`, and a warning will be thrown.
- *
- * @package Arrays
- *
- * @template TKey of array-key
- * @template TValue
- *
- * @param  array<TKey, TValue>  $array
- * @param  TKey                 $key1
- * @param  TKey                 $key2
- * @return array<TKey, TValue>
- *
- * @noinspection PhpDocSignatureInspection
- */
-function array_interchange(array $array, int|string $key1, int|string $key2): array
-{
-    return [
-        ...$array,
-        $key1 => $array[$key2],
-        $key2 => $array[$key1],
-    ];
-}
-
-/**
  * Sequences a value into a {@see \Generator}.
  *
  * @package Generators
