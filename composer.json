@@ -41,5 +41,10 @@
     },
     "scripts": {
         "test": "vendor/bin/pest"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.x-dev"
+        }
     }
 }
