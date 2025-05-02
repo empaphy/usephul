@@ -11,9 +11,15 @@ declare(strict_types=1);
 namespace empaphy\usephul;
 
 use empaphy\usephul\var\Type;
+use Generator;
+use RangeException;
 use ReflectionAttribute;
 use ReflectionClass;
+use ReflectionException;
 use ReflectionObject;
+
+use function is_string;
+use function strlen;
 
 /**
  * Finds whether an attribute has been applied to a given object, class,
@@ -41,7 +47,7 @@ function applies(object|string $object_or_class, string $attribute): bool
             Type::String => new ReflectionClass($object_or_class),
             default => null,
         };
-    } catch (\ReflectionException $e) {
+    } catch (ReflectionException $e) {
         return false;
     }
 
@@ -56,14 +62,14 @@ function applies(object|string $object_or_class, string $attribute): bool
 }
 
 /**
- * Sequences a value into a {@see \Generator}.
- *
- * @package Generators
+ * Sequences a value into a Generator.
  *
  * @param  mixed  $value  The value to sequence.
- * @return \Generator<string|int>
+ * @return Generator<string|int>
+ * @package Generators
+ *
  */
-function seq(mixed $value): \Generator
+function seq(mixed $value): Generator
 {
     switch (Type::of($value)) {
         case Type::Boolean:
@@ -77,7 +83,7 @@ function seq(mixed $value): \Generator
 
         case Type::Integer:
             $value = (string) $value;
-            $size = \strlen($value);
+            $size = strlen($value);
             for ($i = 0; $i < $size; $i++) {
                 yield (int) $value[$i];
             }
@@ -86,10 +92,10 @@ function seq(mixed $value): \Generator
         case Type::Float:
             // I'm not sure how to sequence floats yet, so I'm simply not
             // supporting them for now.
-            throw new \RangeException('Sequencing floats is not supported.');
+            throw new RangeException('Sequencing floats is not supported.');
 
         case Type::String:
-            $size = \strlen($value);
+            $size = strlen($value);
             for ($i = 0; $i < $size; $i++) {
                 yield $value[$i];
             }
@@ -106,7 +112,7 @@ function seq(mixed $value): \Generator
         case Type::Resource:
             // I'm not sure how to sequence resources yet, so I'm simply not
             // supporting them for now.
-            throw new \RangeException('Sequencing resources is not supported.');
+            throw new RangeException('Sequencing resources is not supported.');
     }
 }
 
@@ -136,7 +142,7 @@ function uses(
     string $trait,
     bool $allow_string = true
 ): bool {
-    if (false === $allow_string && \is_string($object_or_class)) {
+    if (false === $allow_string && is_string($object_or_class)) {
         return false;
     }
 
