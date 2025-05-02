@@ -4,7 +4,6 @@
  * @author    Alwin Garside <alwin@garsi.de>
  * @copyright 2025 The Empaphy Project
  * @license   MIT
- * @package   empaphy\usephul
  *
  * @noinspection StaticClosureCanBeUsedInspection
  */

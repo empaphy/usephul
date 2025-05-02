@@ -40,14 +40,14 @@ enum Type: string
     case Integer = 'integer';
 
     /**
-     * A {@link https://www.php.net/types.float float} is a floating point
-     * number, also known as a "double", or "real number".
+     * A "float" is a floating point number, also known as a "double", or
+     * "real number".
      */
     case Float = 'double';
 
     /**
-     * A string is a series of
-     * characters, where a character is the same as a byte.
+     * A string is a series of characters, where a character is the same as
+     * a byte.
      */
     case String = 'string';
 
