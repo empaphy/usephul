@@ -10,7 +10,11 @@
 
 declare(strict_types=1);
 
-use empaphy\usephul;
+namespace empaphy\usephul\tests\Unit\type\AppliesTest;
+
+use Attribute;
+use empaphy\usephul\type;
+use stdClass;
 
 describe('applies()', function () {
     #[Attribute(Attribute::TARGET_CLASS)]
@@ -22,34 +26,34 @@ describe('applies()', function () {
     class MockAttributeTargetChild extends MockAttributeTarget {}
 
     test('returns true when attribute is applied to class', function () {
-        $applied = usephul\applies(MockAttributeTarget::class, MockAttribute::class);
+        $applied = type\applies(MockAttributeTarget::class, MockAttribute::class);
 
         expect($applied)->toBeTrue();
     });
 
     test('returns false when attribute is not applied to class', function () {
-         $applied = usephul\applies(stdClass::class, MockAttribute::class);
+         $applied = type\applies(stdClass::class, MockAttribute::class);
 
          expect($applied)->toBeFalse();
     });
 
     test('returns true when attribute is applied to object', function () {
         $object = new MockAttributeTarget();
-        $applied = usephul\applies($object, MockAttribute::class);
+        $applied = type\applies($object, MockAttribute::class);
 
         expect($applied)->toBeTrue();
     });
 
     test('returns false when attribute is not applied to object', function () {
         $object = new stdClass();
-        $applied = usephul\applies($object, MockAttribute::class);
+        $applied = type\applies($object, MockAttribute::class);
 
         expect($applied)->toBeFalse();
     });
 
     test('returns false when attribute is applied to parent', function () {
         $object = new MockAttributeTargetChild();
-        $applied = usephul\applies($object, MockAttribute::class);
+        $applied = type\applies($object, MockAttribute::class);
 
         expect($applied)->toBeFalse();
     });

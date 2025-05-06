@@ -28,6 +28,7 @@
             "src/filesystem.php",
             "src/functions.php",
             "src/other.php",
+            "src/type.php",
             "src/var.php"
         ],
         "psr-4": {
