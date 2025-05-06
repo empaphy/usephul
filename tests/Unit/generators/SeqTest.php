@@ -11,13 +11,13 @@
 
 declare(strict_types=1);
 
-use empaphy\usephul;
+use empaphy\usephul\generators;
 
 describe('seq()', function () {
     test('properly sequences values', function ($data, $expected) {
         $array = [];
 
-        foreach (usephul\seq($data) as $key => $value) {
+        foreach (generators\seq($data) as $key => $value) {
             $array[$key] = $value;
         }
 

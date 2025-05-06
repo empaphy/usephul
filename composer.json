@@ -26,7 +26,7 @@
             "src/array.php",
             "src/constants.php",
             "src/filesystem.php",
-            "src/functions.php",
+            "src/generators.php",
             "src/other.php",
             "src/type.php",
             "src/var.php"

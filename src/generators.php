@@ -4,11 +4,12 @@
  * @author    Alwin Garside <alwin@garsi.de>
  * @copyright 2025 The Empaphy Project
  * @license   MIT
+ * @package   Generators
  */
 
 declare(strict_types=1);
 
-namespace empaphy\usephul;
+namespace empaphy\usephul\generators;
 
 use empaphy\usephul\var\Type;
 use Generator;
