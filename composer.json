@@ -28,6 +28,7 @@
             "src/filesystem.php",
             "src/generators.php",
             "src/other.php",
+            "src/math.php",
             "src/type.php",
             "src/var.php"
         ],
@@ -41,6 +42,7 @@
         }
     },
     "scripts": {
+        "stan": "vendor/bin/phpstan",
         "test": "vendor/bin/pest"
     },
     "extra": {

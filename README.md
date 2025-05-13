@@ -26,6 +26,15 @@
   - [seq()](https://usephul.empaphy.org/packages/Generators.html#function_seq)
     — Sequences a value into a [Generator](https://www.php.net/generators).
 
+### Math Functions
+
+  - [greatest()](https://usephul.empaphy.org/packages/Math.html#function_greatest)
+    — Finds the value that is greater than all the other values.
+  - [least()](https://usephul.empaphy.org/packages/Math.html#function_least)
+    — Finds the value that is less than all the other values.
+  - [rank()](https://usephul.empaphy.org/packages/Math.html#function_rank)
+    — Returns the ordinal rank for a given value.
+
 ### Variable handling Functions
 
   - [is_closed_resource()](https://usephul.empaphy.org/packages/Types-Variables.html#function_is_closed_resource)
