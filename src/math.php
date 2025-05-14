@@ -17,10 +17,8 @@ use DateInterval;
 use DatePeriod;
 use DateTimeImmutable;
 use DateTimeInterface;
-use IntBackedEnum;
 use InvalidArgumentException;
 use Stringable;
-use StringBackedEnum;
 use UnitEnum;
 
 use function get_debug_type;
@@ -70,27 +68,37 @@ function least(mixed ...$values): mixed
  *   The value to rank.
  *
  * @return (
- *     TValue is DateTimeInterface ? float  : (
- *     TValue is DateInterval      ? float  : (
- *     TValue is DatePeriod        ? float  : (
- *     TValue is IntBackedEnum     ? int    : (
- *     TValue is StringBackedEnum  ? string : (
- *     TValue is UnitEnum          ? string : (
- *     TValue is Stringable        ? string : (
- *     TValue is Countable         ? int    : (
- *     TValue is int               ? TValue : (
- *     TValue is float             ? TValue : (
- *     TValue is string            ? TValue : (
- *     TValue is array             ? array  : (
- *     TValue is object            ? array  :
- *     never )))))))))))))
- *   A value that represents the rank for the given __value__.
+ *     TValue is DateTimeInterface ? float            : (
+ *     TValue is DateInterval      ? float            : (
+ *     TValue is DatePeriod        ? float            : (
+ *     TValue is BackedEnum        ? value-of<TValue> : (
+ *     TValue is UnitEnum          ? string           : (
+ *     TValue is Stringable        ? string           : (
+ *     TValue is Countable         ? int              : (
+ *     TValue is null              ? int<0,0>         : (
+ *     TValue is false             ? int<0,0>         : (
+ *     TValue is true              ? int<1,1>         : (
+ *     TValue is int               ? TValue           : (
+ *     TValue is float             ? TValue           : (
+ *     TValue is string            ? TValue           : (
+ *     TValue is array             ? array            : (
+ *     TValue is object            ? array            :
+ *     never )))))))))))))))
+ *   A value that represents the ordinal rank for the given __value__.
  *
  * @throws InvalidArgumentException if the given __value__ is not supported.
+ * @noinspection PhpDocSignatureInspection
  */
-function rank(mixed $value): null | bool | int | float | string | array
+function rank(mixed $value): int | float | string | array
 {
     switch (true) {
+        case null === $value:
+        case false === $value:
+            return 0;
+
+        case true === $value:
+            return 1;
+
         case is_int($value):
         case is_float($value):
         case is_string($value):
@@ -112,14 +120,14 @@ function rank(mixed $value): null | bool | int | float | string | array
         case $value instanceof DatePeriod:
             return rank(current($value));
 
-        case is_array($value):
-            return array_map(__FUNCTION__, $value);
-
         case $value instanceof Stringable:
             return $value->__toString();
 
         case $value instanceof Countable:
             return $value->count();
+
+        case is_array($value):
+            return array_map(__FUNCTION__, $value);
 
         case is_object($value):
             return rank((array) $value);
