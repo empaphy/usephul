@@ -29,14 +29,25 @@ use function sprintf;
  *
  * @template TValue
  *
- * @param  TValue  ...$values
+ * @param  TValue  $value1
+ *   Any {@see rank() rankable} value.
+ *
+ * @param  TValue  $value2
+ *   Any {@see rank() rankable} value.
+ *
+ * @param  TValue[]  ...$values
+ *   Any {@see rank() rankable} values.
+ *
  * @return TValue
  */
-function greatest(mixed ...$values): mixed
+function greatest(mixed $value1, mixed $value2, mixed ...$values): mixed
 {
     return array_reduce(
-        $values,
-        static fn($carry, $item) => rank($item) > rank($carry) ? $item : $carry,
+        [$value2, ...$values],
+        static function (mixed $carry, mixed $item) {
+            return rank($item) > rank($carry) ? $item : $carry;
+        },
+        $value1,
     );
 }
 
@@ -45,14 +56,25 @@ function greatest(mixed ...$values): mixed
  *
  * @template TValue
  *
- * @param  TValue  ...$values
+ * @param  TValue  $value1
+ *   Any {@see rank() rankable} value.
+ *
+ * @param  TValue  $value2
+ *   Any {@see rank() rankable} value.
+ *
+ * @param  TValue[]  ...$values
+ *   Any {@see rank() rankable} values.
+ *
  * @return TValue
  */
-function least(mixed ...$values): mixed
+function least(mixed $value1, mixed $value2, mixed ...$values): mixed
 {
     return array_reduce(
-        $values,
-        static fn($carry, $item) => rank($item) < rank($carry) ? $item : $carry,
+        [$value2, ...$values],
+        static function (mixed $carry, mixed $item) {
+            return rank($item) < rank($carry) ? $item : $carry;
+        },
+        $value1,
     );
 }
 
