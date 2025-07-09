@@ -16,10 +16,16 @@
 
 ### Filesystem Functions
 
-  - [filename()](https://usephul.empaphy.org/packages/Filesystem.html#function_filename)
-    — Returns the name component of path without the extension.
-  - [extension()](https://usephul.empaphy.org/packages/Filesystem.html#function_extension)
-    — Returns the extension component of path without the extension.
+  - [Filesystem\basename()](https://usephul.empaphy.org/packages/Filesystem.html#function_basename)
+    — Returns the trailing name component of a path.
+  - [Filesystem\dirname()](https://usephul.empaphy.org/packages/Filesystem.html#function_dirname)
+    — Returns a parent directory's path.
+  - [Filesystem\extension()](https://usephul.empaphy.org/packages/Filesystem.html#function_extension)
+    — Returns the extension component of a path.
+  - [Filesystem\extension_replace()](https://usephul.empaphy.org/packages/Filesystem.html#function_extension_replace)
+    — Replaces the extension component of a path with something else.
+  - [Filesystyem\filename()](https://usephul.empaphy.org/packages/Filesystem.html#function_filename)
+    — Returns the name component of a path without the extension.
 
 ### Generator Functions
 
