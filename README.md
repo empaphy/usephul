@@ -14,17 +14,17 @@
   - [array_zip()](https://usephul.empaphy.org/packages/Arrays.html#function_array_zip)
     — Perform a zip operation on multiple arrays.
 
-### Filesystem Functions
+### Path Functions
 
-  - [Filesystem\basename()](https://usephul.empaphy.org/packages/Filesystem.html#function_basename)
+  - [Path\basename()](https://usephul.empaphy.org/packages/Filesystem.html#function_basename)
     — Returns the trailing name component of a path.
-  - [Filesystem\dirname()](https://usephul.empaphy.org/packages/Filesystem.html#function_dirname)
+  - [Path\dirname()](https://usephul.empaphy.org/packages/Filesystem.html#function_dirname)
     — Returns a parent directory's path.
-  - [Filesystem\extension()](https://usephul.empaphy.org/packages/Filesystem.html#function_extension)
+  - [Path\extension()](https://usephul.empaphy.org/packages/Filesystem.html#function_extension)
     — Returns the extension component of a path.
-  - [Filesystem\extension_replace()](https://usephul.empaphy.org/packages/Filesystem.html#function_extension_replace)
+  - [Path\extension_replace()](https://usephul.empaphy.org/packages/Filesystem.html#function_extension_replace)
     — Replaces the extension component of a path with something else.
-  - [Filesystyem\filename()](https://usephul.empaphy.org/packages/Filesystem.html#function_filename)
+  - [Path\filename()](https://usephul.empaphy.org/packages/Filesystem.html#function_filename)
     — Returns the name component of a path without the extension.
 
 ### Generator Functions
@@ -83,7 +83,7 @@
 
 ## Classes
 
-### Filesystem
+### Path
 
   - [PathInfo](http://localhost:63342/usephul/.phpdoc/build/classes/empaphy-usephul-Filesystem-PathInfo.html)
     — Provides information about a file path.

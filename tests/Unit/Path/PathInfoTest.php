@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-use empaphy\usephul\Filesystem\PathInfo;
+use empaphy\usephul\Path\PathInfo;
 
 describe('PathInfo', function() {
     test('matches pathinfo()', function ($path) {

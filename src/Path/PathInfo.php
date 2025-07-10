@@ -4,12 +4,12 @@
  * @author    Alwin Garside <alwin@garsi.de>
  * @copyright 2025 The Empaphy Project
  * @license   MIT
- * @package   Filesystem
+ * @package   Path
  */
 
 declare(strict_types=1);
 
-namespace empaphy\usephul\Filesystem;
+namespace empaphy\usephul\Path;
 
 /**
  * Provides information about a file path.
@@ -20,7 +20,7 @@ namespace empaphy\usephul\Filesystem;
  * > of the actual filesystem, or path components such as "..".
  *
  * > **Caution**
- * > {@see PathInfo} is locale aware, so for it to parse a path containing
+ * > {@see PathInfo} is locale-aware, so for it to parse a path containing
  * > multibyte characters correctly, the matching locale must be set using the
  * > setlocale() function.
  */
