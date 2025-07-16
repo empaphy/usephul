@@ -65,7 +65,7 @@ function array_exclude(array $array, mixed ...$values): array
  * @see array_omit() - Omit keys from an array
  * @see array_pick() - Pick keys from an array
  */
-function array_extract(array $array, int|string ...$values): array
+function array_extract(array $array, mixed ...$values): array
 {
     return array_filter(
         $array,
