@@ -11,7 +11,9 @@
 
 declare(strict_types=1);
 
-namespace empaphy\usephul\var;
+namespace empaphy\usephul\Var;
+
+use UnitEnum;
 
 /**
  * Default error tolerance.
@@ -31,6 +33,17 @@ const PHP_ZERO_TOLERANCE = 0.00000000001;
 function is_closed_resource(mixed $value): bool
 {
     return Type::ClosedResource->is($value);
+}
+
+/**
+ * Finds whether the given value is an enum case.
+ *
+ * @param  mixed  $value
+ * @return bool
+ */
+function is_enum_case(mixed $value): bool
+{
+    return $value instanceof UnitEnum;
 }
 
 /**

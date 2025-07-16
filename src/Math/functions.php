@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace empaphy\usephul\math;
+namespace empaphy\usephul\Math;
 
 use BackedEnum;
 use Countable;
@@ -21,7 +21,15 @@ use InvalidArgumentException;
 use Stringable;
 use UnitEnum;
 
+use function array_map;
+use function array_reduce;
+use function current;
 use function get_debug_type;
+use function is_array;
+use function is_float;
+use function is_int;
+use function is_object;
+use function is_string;
 use function sprintf;
 
 /**

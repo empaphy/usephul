@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace empaphy\usephul\type;
+namespace empaphy\usephul\Type;
 
-use empaphy\usephul\var\Type;
+use empaphy\usephul\Var\Type;
 use ReflectionAttribute;
 use ReflectionClass;
 use ReflectionException;

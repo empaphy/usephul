@@ -25,12 +25,12 @@
         "files": [
             "src/array.php",
             "src/constants.php",
-            "src/Path/functions.php",
             "src/generators.php",
+            "src/Math/functions.php",
             "src/other.php",
-            "src/math.php",
-            "src/type.php",
-            "src/var.php"
+            "src/Path/functions.php",
+            "src/Type/functions.php",
+            "src/Var/functions.php"
         ],
         "psr-4": {
             "empaphy\\usephul\\": "src/"

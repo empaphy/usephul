@@ -10,18 +10,18 @@
 
 declare(strict_types=1);
 
-use empaphy\usephul\math;
+use empaphy\usephul\Math;
 
-describe('math\\greatest()', function () {
+describe('Math\\greatest()', function () {
     test('should require at least two arguments', function () {
         $this->expectException(\ArgumentCountError::class);
 
         /** @noinspection PhpParamsInspection */
-        math\greatest(1);
+        Math\greatest(1);
     });
 
     test('returns the greatest given values', function ($a, $b, $expected) {
-        $greatest = math\greatest($a, $b);
+        $greatest = Math\greatest($a, $b);
 
         expect($greatest)->toBe($expected);
     })->with([
