@@ -7,8 +7,16 @@
 
 ### Array Functions
 
+  - [array_exclude()](https://usephul.empaphy.org/packages/Arrays.html#function_array_exclude)
+    — exclude values from an array.
+  - [array_extract()](https://usephul.empaphy.org/packages/Arrays.html#function_array_extract)
+    — Extract values from an array.
   - [array_interchange()](https://usephul.empaphy.org/packages/Arrays.html#function_array_interchange)
     — Interchange the values of two elements of an array.
+  - [array_omit()](https://usephul.empaphy.org/packages/Arrays.html#function_array_omit)
+    — Omit keys from an array.
+  - [array_pick()](https://usephul.empaphy.org/packages/Arrays.html#function_array_pick)
+    — Pick keys from an array.
   - [array_remap()](https://usephul.empaphy.org/packages/Arrays.html#function_array_remap)
     — Applies a (generator) callback to the elements of a given array, allowing the remapping of its keys in the process.
   - [array_zip()](https://usephul.empaphy.org/packages/Arrays.html#function_array_zip)
@@ -16,15 +24,15 @@
 
 ### Path Functions
 
-  - [Path\basename()](https://usephul.empaphy.org/packages/Filesystem.html#function_basename)
+  - [Path\basename()](https://usephul.empaphy.org/packages/Paths.html#function_basename)
     — Returns the trailing name component of a path.
-  - [Path\dirname()](https://usephul.empaphy.org/packages/Filesystem.html#function_dirname)
+  - [Path\dirname()](https://usephul.empaphy.org/packages/Paths.html#function_dirname)
     — Returns a parent directory's path.
-  - [Path\extension()](https://usephul.empaphy.org/packages/Filesystem.html#function_extension)
+  - [Path\extension()](https://usephul.empaphy.org/packages/Paths.html#function_extension)
     — Returns the extension component of a path.
-  - [Path\extension_replace()](https://usephul.empaphy.org/packages/Filesystem.html#function_extension_replace)
+  - [Path\extension_replace()](https://usephul.empaphy.org/packages/Paths.html#function_extension_replace)
     — Replaces the extension component of a path with something else.
-  - [Path\filename()](https://usephul.empaphy.org/packages/Filesystem.html#function_filename)
+  - [Path\filename()](https://usephul.empaphy.org/packages/Paths.html#function_filename)
     — Returns the name component of a path without the extension.
 
 ### Generator Functions
@@ -83,9 +91,9 @@
 
 ## Classes
 
-### Path
+### Paths
 
-  - [PathInfo](http://localhost:63342/usephul/.phpdoc/build/classes/empaphy-usephul-Filesystem-PathInfo.html)
+  - [PathInfo](http://localhost:63342/usephul/.phpdoc/build/classes/empaphy-usephul-Paths-PathInfo.html)
     — Provides information about a file path.
 
 ## Traits
