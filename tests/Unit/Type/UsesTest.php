@@ -10,9 +10,9 @@
 
 declare(strict_types=1);
 
-namespace empaphy\usephul\tests\Unit\type\UsesTest;
+namespace Tests\Unit\Type\UsesTest;
 
-use empaphy\usephul\type;
+use empaphy\usephul\Type;
 
 describe('uses()', function () {
     trait SuperMockTrait {}
@@ -52,8 +52,8 @@ describe('uses()', function () {
 
     test('returns true when a class uses a specific trait', function () {
         $class = UsesMockTrait::class;
-        $uses = type\uses($class, MockTrait::class);
-        $usesOther = type\uses($class, OtherMockTrait::class);
+        $uses = Type\uses($class, MockTrait::class);
+        $usesOther = Type\uses($class, OtherMockTrait::class);
 
         expect($uses)->toBeTrue()
             ->and($usesOther)->toBeFalse();
@@ -61,8 +61,8 @@ describe('uses()', function () {
 
     test('returns false when a class does not use a trait', function () {
         $class = DoesntUseTrait::class;
-        $uses = type\uses($class, MockTrait::class);
-        $usesOther = type\uses($class, OtherMockTrait::class);
+        $uses = Type\uses($class, MockTrait::class);
+        $usesOther = Type\uses($class, OtherMockTrait::class);
 
         expect($uses)->toBeFalse()
             ->and($usesOther)->toBeFalse();
@@ -71,8 +71,8 @@ describe('uses()', function () {
     test('returns false with a class while allow_string = false', function () {
         $class = UsesMockTrait::class;
         $object = new $class();
-        $classUses = type\uses($class, MockTrait::class, false);
-        $objectUses = type\uses($object, MockTrait::class, false);
+        $classUses = Type\uses($class, MockTrait::class, false);
+        $objectUses = Type\uses($object, MockTrait::class, false);
 
         expect($classUses)->toBeFalse()
             ->and($objectUses)->toBeTrue();
@@ -80,8 +80,8 @@ describe('uses()', function () {
 
     test('returns true when an object uses a specific trait', function () {
         $object = new UsesMockTrait();
-        $uses = type\uses($object, MockTrait::class);
-        $usesOther = type\uses($object, OtherMockTrait::class);
+        $uses = Type\uses($object, MockTrait::class);
+        $usesOther = Type\uses($object, OtherMockTrait::class);
 
         expect($uses)->toBeTrue()
             ->and($usesOther)->toBeFalse();
@@ -89,7 +89,7 @@ describe('uses()', function () {
 
     test('returns false when an object does not use a trait', function () {
         $object = new UsesMockTrait();
-        $uses = type\uses($object, OtherMockTrait::class);
+        $uses = Type\uses($object, OtherMockTrait::class);
 
         expect($uses)->toBeFalse();
     });
@@ -97,8 +97,8 @@ describe('uses()', function () {
     test('returns true when a parent class uses a trait', function () {
         $class = ClassExtendsParentClass::class;
         $object = new $class();
-        $classUses = type\uses($class, ParentMockTrait::class);
-        $objectUses = type\uses($object, ParentMockTrait::class);
+        $classUses = Type\uses($class, ParentMockTrait::class);
+        $objectUses = Type\uses($object, ParentMockTrait::class);
 
         expect($classUses)->toBeTrue()
             ->and($objectUses)->toBeTrue();
@@ -107,10 +107,10 @@ describe('uses()', function () {
     test("returns true when a class' with a parent class that uses another trait", function () {
         $class = ClassExtendsParentClassUsesOtherMockTrait::class;
         $object = new $class();
-        $classUses = type\uses($class, OtherMockTrait::class);
-        $objectUses = type\uses($object, OtherMockTrait::class);
-        $classUsesParent = type\uses($class, ParentMockTrait::class);
-        $objectUsesParent = type\uses($object, ParentMockTrait::class);
+        $classUses = Type\uses($class, OtherMockTrait::class);
+        $objectUses = Type\uses($object, OtherMockTrait::class);
+        $classUsesParent = Type\uses($class, ParentMockTrait::class);
+        $objectUsesParent = Type\uses($object, ParentMockTrait::class);
 
         expect($classUses)->toBeTrue()
             ->and($classUsesParent)->toBeTrue()
@@ -121,8 +121,8 @@ describe('uses()', function () {
     test("returns true when a class' trait uses a trait", function () {
         $class = ParentClassUsesParentMockTrait::class;
         $object = new $class();
-        $classUses = type\uses($class, ParentSuperMockTrait::class);
-        $objectUses = type\uses($object, ParentSuperMockTrait::class);
+        $classUses = Type\uses($class, ParentSuperMockTrait::class);
+        $objectUses = Type\uses($object, ParentSuperMockTrait::class);
 
         expect($classUses)->toBeTrue()
             ->and($objectUses)->toBeTrue();

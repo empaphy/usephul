@@ -29,8 +29,8 @@
             "src/Math/functions.php",
             "src/other.php",
             "src/Path/functions.php",
-            "src/type.php",
-            "src/var.php"
+            "src/Type/functions.php",
+            "src/Var/functions.php"
         ],
         "psr-4": {
             "empaphy\\usephul\\": "src/"

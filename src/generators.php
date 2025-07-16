@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace empaphy\usephul\generators;
 
-use empaphy\usephul\var\Type;
+use empaphy\usephul\Var\Type;
 use Generator;
 use RangeException;
 
