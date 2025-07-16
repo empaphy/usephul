@@ -25,10 +25,10 @@
         "files": [
             "src/array.php",
             "src/constants.php",
-            "src/Path/functions.php",
             "src/generators.php",
             "src/Math/functions.php",
             "src/other.php",
+            "src/Path/functions.php",
             "src/type.php",
             "src/var.php"
         ],
