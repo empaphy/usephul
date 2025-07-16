@@ -27,8 +27,8 @@
             "src/constants.php",
             "src/Path/functions.php",
             "src/generators.php",
+            "src/Math/functions.php",
             "src/other.php",
-            "src/math.php",
             "src/type.php",
             "src/var.php"
         ],
