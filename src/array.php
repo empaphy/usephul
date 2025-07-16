@@ -14,7 +14,9 @@ namespace empaphy\usephul;
 use Generator;
 
 use function array_filter;
+use function array_is_list;
 use function array_map;
+use function array_values;
 use function in_array;
 
 /**
@@ -38,10 +40,12 @@ use function in_array;
  */
 function array_exclude(array $array, mixed ...$values): array
 {
-    return array_filter(
+    $result = array_filter(
         $array,
         static fn (mixed $value): bool => ! in_array($value, $values, true),
     );
+
+    return array_is_list($array) ? array_values($result) : $result;
 }
 
 /**
@@ -67,10 +71,12 @@ function array_exclude(array $array, mixed ...$values): array
  */
 function array_extract(array $array, mixed ...$values): array
 {
-    return array_filter(
+    $result = array_filter(
         $array,
         static fn (mixed $value): bool => in_array($value, $values, true),
     );
+
+    return array_is_list($array) ? array_values($result) : $result;
 }
 
 /**
