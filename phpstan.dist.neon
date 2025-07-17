@@ -1,0 +1,17 @@
+includes:
+    - phar://phpstan.phar/conf/bleedingEdge.neon
+
+parameters:
+    editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
+    level: 8
+    paths:
+        - src/
+        - tests/
+    resultCachePath: var/cache/phpstan/resultCache.php
+    treatPhpDocTypesAsCertain: false
+
+services:
+    cacheStorage:
+        arguments:
+            directory: var/cache/phpstan/cache/PHPStan
+        alteration: true
