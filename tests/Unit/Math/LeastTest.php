@@ -17,7 +17,7 @@ describe('Math\\least()', function () {
         $this->expectException(ArgumentCountError::class);
 
         /** @noinspection PhpParamsInspection */
-        Math\least(1);
+        Math\least(1); // @phpstan-ignore arguments.count
     });
 
     test('returns the least of given values', function ($a, $b, $expected) {

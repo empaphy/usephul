@@ -10,17 +10,20 @@
 
 declare(strict_types=1);
 
+namespace Pest;
+
+use ArgumentCountError;
 use empaphy\usephul\Math;
 
 describe('Math\\greatest()', function () {
     test('should require at least two arguments', function () {
-        $this->expectException(\ArgumentCountError::class);
+        $this->expectException(ArgumentCountError::class);
 
         /** @noinspection PhpParamsInspection */
-        Math\greatest(1);
+        Math\greatest(1); // @phpstan-ignore arguments.count
     });
 
-    test('returns the greatest given values', function ($a, $b, $expected) {
+    test('returns the greatest value', function ($a, $b, $expected) {
         $greatest = Math\greatest($a, $b);
 
         expect($greatest)->toBe($expected);

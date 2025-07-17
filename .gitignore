@@ -4,7 +4,11 @@
 /var
 /vendor
 
+/.php-cs-fixer.php
+/compose.override.yaml
 /composer.lock
+/phpstan.neon
+/phpunit.xml
 
 .DS_Store
 .git

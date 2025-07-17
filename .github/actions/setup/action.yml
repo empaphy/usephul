@@ -1,0 +1,38 @@
+name: Setup PHP project
+description:
+  Sets up everything needed to run a standard PHP project.
+
+inputs:
+  php-version:
+    description: PHP Version
+    required: false
+    default: 'pre-installed'
+
+runs:
+  using: composite
+  steps:
+    - name: Setup PHP ${{ inputs.php-version }}
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ inputs.php-version }}
+        tools: composer:v2
+        coverage: xdebug
+
+    - name: Validate Composer Config
+      shell: bash
+      #language=bash
+      run: composer validate --strict
+
+    - name: Cache Composer Packages
+      uses: actions/cache@v4
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ inputs.php-version }}-${{ hashFiles('composer.json') }}
+        restore-keys: |
+          ${{ runner.os }}-php-${{ inputs.php-version }}-
+          ${{ runner.os }}-php-
+
+    - name: Install Composer Packages
+      shell: bash
+      #language=bash
+      run: composer install --no-interaction --no-progress --prefer-dist --optimize-autoloader

@@ -10,19 +10,17 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Type\UsesTest;
-
 use empaphy\usephul\Type;
 
 describe('uses()', function () {
-    trait SuperMockTrait {}
+    trait SuperMockTrait {} // @phpstan-ignore trait.unused
 
     trait MockTrait
     {
         use SuperMockTrait;
     }
 
-    trait ParentSuperMockTrait {}
+    trait ParentSuperMockTrait {} // @phpstan-ignore trait.unused
 
     trait ParentMockTrait
     {

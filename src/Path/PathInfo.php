@@ -11,15 +11,17 @@ declare(strict_types=1);
 
 namespace empaphy\usephul\Path;
 
+use function pathinfo;
+
 /**
  * Provides information about a file path.
  *
- * > **Note**:
+ * > __Note__:
  * >
  * > {@see PathInfo} operates naively on the **path** string, and is not aware
  * > of the actual filesystem, or path components such as "..".
  *
- * > **Caution**
+ * > __Caution__
  * > {@see PathInfo} is locale-aware, so for it to parse a path containing
  * > multibyte characters correctly, the matching locale must be set using the
  * > setlocale() function.
@@ -51,7 +53,7 @@ class PathInfo
      */
     public function __construct(public readonly string $path)
     {
-        $pathinfo = \pathinfo($path);
+        $pathinfo = pathinfo($path);
 
         $this->dirname   = $pathinfo['dirname'] ?? null;
         $this->basename  = $pathinfo['basename'];

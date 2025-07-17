@@ -11,8 +11,9 @@
 
 declare(strict_types=1);
 
-use empaphy\usephul\Enumerations\EnumDynamicity;
+namespace Pest;
 
+use empaphy\usephul\Enumerations\EnumDynamicity;
 
 describe('EnumDynamicity::try()', function () {
     enum MockEnum: string
@@ -27,7 +28,10 @@ describe('EnumDynamicity::try()', function () {
         $case = MockEnum::try($mock->name);
 
         expect($case)->toBe($mock);
-    })->with(MockEnum::cases());
+    })->with([
+        ['mock' => MockEnum::Foo],
+        ['mock' => MockEnum::Bar],
+    ]);
 
     test('returns `null` if a provided name does not exist', function () {
         $case = MockEnum::try('Baz');
@@ -36,6 +40,6 @@ describe('EnumDynamicity::try()', function () {
     });
 
     test('throws a `ValueError` when provided an empty string', function () {
-        MockEnum::try('');
+        MockEnum::try(''); // @phpstan-ignore argument.type
     })->throws(\ValueError::class);
 });

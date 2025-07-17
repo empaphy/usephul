@@ -44,13 +44,13 @@ describe('is_negative_int()', function () {
     ]);
 });
 
-describe('is_non_empty_string()', function() {
+describe('is_non_empty_string()', function () {
     test('returns true', function ($value) {
         $result = Var\is_non_empty_string($value);
 
         expect($result)->toBeTrue();
     })->with([
-        ['foo']
+        ['foo'],
     ]);
 
     test('returns false', function ($value) {
@@ -197,7 +197,7 @@ describe('is_zero()', function () {
     })->with([
         [0, null],
         [0.0, null],
-        [PHP_FLOAT_MIN, Var\PHP_ZERO_TOLERANCE],
+        [PHP_FLOAT_MIN, Var\ZERO_TOLERANCE],
         [PHP_FLOAT_MIN, PHP_FLOAT_MIN],
     ]);
 
@@ -206,8 +206,8 @@ describe('is_zero()', function () {
 
         expect($isZero)->toBeFalse();
     })->with([
-        [1, Var\PHP_ZERO_TOLERANCE],
-        [1.0, Var\PHP_ZERO_TOLERANCE],
+        [1, Var\ZERO_TOLERANCE],
+        [1.0, Var\ZERO_TOLERANCE],
         [PHP_FLOAT_EPSILON, PHP_FLOAT_MIN],
         [PHP_FLOAT_MIN, null],
     ]);

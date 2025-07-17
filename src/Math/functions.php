@@ -47,6 +47,7 @@ use function sprintf;
  *   Any {@see rank() rankable} values.
  *
  * @return TValue
+ *   Returns the greatest of the given values.
  */
 function greatest(mixed $value1, mixed $value2, mixed ...$values): mixed
 {
@@ -116,10 +117,12 @@ function least(mixed $value1, mixed $value2, mixed ...$values): mixed
  *     never )))))))))))))))
  *   A value that represents the ordinal rank for the given __value__.
  *
- * @throws InvalidArgumentException if the given __value__ is not supported.
+ * @throws InvalidArgumentException
+ *   Thrown if the given __value__ is not supported.
+ *
  * @noinspection PhpDocSignatureInspection
  */
-function rank(mixed $value): int | float | string | array
+function rank(mixed $value): int|float|string|array
 {
     switch (true) {
         case null === $value:

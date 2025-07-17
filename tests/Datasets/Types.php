@@ -12,6 +12,7 @@ declare(strict_types=1);
 use empaphy\usephul\Var\Type;
 
 $closedResource = fopen(__FILE__, 'rb');
+assert(is_resource($closedResource));
 fclose($closedResource);
 $openResource = fopen(__FILE__, 'rb');
 

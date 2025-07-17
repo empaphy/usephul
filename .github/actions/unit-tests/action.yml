@@ -1,0 +1,34 @@
+name: 'Run Unit Tests'
+description: 'Run Unit Tests'
+
+inputs:
+  test-name:
+    description: Name of the test run
+    default: 'Test Results'
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run Pest
+      id: pest
+      shell: bash
+      #language=bash
+      run: |
+        mkdir -p var/test-results
+        vendor/bin/pest --ci --log-junit var/test-results/junit.xml
+      continue-on-error: true # So the test results are always published
+
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if:   (!cancelled())
+      with:
+        check_name: ${{ inputs.test-name }}
+        comment_mode: off
+        files: var/test-results/junit.xml
+
+    - name: Fail Job if Tests Failed
+      if: steps.pest.outcome == 'failure'   # pre-continue outcome
+      shell: bash
+      #language=bash
+      run: exit 1

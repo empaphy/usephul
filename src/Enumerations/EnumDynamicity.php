@@ -11,6 +11,11 @@ declare(strict_types=1);
 
 namespace empaphy\usephul\Enumerations;
 
+use UnitEnum;
+use ValueError;
+
+use function array_find;
+
 /**
  * Adds dynamicity of case names to PHP Enumerations.
  *
@@ -21,28 +26,32 @@ trait EnumDynamicity
     /**
      * Maps a string to an enum instance or NULL.
      *
-     * The **try()** method translates a <u>string</u> or <u>int</u> into the
-     * corresponding Enum case, if any. If there is no matching case defined, it
-     * will return `NULL`.
+     * The {@see try()} method translates a `string` or `int` into the
+     * corresponding Enum case, if any. If there is no matching case defined,
+     * `null` is returned.
      *
-     * @param  non-empty-string  $name  The name to map to an enum case.
-     * @return self|null A case instance of this enum, or `null` if not found.
+     * @param  non-empty-string  $name
+     *   The name to map to an enum case.
      *
-     * @throws \ValueError if an empty string is provided as **name**.
+     * @return ?self
+     *   A case instance of this enum, or `null` if not found.
+     *
+     * @throws ValueError
+     *   Thrown if an empty string is provided as __name__.
      *
      * @noinspection PhpDocSignatureInspection
      */
     public static function try(string $name): ?self
     {
         if ('' === $name) {
-            throw new \ValueError(
-                'An empty string ("") is not a valid name for an enum case.'
+            throw new ValueError(
+                'An empty string ("") is not a valid name for an enum case.',
             );
         }
 
-        return \array_find(
+        return array_find(
             self::cases(),
-            static fn(\UnitEnum $case): bool => $case->name === $name
+            static fn(UnitEnum $case): bool => $case->name === $name,
         );
     }
 }

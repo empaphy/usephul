@@ -23,7 +23,7 @@ enum Direction: int
     /**
      * Sorts in ascending order.
      *
-     * For example:
+     * For example,
      * - numbers are sorted from smaller to larger numbers. (-1, 0, 1, 2, …)
      * - strings are sorted in alphabetical order. (A, B, C, …, X, Y, Z)
      */
@@ -32,7 +32,7 @@ enum Direction: int
     /**
      * Sorts in descending order.
      *
-     * For example:
+     * For example,
      * - numbers are sorted from larger to smaller numbers. (2, 1, 0, -1, …)
      * - strings are sorted in reverse alphabetical order. (Z, Y, X, …, C, B, A)
      */
