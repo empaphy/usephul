@@ -1,5 +1,11 @@
-name: 'Run Pest'
-description: 'Run PHP Pest tests'
+name: 'Run Unit Tests'
+description: 'Run Unit Tests'
+
+inputs:
+  test-name:
+    description: Name of the test run
+    default: 'Test Results'
+    required: false
 
 runs:
   using: "composite"
@@ -17,6 +23,7 @@ runs:
       uses: EnricoMi/publish-unit-test-result-action@v2
       if:   (!cancelled())
       with:
+        check_name: ${{ inputs.test-name }}
         files: var/test-results/junit.xml
 
     - name: Fail Job if Tests Failed
