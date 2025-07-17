@@ -24,6 +24,7 @@ runs:
       if:   (!cancelled())
       with:
         check_name: ${{ inputs.test-name }}
+        comment_mode: off
         files: var/test-results/junit.xml
 
     - name: Fail Job if Tests Failed
