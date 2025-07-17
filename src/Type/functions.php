@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace empaphy\usephul\Type;
 
-use empaphy\usephul\Var\Type;
 use ReflectionAttribute;
 use ReflectionClass;
 use ReflectionException;
@@ -37,21 +36,13 @@ use function is_string;
  *   `true` if the attribute has been applied to the given object or class.
  *   `false` otherwise.
  */
-function applies(object | string $object_or_class, string $attribute): bool
+function applies(object|string $object_or_class, string $attribute): bool
 {
-    $type = Type::of($object_or_class);
-
     try {
-        $reflector = match ($type) {
-            Type::Object => new ReflectionObject($object_or_class),
-            Type::String => new ReflectionClass($object_or_class),
-            default      => null,
-        };
-    } catch (ReflectionException $e) {
-        return false;
-    }
-
-    if (null === $reflector) {
+        $reflector = is_object($object_or_class)
+            ? new ReflectionObject($object_or_class)
+            : new ReflectionClass($object_or_class);
+    } catch (ReflectionException) {
         return false;
     }
 

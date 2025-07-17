@@ -13,6 +13,13 @@ namespace empaphy\usephul\Sorting;
 
 use empaphy\usephul\Enumerations\EnumDynamicity;
 
+use const SORT_FLAG_CASE;
+use const SORT_LOCALE_STRING;
+use const SORT_NATURAL;
+use const SORT_NUMERIC;
+use const SORT_REGULAR;
+use const SORT_STRING;
+
 /**
  * Sorting type flags: used by various sort functions.
  */
@@ -20,19 +27,19 @@ enum Type: int
 {
     use EnumDynamicity;
 
-    private const REGULAR = \SORT_REGULAR;
+    private const REGULAR = SORT_REGULAR;
 
-    private const REGULAR_CASE_INSENSITIVE = \SORT_REGULAR | \SORT_FLAG_CASE;
+    private const REGULAR_CASE_INSENSITIVE = SORT_REGULAR | SORT_FLAG_CASE;
 
-    private const NUMERIC = \SORT_NUMERIC;
+    private const NUMERIC = SORT_NUMERIC;
 
-    private const STRING = \SORT_STRING;
+    private const STRING = SORT_STRING;
 
-    private const STRING_CASE_INSENSITIVE = \SORT_STRING | \SORT_FLAG_CASE;
+    private const STRING_CASE_INSENSITIVE = SORT_STRING | SORT_FLAG_CASE;
 
-    private const LOCALE_STRING = \SORT_LOCALE_STRING;
+    private const LOCALE_STRING = SORT_LOCALE_STRING;
 
-    private const NATURAL = \SORT_NATURAL;
+    private const NATURAL = SORT_NATURAL;
 
     /**
      * Compare items normally.
