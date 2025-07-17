@@ -14,8 +14,8 @@ runs:
       continue-on-error: true # So the test results are always published
 
     - name: Publish Test Results
-      if: always()
       uses: EnricoMi/publish-unit-test-result-action@v2
+      if:   (!cancelled())
       with:
         files: var/test-results/junit.xml
 
