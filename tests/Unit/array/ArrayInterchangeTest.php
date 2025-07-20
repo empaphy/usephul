@@ -14,9 +14,13 @@ use empaphy\usephul;
 
 describe('array_interchange()', function () {
 
-    test('interchanges array elements when called', function ($array, $key1, $key2, $expected) {
+    test('interchanges array elements when called', function (
+        array $array,
+        int|string $key1,
+        int|string $key2,
+        array $expected,
+    ) {
         $result = usephul\array_interchange($array, $key1, $key2);
-
         expect($result)->toBe($expected);
     })->with([
         'integer keys and values' => [

@@ -88,7 +88,7 @@ function basename(string $path, string $suffix = ''): string
  *   separator characters. In other environments, it is the forward slash
  *   (`/`).
  *
- * @param  int  $levels
+ * @param  int<1, max>  $levels
  *   The number of parent directories to go up.
  *
  *   This must be an integer greater than 0.
@@ -186,8 +186,7 @@ function extension_replace(
     string $path,
     string $replacement = '',
     string $suffix = '',
-): string
-{
+): string {
     $dirname = dirname($path);
     $filename = filename($path, $suffix);
 

@@ -20,8 +20,10 @@ use function strlen;
 /**
  * Sequences a value into a Generator.
  *
- * @param  mixed  $value  The value to sequence.
- * @return Generator<string|int>
+ * @param  mixed  $value
+ *   The value to sequence.
+ *
+ * @return Generator<string|int|null>
  */
 function seq(mixed $value): Generator
 {

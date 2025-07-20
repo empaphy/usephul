@@ -1,0 +1,44 @@
+includes:
+    - phar://phpstan.phar/conf/bleedingEdge.neon
+    - vendor/pestphp/pest/extension.neon
+
+parameters:
+    checkFunctionNameCase:             true
+    checkInternalClassCaseSensitivity: true
+    checkUninitializedProperties:      true
+
+    editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
+
+    ignoreErrors:
+        - identifier: missingType.generics
+        - identifier: missingType.iterableValue
+        - identifier: method.internalClass
+          path:       tests/Unit/*
+        - identifier: method.protected
+          path:       tests/Unit/*
+
+    level: 8
+    reportWrongPhpDocTypeInVarTag: true
+
+    resultCachePath: var/cache/phpstan/resultCache.php
+    stubFiles:
+        - stubs/Pest/Support/HigherOrderTapProxy.stub.php
+        - stubs/Pest/PendingCalls/TestCall.stub.php
+    tipsOfTheDay: false
+    treatPhpDocTypesAsCertain: false
+
+    paths:
+        - src/
+        - tests/
+
+    # Pest
+    universalObjectCratesClasses:
+        - Pest\Expectation
+        - Pest\PendingCalls\TestCall
+        - Pest\Support\HigherOrderTapProxy
+
+services:
+    cacheStorage:
+        arguments:
+            directory: var/cache/phpstan/cache/PHPStan
+        alteration: true

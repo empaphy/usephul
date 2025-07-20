@@ -10,12 +10,16 @@
 
 declare(strict_types=1);
 
+namespace Pest;
+
+use empaphy\usephul;
+
 describe('E_EVERYTHING', function () {
     it('is defined', function () {
         expect(defined('empaphy\usephul\E_EVERYTHING'))->toBeTrue();
     });
 
     it('matches', function ($expected) {
-        expect(empaphy\usephul\E_EVERYTHING)->toBe($expected);
-    })->with([0x7FFFFFFF]);
+        expect(usephul\E_EVERYTHING)->toBe($expected);
+    })->with([[0x7FFFFFFF]]);
 });

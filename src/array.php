@@ -42,7 +42,7 @@ function array_exclude(array $array, mixed ...$values): array
 {
     $result = array_filter(
         $array,
-        static fn (mixed $value): bool => ! in_array($value, $values, true),
+        static fn(mixed $value): bool => ! in_array($value, $values, true),
     );
 
     return array_is_list($array) ? array_values($result) : $result;
@@ -73,7 +73,7 @@ function array_extract(array $array, mixed ...$values): array
 {
     $result = array_filter(
         $array,
-        static fn (mixed $value): bool => in_array($value, $values, true),
+        static fn(mixed $value): bool => in_array($value, $values, true),
     );
 
     return array_is_list($array) ? array_values($result) : $result;
@@ -216,13 +216,13 @@ function array_remap(callable $callback, array $array): array
  *
  * @template TValue
  *
- * @param  array<TValue>  $array
+ * @param  array<array-key, TValue>  $array
  *   An array to zip.
  *
- * @param  array<TValue>  ...$arrays
+ * @param  array<array-key, TValue>  ...$arrays
  *   Supplementary list of array arguments to zip.
  *
- * @return array<array<TValue>>
+ * @return list<array{TValue}>
  *   Returns an array whose elements are each an array holding the elements
  *   of the input arrays at the same index.
  */
