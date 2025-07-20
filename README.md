@@ -1,5 +1,6 @@
 # Usephul
-[![Test Suite](https://github.com/empaphy/usephul/actions/workflows/test-suite.yml/badge.svg)](https://github.com/empaphy/usephul/actions/workflows/test-suite.yml)
+[![Tests](https://github.com/empaphy/usephul/actions/workflows/tests.yml/badge.svg)](https://github.com/empaphy/usephul/actions/workflows/tests.yml)
+[![Quality](https://github.com/empaphy/usephul/actions/workflows/quality.yml/badge.svg)](https://github.com/empaphy/usephul/actions/workflows/quality.yml)
 
 **Usephul** is a PHP library that provides useful classes and functions that extend the standard functionality of PHP.
 
