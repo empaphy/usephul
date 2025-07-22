@@ -12,8 +12,6 @@ parameters:
     ignoreErrors:
         - identifier: missingType.generics
         - identifier: missingType.iterableValue
-        - identifier: method.internalClass
-          path:       tests/Unit/*
         - identifier: method.protected
           path:       tests/Unit/*
 

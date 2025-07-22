@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Type\AppliesTest;
+namespace Pest\Unit\Type\applies;
 
 use Attribute;
 use empaphy\usephul\Type;
@@ -32,9 +32,9 @@ describe('applies()', function () {
     });
 
     test('returns false when attribute is not applied to class', function () {
-         $applied = Type\applies(stdClass::class, MockAttribute::class);
+        $applied = Type\applies(stdClass::class, MockAttribute::class);
 
-         expect($applied)->toBeFalse();
+        expect($applied)->toBeFalse();
     });
 
     test('returns true when attribute is applied to object', function () {

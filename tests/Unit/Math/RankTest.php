@@ -10,6 +10,11 @@
 
 declare(strict_types=1);
 
+namespace Pest\Unit\Math;
+
+use DateInterval;
+use DatePeriod;
+use DateTimeImmutable;
 use empaphy\usephul\Math;
 
 describe('Math\\rank()', function () {

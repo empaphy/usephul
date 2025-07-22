@@ -151,7 +151,7 @@ function rank(mixed $value): int|float|string|array
             return rank($ref->add($value)) - rank($ref);
 
         case $value instanceof DatePeriod:
-            return rank(current($value));
+            return rank(current(iterator_to_array($value)));
 
         case $value instanceof Stringable:
             return $value->__toString();

@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace Pest;
+namespace Pest\Unit\constants;
 
 use empaphy\usephul;
 

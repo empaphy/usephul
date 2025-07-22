@@ -10,6 +10,8 @@
 
 declare(strict_types=1);
 
+namespace Pest\Unit\Type\uses;
+
 use empaphy\usephul\Type;
 
 describe('uses()', function () {

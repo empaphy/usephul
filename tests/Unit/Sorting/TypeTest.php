@@ -11,6 +11,8 @@
 
 declare(strict_types=1);
 
+namespace Pest\Unit\Sorting;
+
 use empaphy\usephul\Sorting\Type;
 
 describe('Sorting Type enum', function () {

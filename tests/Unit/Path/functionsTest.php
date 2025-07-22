@@ -11,6 +11,8 @@
 
 declare(strict_types=1);
 
+namespace Pest\Unit\Path;
+
 use empaphy\usephul\Path;
 
 describe('Path', function () {

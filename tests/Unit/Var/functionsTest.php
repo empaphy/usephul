@@ -11,7 +11,10 @@
 
 declare(strict_types=1);
 
+namespace Pest\Unit\Var;
+
 use empaphy\usephul\Var;
+use stdClass;
 
 describe('is_closed_resource()', function () {
     it('correctly returns whether value is a closed resource', function ($value, $type) {

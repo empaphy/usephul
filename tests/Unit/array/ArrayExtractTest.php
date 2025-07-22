@@ -10,6 +10,8 @@
 
 declare(strict_types=1);
 
+namespace Pest\Unit\array;
+
 use empaphy\usephul;
 
 describe('array_extract()', function () {
@@ -27,6 +29,6 @@ describe('array_extract()', function () {
                 'qux' => null,
             ],
             'values' => ['FOO'],
-        ]
+        ],
     ]);
 });

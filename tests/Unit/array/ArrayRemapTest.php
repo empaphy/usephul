@@ -10,14 +10,16 @@
 
 declare(strict_types=1);
 
+namespace Pest\Unit\array;
+
 use empaphy\usephul;
 
 describe('array_remap()', function () {
 
     test('yields from generators', function (array $map) {
         $remap = usephul\array_remap(
-            fn ($key, $value) => yield $value => $key,
-            $map
+            fn($key, $value) => yield $value => $key,
+            $map,
         );
 
         expect($remap)->toEqual(array_flip($map));
@@ -26,28 +28,28 @@ describe('array_remap()', function () {
             'map' => [
                 'foo' => 'FOO',
                 'bar' => 'BAR',
-            ]
-        ]
+            ],
+        ],
     ]);
 
     test('yields from callable', function (array $expected, array $map) {
         $remap = usephul\array_remap(
-            fn ($key, $value) => $key,
-            $map
+            fn($key, $value) => $key,
+            $map,
         );
 
         expect($remap)->toEqual($expected);
     })->with([
         [
             'expected' => [
-               'foo' => 'foo',
-               'bar' => 'bar',
+                'foo' => 'foo',
+                'bar' => 'bar',
             ],
             'map' => [
-               'foo' => 'FOO',
-               'bar' => 'BAR',
-            ]
-        ]
+                'foo' => 'FOO',
+                'bar' => 'BAR',
+            ],
+        ],
     ]);
 
 });

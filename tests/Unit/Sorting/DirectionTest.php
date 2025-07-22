@@ -11,6 +11,8 @@
 
 declare(strict_types=1);
 
+namespace Pest\Unit\Sorting;
+
 use empaphy\usephul\Sorting\Direction;
 
 describe('Sorting Direction enum', function () {

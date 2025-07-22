@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace empaphy\usephul\tests\Unit\OtherTest;
+namespace Pest\Unit\other;
 
 use empaphy\usephul;
 
@@ -46,7 +46,7 @@ describe('class_parents_uses()', function () {
         $objectParentsUses = usephul\class_parents_uses($object);
 
         $expected = [
-            ParentMockTrait::class => ParentMockTrait::class
+            ParentMockTrait::class => ParentMockTrait::class,
         ];
 
         expect($classParentsUses)->toEqual($expected)

@@ -11,6 +11,8 @@
 
 declare(strict_types=1);
 
+namespace Pest\Unit\generators;
+
 use empaphy\usephul\generators;
 
 describe('seq()', function () {

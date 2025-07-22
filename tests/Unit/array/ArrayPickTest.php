@@ -10,6 +10,8 @@
 
 declare(strict_types=1);
 
+namespace Pest\Unit\array;
+
 use empaphy\usephul;
 
 describe('array_pick()', function () {
@@ -28,6 +30,6 @@ describe('array_pick()', function () {
                 'qux' => null,
             ],
             'keys' => ['bar', 'qux'],
-        ]
+        ],
     ]);
 });

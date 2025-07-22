@@ -10,9 +10,11 @@
 
 declare(strict_types=1);
 
+namespace Pest\Unit\Path;
+
 use empaphy\usephul\Path\PathInfo;
 
-describe('PathInfo', function() {
+describe('PathInfo', function () {
     test('matches pathinfo()', function ($path) {
         $pathInfo = new PathInfo($path);
         $pathinfo = pathinfo($path);

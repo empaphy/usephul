@@ -10,7 +10,10 @@
 
 declare(strict_types=1);
 
+namespace Pest\Unit\array;
+
 use empaphy\usephul;
+use Throwable;
 
 describe('array_interchange()', function () {
 
