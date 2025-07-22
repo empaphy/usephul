@@ -100,7 +100,16 @@ enum Type: string
      * @param  mixed  $value
      *   The value for which to deduce the type.
      *
-     * @return self
+     * @return ($value is null            ? Type::Null
+     *       : ($value is bool            ? Type::Boolean
+     *       : ($value is int             ? Type::Integer
+     *       : ($value is float           ? Type::Float
+     *       : ($value is string          ? Type::String
+     *       : ($value is array           ? Type::Array
+     *       : ($value is object          ? Type::Object
+     *       : ($value is resource        ? Type::Resource
+     *       : ($value is closed-resource ? Type::ClosedResource
+     *       : Type::Unknown )))))))))
      *   A Type case instance.
      *
      * @throws ValueError
@@ -128,14 +137,13 @@ enum Type: string
     }
 
     /**
-     * Checks whether the type of provided value matches this {@see Type}.
+     * Checks whether the type of the provided value matches this Type.
      *
      * @param mixed $value
      *   The value to check.
      *
      * @return bool
-     *   Returns `true` if __value__ matches this {@see Type}, `false`
-     *   otherwise.
+     *   Returns `true` if __value__ matches this Type, `false` otherwise.
      */
     public function is(mixed $value): bool
     {
