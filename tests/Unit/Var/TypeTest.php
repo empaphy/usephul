@@ -15,46 +15,48 @@ namespace Pest\Unit\Var;
 
 use empaphy\usephul\Var\Type;
 
-describe('Type', function () {
-    it('has the appropriate cases', function ($case, $expected) {
-        expect($case->value)->toBe($expected);
-    })->with('types / values');
-});
+describe('Var', function () {
+    describe('Type', function () {
+        test('has the appropriate cases', function ($case, $expected) {
+            expect($case->value)->toBe($expected);
+        })->with('types / values');
+    });
 
-describe('Type::of()', function () {
-    it('returns appropriate Type when called', function ($value, $expected) {
-        $type = Type::of($value);
+    describe('Type::of()', function () {
+        test('returns appropriate Type', function ($value, $expected) {
+            $type = Type::of($value);
 
-        expect($type)->toBe($expected);
-    })->with('types / test cases');
+            expect($type)->toBe($expected);
+        })->with('types / test cases');
 
-    it("doesn't return wrong Type when called", function ($value, $unexpected) {
-        $type = Type::of($value);
+        test("doesn't return wrong Type", function ($value, $unexpected) {
+            $type = Type::of($value);
 
-        expect($type)->not()->toBe($unexpected);
-    })->with('types / fail cases');
-});
+            expect($type)->not()->toBe($unexpected);
+        })->with('types / fail cases');
+    });
 
-describe('Type::tryOf()', function () {
-    it('returns appropriate Type when called', function ($value, $expected) {
-        $type = Type::tryOf($value);
+    describe('Type::tryOf()', function () {
+        test('returns appropriate Type', function ($value, $expected) {
+            $type = Type::tryOf($value);
 
-        expect($type)->toBe($expected);
-    })->with('types / test cases');
+            expect($type)->toBe($expected);
+        })->with('types / test cases');
 
-    it("doesn't return wrong Type when called", function ($value, $unexpected) {
-        $type = Type::tryOf($value);
+        test("doesn't return wrong Type", function ($value, $unexpected) {
+            $type = Type::tryOf($value);
 
-        expect($type)->not()->toBe($unexpected);
-    })->with('types / fail cases');
-});
+            expect($type)->not()->toBe($unexpected);
+        })->with('types / fail cases');
+    });
 
-describe('Type->is()', function () {
-    it('returns true when type matches', function ($value, Type $type) {
-        expect($type->is($value))->toBeTrue();
-    })->with('types / test cases');
+    describe('Type->is()', function () {
+        test('returns true when type matches', function ($value, Type $type) {
+            expect($type->is($value))->toBeTrue();
+        })->with('types / test cases');
 
-    it('returns false when called', function ($value, Type $type) {
-        expect($type->is($value))->toBeFalse();
-    })->with('types / fail cases');
+        test('returns false', function ($value, Type $type) {
+            expect($type->is($value))->toBeFalse();
+        })->with('types / fail cases');
+    });
 });

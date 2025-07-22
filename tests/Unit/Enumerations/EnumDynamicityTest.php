@@ -15,31 +15,33 @@ namespace Pest\Unit\Enumerations;
 
 use empaphy\usephul\Enumerations\EnumDynamicity;
 
-describe('EnumDynamicity::try()', function () {
-    enum MockEnum: string
-    {
-        use EnumDynamicity;
+describe('Enumerations', function () {
+    describe('EnumDynamicity::try()', function () {
+        enum MockEnum: string
+        {
+            use EnumDynamicity;
 
-        case Foo = 'foo';
-        case Bar = 'bar';
-    }
+            case Foo = 'foo';
+            case Bar = 'bar';
+        }
 
-    test('returns enum case for provided name', function (MockEnum $mock) {
-        $case = MockEnum::try($mock->name);
+        test('returns enum case for provided name', function (MockEnum $mock) {
+            $case = MockEnum::try($mock->name);
 
-        expect($case)->toBe($mock);
-    })->with([
-        ['mock' => MockEnum::Foo],
-        ['mock' => MockEnum::Bar],
-    ]);
+            expect($case)->toBe($mock);
+        })->with([
+            ['mock' => MockEnum::Foo],
+            ['mock' => MockEnum::Bar],
+        ]);
 
-    test('returns `null` if a provided name does not exist', function () {
-        $case = MockEnum::try('Baz');
+        test('returns `null` if a provided name does not exist', function () {
+            $case = MockEnum::try('Baz');
 
-        expect($case)->toBeNull();
+            expect($case)->toBeNull();
+        });
+
+        test('throws a `ValueError` when provided an empty string', function () {
+            MockEnum::try(''); // @phpstan-ignore argument.type
+        })->throws(\ValueError::class);
     });
-
-    test('throws a `ValueError` when provided an empty string', function () {
-        MockEnum::try(''); // @phpstan-ignore argument.type
-    })->throws(\ValueError::class);
 });
