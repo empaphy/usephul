@@ -12,8 +12,6 @@ parameters:
     ignoreErrors:
         - identifier: missingType.generics
         - identifier: missingType.iterableValue
-        - identifier: method.protected
-          path:       tests/Unit/*
 
     level: 8
     reportWrongPhpDocTypeInVarTag: true
