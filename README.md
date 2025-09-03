@@ -27,6 +27,8 @@
 
   - [Path\basename()](https://usephul.empaphy.org/packages/Paths.html#function_basename)
     — Returns the trailing name component of a path.
+  - [Path\components()](https://usephul.empaphy.org/packages/Paths.html#function_components)
+    — Returns an array of path components for the given path.
   - [Path\dirname()](https://usephul.empaphy.org/packages/Paths.html#function_dirname)
     — Returns a parent directory's path.
   - [Path\extension()](https://usephul.empaphy.org/packages/Paths.html#function_extension)

@@ -11,10 +11,12 @@ declare(strict_types=1);
 
 namespace empaphy\usephul\Path;
 
+use function explode;
 use function pathinfo;
 use function strlen;
 use function substr;
 
+use const DIRECTORY_SEPARATOR;
 use const PATHINFO_FILENAME;
 
 /**
@@ -56,6 +58,52 @@ use const PATHINFO_FILENAME;
 function basename(string $path, string $suffix = ''): string
 {
     return \basename($path, $suffix);
+}
+
+/**
+ * Returns an array of path components for the given path.
+ *
+ * Empty components are represented as `null`. This includes the first empty
+ * component if the __path__ starts with a directory separator. For example:
+ *
+ *     components('foo/bar')    === ['foo', 'bar'];
+ *     components('/foo//bar/') === [null, 'foo', null, 'bar', null];
+ *     components('/')          === [null, null];
+ *     components('')           === [null];
+ *
+ * > __Note__:
+ * >
+ * > {@see components()} operates naively on the input string, and is not
+ * > aware of the actual filesystem, or path components such as "..".
+ *
+ * On other systems, dirname() assumes path to be encoded in an ASCII compatible encoding. Otherwise, the behavior of the function is undefined.
+ *
+ * @param  string  $path
+ *   A path to split into its components.
+ *
+ *   On Windows, both slash (`/`) and backslash (`\`) are used as directory
+ *   separator characters. In other environments, it is the forward slash (`/`).
+ *
+ * @return non-empty-list<non-empty-string|null>
+ *   An array containing the __path__ split up into its components.
+ */
+function components(string $path): array
+{
+    $components = [];
+
+    if ('/' === DIRECTORY_SEPARATOR) {
+        foreach (explode('/', $path) as $v) {
+            $components[] = '' === $v ? null : $v;
+        }
+    } else {
+        foreach (explode('/', $path) as $v) {
+            foreach (explode(DIRECTORY_SEPARATOR, $v) as $u) {
+                $components[] = '' === $u ? null : $u;
+            }
+        }
+    }
+
+    return $components;
 }
 
 /**

@@ -16,6 +16,26 @@ namespace Pest\Unit\Path;
 use empaphy\usephul\Path;
 
 describe('Path', function () {
+    describe('components()', function () {
+        test('returns correct components', function ($path, $expected) {
+            $components = Path\components($path);
+            expect($components)->toEqual($expected);
+        })->with([
+            ['path' => '<cwd1>/<cwd2>//<cwd3>/<name>', 'expected' => ['<cwd1>', '<cwd2>',  null , '<cwd3>', '<name>']],
+            ['path' => '////<name>',                   'expected' => [  null  ,   null  ,  null ,   null  , '<name>']],
+            ['path' => '<cwd1>/<cwd2>//<cwd3>/',       'expected' => ['<cwd1>', '<cwd2>',  null , '<cwd3>',   null  ]],
+            ['path' => '////',                         'expected' => [  null  ,   null  ,  null ,   null  ,   null  ]],
+            ['path' => '/',                            'expected' => [  null  ,   null                              ]],
+            ['path' => '',                             'expected' => [  null                                        ]],
+            ['path' => '0',                            'expected' => [  '0'                                         ]],
+            ['path' => 'false',                        'expected' => ['false'                                         ]],
+            ['path' => '%2Fetc/motd',                  'expected' => ['%2Fetc',  'motd'                             ]],
+            ['path' => 'etc/motd',                     'expected' => [ 'etc'  ,  'motd'                             ]],
+            ['path' => '/etc/motd',                    'expected' => [  null  ,   'etc' , 'motd'                    ]],
+            ['path' => 'motd',                         'expected' => [ 'motd'                                       ]],
+        ]);
+    });
+
     describe('dirname()', function () {
         test('returns correct directory name', function ($path, $returns) {
             $pathinfo = pathinfo($path, PATHINFO_DIRNAME);
