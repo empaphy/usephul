@@ -13,11 +13,9 @@ declare(strict_types=1);
 namespace Pest\Unit\array;
 
 use empaphy\usephul;
+use empaphy\usephul\Var\Type;
 
 use function array_flip;
-use function describe;
-use function expect;
-use function test;
 
 describe('array_exclude()', function () {
     test('excludes values from an array', function (array $array, array $values, $expected) {
@@ -82,6 +80,19 @@ describe('array_interchange()', function () {
         $result = usephul\array_interchange([3, 5, 7], 1, 3);
         expect($result[1])->toBeNull();
     });
+});
+
+describe('array_key_types()', function () {
+    test('returns array key types', function (array $array, array $expected) {
+        $types = usephul\array_key_types($array);
+        expect($types)->toBe($expected);
+    })->with([
+        ['array' => [],                               'expected' => []],
+        ['array' => [         'FOO',          'BAR'], 'expected' => [Type::INTEGER => true]],
+        ['array' => [  37  => 'FOO',   42  => 'BAR'], 'expected' => [Type::INTEGER => true]],
+        ['array' => ['foo' => 'FOO', 'bar' => 'BAR'], 'expected' => [Type::STRING  => true]],
+        ['array' => ['foo' => 'FOO',   42  => 'BAR'], 'expected' => [Type::INTEGER => true, Type::STRING => true]],
+    ]);
 });
 
 describe('array_omit()', function () {

@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace empaphy\usephul;
 
+use empaphy\usephul\Var\Type;
 use Generator;
 
 use function array_filter;
@@ -18,6 +19,7 @@ use function array_is_list;
 use function array_map;
 use function array_values;
 use function in_array;
+use function is_int;
 
 /**
  * Exclude from an array all the elements that match the provided values.
@@ -92,8 +94,6 @@ function array_extract(array $array, mixed ...$values): array
  * @param  TKey                 $key1
  * @param  TKey                 $key2
  * @return array<TKey, TValue>
- *
- * @noinspection PhpDocSignatureInspection
  */
 function array_interchange(array $array, int|string $key1, int|string $key2): array
 {
@@ -102,6 +102,53 @@ function array_interchange(array $array, int|string $key1, int|string $key2): ar
         $key1 => $array[$key2],
         $key2 => $array[$key1],
     ];
+}
+
+/**
+ * Inspects the types of keys used in an array.
+ *
+ * @param  array<int|string, mixed>  $array
+ *   The array to inspect.
+ *
+ * @return ($array is array{}              ? array{}
+ *       : ($array is array<int, mixed>    ? array{integer: true}
+ *       : ($array is array<string, mixed> ? array{string: true}
+ *       :                                   array{integer: true, string: true}
+ *   )))
+ *   Returns an array whose keys are strings representing the {@see Type types}
+ *   of keys used in __array__. The values are always `true`.
+ */
+function array_key_types(array $array): array
+{
+    if (empty($array)) {
+        return [];
+    }
+
+    if (array_is_list($array)) {
+        return [Type::INTEGER => true];
+    }
+
+    $hasInt    = false;
+    $hasString = false;
+    foreach ($array as $key => $_) {
+        if (is_int($key)) {
+            if ($hasString) {
+                return [Type::INTEGER => true, Type::STRING => true];
+            }
+            $hasInt = true;
+        } elseif (is_string($key)) {
+            if ($hasInt) {
+                return [Type::INTEGER => true, Type::STRING => true];
+            }
+            $hasString = true;
+        }
+    }
+
+    return match (true) {
+        $hasInt    => [Type::INTEGER => true],
+        $hasString => [Type::STRING  => true],
+        default    => [],
+    };
 }
 
 /**

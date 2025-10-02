@@ -14,6 +14,8 @@
     — Extract values from an array.
   - [array_interchange()](https://usephul.empaphy.org/packages/Arrays.html#function_array_interchange)
     — Interchange the values of two elements of an array.
+  - [array_key_types()](https://usephul.empaphy.org/packages/Arrays.html#function_array_key_type)
+    — Inspects the types of keys used in an array.
   - [array_omit()](https://usephul.empaphy.org/packages/Arrays.html#function_array_omit)
     — Omit keys from an array.
   - [array_pick()](https://usephul.empaphy.org/packages/Arrays.html#function_array_pick)
