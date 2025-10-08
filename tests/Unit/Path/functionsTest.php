@@ -109,19 +109,12 @@ describe('Path', function () {
         ]);
     });
 
-    describe('extension_replace()', function () {
-        test('replaces directory name', function ($path, $replacement, $suffix, $returns) {
-            $replaced = Path\extension_replace($path, $replacement, $suffix);
+    describe('extension_replace', function () {
+        test('replaces extension', function ($path, $replacement, $prefix, $expected) {
+            $replaced = Path\extension_replace($path, $replacement, $prefix);
 
-            expect($replaced)->toEqual($returns);
-        })->with([
-            ['path' => 'dir/name.suf.ext', 'replacement' => 'next', 'suffix' => '', 'returns' => 'dir/name.suf.next'],
-            ['path' => 'dir/name.suf.ext', 'replacement' => 'next', 'suffix' => '.suf', 'returns' => 'dir/name.next'],
-            ['path' => 'dir/name.suf.ext', 'replacement' => '', 'suffix' => '', 'returns' => 'dir/name.suf'],
-            ['path' => 'dir/name.suf.ext', 'replacement' => '', 'suffix' => '.suf', 'returns' => 'dir/name'],
-            ['path' => 'dir/name.suf.ext', 'replacement' => '', 'suffix' => '.ext', 'returns' => 'dir/name.suf'],
-            ['path' => 'dir/name.suf.ext', 'replacement' => '', 'suffix' => '.bar', 'returns' => 'dir/name.suf'],
-        ]);
+            expect($replaced)->toEqual($expected);
+        })->with('Path / extension_replace');
     });
 
     describe('filename()', function () {

@@ -12,7 +12,11 @@ declare(strict_types=1);
 namespace empaphy\usephul\Path;
 
 use function explode;
+use function implode;
 use function pathinfo;
+use function preg_quote;
+use function preg_replace;
+use function str_contains;
 use function strlen;
 use function substr;
 
@@ -217,32 +221,58 @@ function extension(string $path): string
  * If __replacement__ is left empty, the extension is removed from __path__,
  * _including_ the seperating period (`.`).
  *
+ * For the intents of this function, __path__ is considered to have an extension
+ * if there is a period (`.`) which is not the first character of the basename.
+ *
  * @param  string  $path
  *   A path.
  *
- * @param  string  $replacement
- *   The replacement extension. If empty, the extension is removed.
+ * @param  null|string  $replacement
+ *   The replacement extension. If `null`, the extension is removed along with
+ *   the preceding period (`.`).
  *
- * @param  string  $suffix
- *   If the name component ends in __suffix__, this will also be replaced.
+ * @param  string  $prefix
+ *   If __path__ contains an extension that is preceeded by __prefix__, then
+ *   __prefix__ is also replaced along with the extension.
+ *   Additionally, if __prefix__ contains an extension – i.e. contains a
+ *   period (`.`) – then it will always be replaced in __path__, even if
+ *   the value of __path__ starts with __prefix__.
  *
- * @return string
- *   Returns __path__ with any extension (and optionally __suffix__)
- *   replaced with __replacement__.
+ * @return ($path is '' ? '' : string)
+ *   The modified path.
  */
 function extension_replace(
     string $path,
-    string $replacement = '',
-    string $suffix = '',
+    ?string $replacement = null,
+    string $prefix = '',
 ): string {
-    $dirname = dirname($path);
-    $filename = filename($path, $suffix);
-
-    if ('' === $replacement) {
-        return "$dirname/$filename";
+    if ('' === $path) {
+        return $path;
     }
 
-    return "$dirname/$filename.$replacement";
+    $separators = [preg_quote('/', '/')];
+    if (DIRECTORY_SEPARATOR !== '/') {
+        $separators[] = preg_quote(DIRECTORY_SEPARATOR, '/');
+    }
+
+    $sep = implode('', $separators);
+    $start = implode('|', $separators);
+    $match = "((?<!^|$start))\.[^.$sep]*";
+
+    if ($prefix) {
+        $pre = preg_quote($prefix, '/');
+        $match = "(?:$pre)?$match";
+
+        if (str_contains($prefix, '.')) {
+            $match = "(?:$pre|$match)";
+        }
+    }
+
+    return preg_replace(
+        "/$match([$sep]?)$/",
+        null === $replacement ? '\\1\\2' : "\\1.$replacement\\2",
+        $path,
+    );
 }
 
 /**
