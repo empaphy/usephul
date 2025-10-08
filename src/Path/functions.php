@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace empaphy\usephul\Path;
 
-use Composer\Pcre\Regex;
 use function implode;
 use function pathinfo;
-use function preg_last_error_msg;
 use function preg_quote;
+use function preg_replace;
+use function str_contains;
 use function strlen;
 use function substr;
 
