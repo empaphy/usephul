@@ -106,9 +106,12 @@ describe('Path', function () {
             expect($extension)->toEqual($pathinfo);
         })->with([
             ['path' => '/root/dir/sub/name.suf.ext', 'returns' => 'ext'],
+            ['path' => '/root/dir/sub/name.suf.', 'returns' => ''],
             ['path' => '/root/dir/sub/name.ext', 'returns' => 'ext'],
+            ['path' => '/root/dir/sub/name.', 'returns' => ''],
             ['path' => '/root/dir/sub/name', 'returns' => ''],
             ['path' => '/root/dir/sub/.ext', 'returns' => 'ext'],
+            ['path' => '/root/dir/sub/.', 'returns' => ''],
             ['path' => '/root/dir/sub/', 'returns' => ''],
         ]);
     });
