@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace empaphy\usephul\Path;
 
+use RuntimeException;
 use ValueError;
 
 use function explode;
@@ -273,11 +274,15 @@ function extension_replace(
         }
     }
 
-    return preg_replace(
+    $path = preg_replace(
         "/$match([$sep]?)$/",
         null === $replacement ? '\\1\\2' : "\\1.$replacement\\2",
         $path,
     );
+
+    assert(null !== $path);
+
+    return $path;
 }
 
 /**
