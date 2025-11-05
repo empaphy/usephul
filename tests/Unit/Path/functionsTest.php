@@ -15,6 +15,10 @@ namespace Pest\Unit\Path;
 
 use empaphy\usephul\Path;
 
+use function pathinfo;
+
+use const PATHINFO_FILENAME;
+
 describe('Path', function () {
     describe('components()', function () {
         test('returns correct components', function ($path, $expected) {
@@ -118,33 +122,17 @@ describe('Path', function () {
     });
 
     describe('filename()', function () {
-        test('returns correct filename', function ($path) {
-            $pathinfo = pathinfo($path, PATHINFO_FILENAME);
+        test('behaves like pathinfo()', function ($path) {
+            $expected = pathinfo($path, PATHINFO_FILENAME);
             $filename = Path\filename($path);
 
-            expect($filename)->toEqual($pathinfo);
-        })->with([
-            ['path' => '/root/dir/sub/name.suf.ext'],
-            ['path' => '/root/dir/sub/name.ext'],
-            ['path' => '/root/dir/sub/name'],
-            ['path' => '/root/dir/sub/.ext'],
-            ['path' => '/root/dir/sub/'],
-        ]);
+            expect($filename)->toEqual($expected);
+        })->with('Path / filename defaults');
 
         test('returns file name, without suffix', function ($path, $suffix, $expected) {
             $filename = Path\filename($path, $suffix);
 
             expect($filename)->toEqual($expected);
-        })->with([
-            ['path' => '/root/dir/sub/name.suf.ext', 'suffix' => '.ext', 'expected' => 'name.suf'],
-            ['path' => '/root/dir/sub/name.suf.ext', 'suffix' => '.suf', 'expected' => 'name'],
-            ['path' => '/root/dir/sub/name.suf.suf', 'suffix' => '.suf', 'expected' => 'name'],
-            ['path' => '/root/dir/sub/name.ext', 'suffix' => '.suf', 'expected' => 'name'],
-            ['path' => '/root/dir/sub/name.suf', 'suffix' => '.suf', 'expected' => 'name'],
-            ['path' => '/root/dir/sub/name', 'suffix' => '.suf', 'expected' => 'name'],
-            ['path' => '/root/dir/sub/.suf.ext', 'suffix' => '.suf', 'expected' => ''],
-            ['path' => '/root/dir/sub/', 'suffix' => '.suf', 'expected' => 'sub'],
-            ['path' => '/root/dir/sub/', 'suffix' => 'sub', 'expected' => ''],
-        ]);
+        })->with('Path / filename with suffix');
     });
 });

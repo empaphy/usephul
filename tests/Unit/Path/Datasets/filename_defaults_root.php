@@ -1,0 +1,35 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    ['path' => '/'],
+    ['path' => '/.'],
+    ['path' => '/dir./'],
+    ['path' => '/dir./.'],
+    ['path' => '/dir.ext/'],
+    ['path' => '/dir.ext/.'],
+    ['path' => '/dir.suf./'],
+    ['path' => '/dir.suf./.'],
+    ['path' => '/dir.suf.ext/'],
+    ['path' => '/dir.suf.ext/.'],
+    ['path' => '/dir/'],
+    ['path' => '/dir/.'],
+    ['path' => '/dir/name'],
+    ['path' => '/dir/name.'],
+    ['path' => '/dir/name.ext'],
+    ['path' => '/dir/sub./'],
+    ['path' => '/dir/sub.d/'],
+    ['path' => '/dir/sub.d/.'],
+    ['path' => '/dir/sub.d/.ext'],
+    ['path' => '/dir/sub.d/name'],
+    ['path' => '/dir/sub.d/name.'],
+    ['path' => '/dir/sub.d/name.ext'],
+    ['path' => '/dir/sub.d/name.suf.'],
+    ['path' => '/dir/sub.d/name.suf.ext'],
+    ['path' => '/name'],
+    ['path' => '/name.'],
+    ['path' => '/name.ext'],
+    ['path' => '/name.suf.'],
+    ['path' => '/name.suf.ext'],
+];
