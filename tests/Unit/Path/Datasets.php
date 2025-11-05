@@ -22,3 +22,7 @@ dataset('Path / filename with suffix', [
     ...require __DIR__ . '/Datasets/filename_suffix_dir_root.php',
     ...require __DIR__ . '/Datasets/filename_suffix_dir_relative.php',
 ]);
+
+dataset('Path / suffix', [
+    ...require __DIR__ . '/Datasets/suffix.php',
+]);

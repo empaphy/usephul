@@ -11,13 +11,18 @@ declare(strict_types=1);
 
 namespace empaphy\usephul\Path;
 
+use ValueError;
+
 use function explode;
 use function implode;
+use function is_string;
 use function pathinfo;
 use function preg_quote;
 use function preg_replace;
+use function sprintf;
 use function str_contains;
 use function strlen;
+use function strrpos;
 use function substr;
 
 use const DIRECTORY_SEPARATOR;
@@ -339,4 +344,54 @@ function filename(string $path, string $suffix = ''): string
     }
 
     return $filename;
+}
+
+/**
+ * Returns the suffix of the given path.
+ *
+ * A suffix is defined as the part of the basename after the last separator
+ * character in __separators__, and before the extension.
+ *
+ *     suffix('/path/to/name-suf',     '-'); // returns '-suf'
+ *     suffix('/path/to/name-suf.ext', '-'); // returns '-suf'
+ *     suffix('/path/to/name.suf.ext', '.'); // returns '.suf'
+ *
+ * @param  string  $path
+ *   A path.
+ *
+ * @param  string  $separator
+ *   Specifies the seperator strings.
+ *
+ * @param  string  ...$separators
+ *   Specifies additional seperator strings.
+ *
+ * @return string
+ */
+function suffix(
+    string $path,
+    string $separator = '-',
+    string ...$separators,
+): string {
+    if (empty($separator)) {
+        throw new ValueError('Argument #2 ($separator) must not be empty');
+    }
+
+    $filename = pathinfo($path, PATHINFO_FILENAME);
+    $offset = strrpos($filename, $separator);
+
+    $i = 2;
+    foreach ($separators as $key => $sep) {
+        $i++;
+        if (empty($sep)) {
+            throw new ValueError(sprintf(
+                'Argument #%d (...$separators[%s]) must not be empty',
+                $i,
+                is_string($key) ? "'$key'" : $key,
+            ));
+        }
+
+        $offset = strrpos($filename, $sep, (int) $offset) ?: $offset;
+    }
+
+    return false === $offset ? '' : substr($filename, $offset);
 }

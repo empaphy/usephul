@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Pest\Unit\Path;
 
 use empaphy\usephul\Path;
+use ValueError;
 
 use function pathinfo;
 
@@ -137,5 +138,31 @@ describe('Path', function () {
 
             expect($filename)->toEqual($expected);
         })->with('Path / filename with suffix');
+    });
+
+    describe('suffix()', function () {
+        test('uses hyphen as default separator', function () {
+            $suffix = Path\suffix('foo-suf.ext');
+            expect($suffix)->toEqual('-suf');
+        });
+
+        test('returns suffix', function ($path, $separators, $expected) {
+            $suffix = Path\suffix($path, ...$separators);
+            expect($suffix)->toEqual($expected);
+        })->with('Path / suffix');
+
+        describe('throws ValueError for empty separators', function () {
+            test('with empty $separator', function () {
+                Path\suffix('foo-suf.ext', '');
+            })->throws(ValueError::class, 'Argument #2 ($separator) must not be empty');
+
+            test('with variable arguments', function () {
+                Path\suffix('foo-suf.ext', '-', '');
+            })->throws(ValueError::class, 'Argument #3 (...$separators[0]) must not be empty');
+
+            test('with named arguments', function () {
+                Path\suffix('foo-suf.ext', '-', foo: '');
+            })->throws(ValueError::class, 'Argument #3 (...$separators[\'foo\']) must not be empty');
+        });
     });
 });
