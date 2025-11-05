@@ -231,12 +231,12 @@ function extension(string $path): string
  *   The replacement extension. If `null`, the extension is removed along with
  *   the preceding period (`.`).
  *
- * @param  string  $prefix
- *   If __path__ contains an extension that is preceeded by __prefix__, then
- *   __prefix__ is also replaced along with the extension.
- *   Additionally, if __prefix__ contains an extension – i.e. contains a
- *   period (`.`) – then it will always be replaced in __path__, even if
- *   the value of __path__ starts with __prefix__.
+ * @param  string  $suffix
+ *   If the filename in __path__ is suffixed with __suffix__, then the suffix
+ *   is also replaced along with the extension. Additionally, if __suffix__
+ *   contains an extension – i.e. starts with a period (`.`) – then it will
+ *   always be replaced in __path__, even if the value of __path__ starts with
+ *   __suffix__.
  *
  * @return ($path is '' ? '' : string)
  *   The modified path.
@@ -244,7 +244,7 @@ function extension(string $path): string
 function extension_replace(
     string $path,
     ?string $replacement = null,
-    string $prefix = '',
+    string $suffix = '',
 ): string {
     if ('' === $path) {
         return $path;
@@ -259,11 +259,11 @@ function extension_replace(
     $start = implode('|', $separators);
     $match = "((?<!^|$start))\.[^.$sep]*";
 
-    if ($prefix) {
-        $pre = preg_quote($prefix, '/');
+    if ($suffix) {
+        $pre = preg_quote($suffix, '/');
         $match = "(?:$pre)?$match";
 
-        if (str_contains($prefix, '.')) {
+        if (str_contains($suffix, '.')) {
             $match = "(?:$pre|$match)";
         }
     }
