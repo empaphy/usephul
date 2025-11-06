@@ -19,7 +19,9 @@
         "empaphy/polyphill-php": "^1"
     },
     "require-dev": {
-        "empaphy/dev": "^1@dev"
+        "friendsofphp/php-cs-fixer": "^3",
+        "pestphp/pest": "^4 || ^3 || ^2",
+        "phpstan/phpstan": "^2"
     },
     "autoload": {
         "files": [
