@@ -30,3 +30,7 @@ dataset('Path / filename with suffix', [
 dataset('Path / suffix', [
     ...require __DIR__ . '/Datasets/suffix.php',
 ]);
+
+dataset('Path / suffix_replace', [
+    ...require __DIR__ . '/Datasets/suffix_replace.php',
+]);

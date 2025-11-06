@@ -43,6 +43,8 @@
     — Returns the name component of a path without the extension.
   - [Path\suffix()](https://usephul.empaphy.org/packages/Paths.html#function_suffix)
     — Returns a suffix for a path based on a given set of separators.
+  - [Path\suffix_replace()](https://usephul.empaphy.org/packages/Paths.html#function_suffix_replace)
+    — Replaces a suffix in a path with a new value.
 
 ### Generator Functions
 

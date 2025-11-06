@@ -440,3 +440,72 @@ function suffix(
 
     return false === $offset ? '' : substr($filename, $offset);
 }
+
+/**
+ * Replace a suffix in a path with a new value.
+ *
+ * If __replacement__ is left empty, the suffix is removed from __path__.
+ *
+ * @param  string  $path
+ *   A path.
+ *
+ * @param  string  $suffix
+ *   The new suffix. If empty, the suffix is removed.
+ *
+ * @param  string  ...$separators
+ *   You can provide multiple separator strings to identify the existing suffix.
+ *   If no separator is provided, the suffix will simply be added to the
+ *   filename component of the __path__.
+ *
+ * @return string
+ *   The modified path.
+ */
+function suffix_replace(
+    string $path,
+    string $suffix,
+    string ...$separators,
+): string {
+    $pathinfo = pathinfo($path);
+
+    $filename  = $pathinfo['filename'];
+    $extension = $pathinfo['extension'] ?? null;
+    $dir       = $pathinfo['dirname'] ?? '';
+
+    $offset = null;
+
+    $i = 2;
+    foreach ($separators as $key => $separator) {
+        $i++;
+        if (empty($separator)) {
+            throw new ValueError(sprintf(
+                'Argument #%d (...$separators[%s]) must not be empty',
+                $i,
+                is_string($key) ? "'$key'" : $key,
+            ));
+        }
+
+        $offset = strrpos($filename, $separator, (int) $offset)
+            ?: $offset ?? false;
+    }
+
+    $filename = match ($offset) {
+        null    => $filename . $suffix,
+        false   => $filename,
+        default => substr($filename, 0, $offset) . $suffix,
+    };
+
+    $directory_separator = null;
+    if (str_contains($path, DIRECTORY_SEPARATOR)) {
+        $directory_separator = DIRECTORY_SEPARATOR;
+    } elseif (str_contains($path, '/')) {
+        $directory_separator = '/';
+    }
+
+    if ('.' === $dir && null === $directory_separator) {
+        $dir = '';
+    } else {
+        $dir .= $directory_separator;
+    }
+
+    return $dir . $filename . (null !== $extension ? ".$extension" : '');
+}

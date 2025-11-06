@@ -172,4 +172,25 @@ describe('Path', function () {
             })->throws(ValueError::class, 'Argument #3 (...$separators[\'foo\']) must not be empty');
         });
     });
+
+    describe('suffix_replace()', function () {
+        test('replaces suffix in path', function ($path, $suffix, $separators, $expected) {
+            $actual = Path\suffix_replace($path, $suffix, ...$separators);
+            expect($actual)->toEqual($expected);
+        })->with('Path / suffix_replace');
+
+        describe('throws ValueError', function () {
+            test('with empty $separator', function () {
+                Path\suffix_replace('foo-suf.ext', '-fix', '');
+            })->throws(ValueError::class, 'Argument #3 (...$separators[0]) must not be empty');
+
+            test('with variable arguments', function () {
+                Path\suffix_replace('foo-suf.ext', '-fix', '-', '');
+            })->throws(ValueError::class, 'Argument #4 (...$separators[1]) must not be empty');
+
+            test('with named arguments', function () {
+                Path\suffix_replace('foo-suf.ext', '-fix', '-', foo: '');
+            })->throws(ValueError::class, 'Argument #4 (...$separators[\'foo\']) must not be empty');
+        });
+    });
 });
