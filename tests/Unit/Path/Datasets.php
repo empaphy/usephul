@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+dataset('Path / directory_separator', [
+    ...require __DIR__ . '/Datasets/directory_separator.php',
+]);
+
 dataset('Path / extension_replace', [
     ...require __DIR__ . '/Datasets/extension_replace_defaults.php',
     ...require __DIR__ . '/Datasets/extension_replace_empty_replacement.php',

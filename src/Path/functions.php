@@ -117,6 +117,45 @@ function components(string $path): array
 }
 
 /**
+ * Returns the directory separator used in the given path, supported by the
+ * current platform.
+ *
+ * @param  string  $path
+ *   Path for which to determine the directory separator.
+ *
+ * @param  non-empty-string  $directory_separator
+ *   By default, this is set to {@see DIRECTORY_SEPARATOR}, but you can override
+ *   it for testing purposes.
+ *
+ * @return non-empty-string
+ */
+function directory_separator(
+    string $path,
+    /** @internal */
+    string $directory_separator = DIRECTORY_SEPARATOR,
+): string {
+    if ('' === $directory_separator) {
+        throw new ValueError(
+            'Argument #2 ($directory_separator) must not be empty',
+        );
+    }
+
+    if ('/' === $directory_separator) {
+        return '/';
+    }
+
+    if (str_contains($path, $directory_separator)) {
+        return $directory_separator;
+    }
+
+    if (str_contains($path, '/')) {
+        return '/';
+    }
+
+    return $directory_separator;
+}
+
+/**
  * Returns a parent directory's path.
  *
  * Given a string containing the path of a file or directory, this function

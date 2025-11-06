@@ -41,6 +41,13 @@ describe('Path', function () {
         ]);
     });
 
+    describe('directory_separator()', function () {
+        test('returns correct directory separator', function ($path, $DIRECTORY_SEPARATOR, $expected) {
+            $separator = Path\directory_separator($path, $DIRECTORY_SEPARATOR);
+            expect($separator)->toEqual($expected);
+        })->with('Path / directory_separator');
+    });
+
     describe('dirname()', function () {
         test('returns correct directory name', function ($path, $returns) {
             $pathinfo = pathinfo($path, PATHINFO_DIRNAME);
