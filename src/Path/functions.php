@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace empaphy\usephul\Path;
 
-use RuntimeException;
 use ValueError;
 
 use function explode;
@@ -27,6 +26,7 @@ use function strrpos;
 use function substr;
 
 use const DIRECTORY_SEPARATOR;
+use const PATHINFO_EXTENSION;
 use const PATHINFO_FILENAME;
 
 /**
@@ -256,9 +256,10 @@ function extension_replace(
         return $path;
     }
 
-    $separators = [preg_quote('/', '/')];
+    $delimiter = '/';
+    $separators = [preg_quote('/', $delimiter)];
     if (DIRECTORY_SEPARATOR !== '/') {
-        $separators[] = preg_quote(DIRECTORY_SEPARATOR, '/');
+        $separators[] = preg_quote(DIRECTORY_SEPARATOR, $delimiter);
     }
 
     $sep = implode('', $separators);
@@ -266,7 +267,7 @@ function extension_replace(
     $match = "((?<!^|$start))\.[^.$sep]*";
 
     if ($suffix) {
-        $pre = preg_quote($suffix, '/');
+        $pre = preg_quote($suffix, $delimiter);
         $match = "(?:$pre)?$match";
 
         if (str_contains($suffix, '.')) {
@@ -275,7 +276,7 @@ function extension_replace(
     }
 
     $path = preg_replace(
-        "/$match([$sep]?)$/",
+        "$delimiter$match([$sep]?)$$delimiter",
         null === $replacement ? '\\1\\2' : "\\1.$replacement\\2",
         $path,
     );
@@ -352,7 +353,7 @@ function filename(string $path, string $suffix = ''): string
 }
 
 /**
- * Returns the suffix of the given path.
+ * Returns a suffix for the given path based on a given set of separators.
  *
  * A suffix is defined as the part of the basename after the last separator
  * character in __separators__, and before the extension.
@@ -365,10 +366,10 @@ function filename(string $path, string $suffix = ''): string
  *   A path.
  *
  * @param  string  $separator
- *   Specifies the seperator strings.
+ *   Specifies the separator strings.
  *
  * @param  string  ...$separators
- *   Specifies additional seperator strings.
+ *   Specifies additional separator strings.
  *
  * @return string
  */
