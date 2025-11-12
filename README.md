@@ -100,6 +100,11 @@
   - [class_traits_uses()](https://usephul.empaphy.org/packages/Other-SPL.html#function_class_traits_uses)
     — Return the traits used by the given class or trait, recursively.
 
+### Error Handling Functions
+
+  - [debug_backtrace_depth()](https://usephul.empaphy.org/packages/Debug.html#function_debug_backtrace_depth)
+    — Returns the current stack trace depth.
+
 ## Classes
 
 ### Paths
