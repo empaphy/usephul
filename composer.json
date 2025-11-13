@@ -16,9 +16,10 @@
     },
     "require": {
         "php": ">=8.1",
-        "empaphy/polyphill-php": "^1"
+        "empaphy/polyphill-php": "^1.804"
     },
     "require-dev": {
+        "empaphy/filharmonic": "^1",
         "friendsofphp/php-cs-fixer": "^3",
         "pestphp/pest": "^4 || ^3 || ^2",
         "phpstan/phpstan": "^2"
