@@ -58,7 +58,7 @@ function class_parents_uses(
  *
  * @package Other\SPL
  *
- * @param  object|string  $object_or_class
+ * @param  object|class-string  $object_or_class
  *   An object or class name.
  *
  * @param  bool  $autoload
@@ -95,7 +95,7 @@ function class_parents_traits_uses(
  *
  * @package Other\SPL
  *
- * @param  object|string  $object_or_class
+ * @param  object|class-string  $object_or_class
  *   An object, class name or trait name.
  *
  * @param  bool  $autoload

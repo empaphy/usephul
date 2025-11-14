@@ -181,16 +181,18 @@ enum Type: string
      * @param  mixed  $value
      *   The value for which to deduce the type.
      *
-     * @return ($value is null            ? Type::Null
-     *       : ($value is bool            ? Type::Boolean
-     *       : ($value is int             ? Type::Integer
-     *       : ($value is float           ? Type::Float
-     *       : ($value is string          ? Type::String
-     *       : ($value is array           ? Type::Array
-     *       : ($value is object          ? Type::Object
-     *       : ($value is resource        ? Type::Resource
-     *       : ($value is closed-resource ? Type::ClosedResource
-     *       : Type::Unknown )))))))))
+     * @return (
+     *  $value is null            ? Type::Null : (
+     *  $value is bool            ? Type::Boolean : (
+     *  $value is int             ? Type::Integer : (
+     *  $value is float           ? Type::Float : (
+     *  $value is string          ? Type::String : (
+     *  $value is array           ? Type::Array : (
+     *  $value is object          ? Type::Object : (
+     *  $value is resource        ? Type::Resource : (
+     *  $value is closed-resource ? Type::ClosedResource :
+     *  Type::Unknown ))))))))
+     * )
      *   A Type case instance.
      *
      * @throws ValueError
@@ -225,6 +227,18 @@ enum Type: string
      *
      * @return bool
      *   Returns `true` if __value__ matches this Type, `false` otherwise.
+     *
+     * @phpstan-assert-if-true (
+     *  $this is Type::Null ? null : (
+     *  $this is Type::Boolean ? bool : (
+     *  $this is Type::Integer ? int : (
+     *  $this is Type::Float ? float : (
+     *  $this is Type::String ? string : (
+     *  $this is Type::Array ? array : (
+     *  $this is Type::Object ? object : (
+     *  $this is Type::Resource ? resource : (
+     *  $this is Type::ClosedResource ? closed-resource : never ))))))))
+     * ) $value
      */
     public function is(mixed $value): bool
     {

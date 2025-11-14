@@ -53,9 +53,7 @@ function greatest(mixed $value1, mixed $value2, mixed ...$values): mixed
 {
     return array_reduce(
         [$value2, ...$values],
-        static function (mixed $carry, mixed $item) {
-            return rank($item) > rank($carry) ? $item : $carry;
-        },
+        static fn($carry, $item) => rank($item) > rank($carry) ? $item : $carry,
         $value1,
     );
 }
@@ -80,9 +78,7 @@ function least(mixed $value1, mixed $value2, mixed ...$values): mixed
 {
     return array_reduce(
         [$value2, ...$values],
-        static function (mixed $carry, mixed $item) {
-            return rank($item) < rank($carry) ? $item : $carry;
-        },
+        static fn($carry, $item) => rank($item) < rank($carry) ? $item : $carry,
         $value1,
     );
 }

@@ -59,10 +59,10 @@ function applies(object|string $object_or_class, string $attribute): bool
  *
  * @package Types\Traits
  *
- * @param  object|string  $object_or_class
+ * @param  object|class-string  $object_or_class
  *   A class name or an object instance.
  *
- * @param  string  $trait
+ * @param  class-string  $trait
  *   The trait name.
  *
  * @param  bool  $allow_string

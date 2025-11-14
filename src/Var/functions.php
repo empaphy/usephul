@@ -73,6 +73,8 @@ function is_negative_int(mixed $value): bool
  *
  * @return ($value is non-empty-string ? true : false)
  *   Returns `true` if value is a non-empty string, `false` otherwise.
+ *
+ * @phpstan-assert-if-true non-empty-string $value
  */
 function is_non_empty_string(mixed $value): bool
 {
@@ -87,6 +89,8 @@ function is_non_empty_string(mixed $value): bool
  *
  * @return ($value is non-negative-int ? true : false)
  *   Returns `true` if __value__ is a non-negative `integer`, `false` otherwise.
+ *
+ * @phpstan-assert-if-true non-negative-int $value
  */
 function is_non_negative_int(mixed $value): bool
 {
@@ -101,6 +105,8 @@ function is_non_negative_int(mixed $value): bool
  *
  * @return ($value is non-positive-int ? true : false)
  *   Returns `true` if __value__ is a non-positive `integer`, `false` otherwise.
+ *
+ * @phpstan-assert-if-true non-positive-int $value
  */
 function is_non_positive_int(mixed $value): bool
 {
@@ -115,6 +121,8 @@ function is_non_positive_int(mixed $value): bool
  *
  * @return ($value is non-zero-int ? true : false)
  *   Returns `true` if __value__ is a non-zero `integer`, `false` otherwise.
+ *
+ * @phpstan-assert-if-true non-zero-int $value
  *
  * @noinspection PhpUndefinedClassInspection
  */
@@ -131,6 +139,8 @@ function is_non_zero_int(mixed $value): bool
  *
  * @return ($value is number ? true : false)
  *   Returns `true` if __value__ is an `integer` or `float`, `false` otherwise.
+ *
+ * @phpstan-assert-if-true number $value
  */
 function is_number(mixed $value): bool
 {
@@ -145,6 +155,8 @@ function is_number(mixed $value): bool
  *
  * @return ($value is positive-int ? true : false)
  *   Returns `true` if **value** is a positive `integer`, `false` otherwise.
+ *
+ * @phpstan-assert-if-true positive-int $value
  */
 function is_positive_int(mixed $value): bool
 {
@@ -163,8 +175,10 @@ function is_positive_int(mixed $value): bool
  * @return bool
  *   Returns `true` if __value__ is (sufficiently close to) `0`, `false`
  *   otherwise.
+ *
+ * @phpstan-assert-if-true ($value is int ? non-positive-int&non-negative-int : float) $value
  */
-function is_zero(int | float $value, ?float $tolerance = ZERO_TOLERANCE): bool
+function is_zero(int|float $value, ?float $tolerance = ZERO_TOLERANCE): bool
 {
     return 0 === $value
         || 0.0 === $value
