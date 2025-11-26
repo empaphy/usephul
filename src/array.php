@@ -82,6 +82,49 @@ function array_extract(array $array, mixed ...$values): array
 }
 
 /**
+ * Retrieve an element from an array that can be located several levels deep.
+ *
+ * For example:
+ *
+ *     $data = [
+ *         'foo' => [
+ *             'bar' => [
+ *                 'baz' => 'BAZ',
+ *                 'qux' => ['QUX']
+ *             ]
+ *         ]
+ *     ];
+ *
+ *     array_get($data, 'foo', 'bar', 'baz');    // Returns 'BAZ'
+ *     array_get($data, 'foo', 'bar', 'qux');    // Returns ['QUX']
+ *     array_get($data, 'foo', 'bar', 'qux', 0); // Returns 'QUX'
+ *     array_get($data, 'foo', 'bar');           // Returns $data['foo']['bar']
+ *     array_get($data, 'foo');                  // Returns $data['foo']
+ *     array_get($data);                         // Returns $data
+ *
+ * @template TArray of array
+ *
+ * @param  TArray  $array
+ *   The array to retrieve the element from.
+ *
+ * @param  string  ...$keys
+ *   You can provide a path of keys, where each successive key should be a
+ *   key on the value of the previous key.
+ *
+ * @return ($keys is empty ? TArray : mixed)
+ *   Returns the value of the desired element, or `null` if it's not found.
+ *   If no _keys_ are provided, __array__ is returned.
+ */
+function array_get(array $array, string|int ...$keys): mixed
+{
+    foreach ($keys as $key) {
+        $array = $array[$key];
+    }
+
+    return $array;
+}
+
+/**
  * Interchange the values of two elements in an array.
  *
  * If either of the keys doesn't exist in __array__, then the other key will

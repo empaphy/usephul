@@ -39,6 +39,18 @@ describe('array_extract()', function () {
     ]]);
 });
 
+describe('array_get()', function () {
+    test('get value from an array', function ($array, $keys, $expected) {
+        $value = usephul\array_get($array, ...$keys);
+        expect($value)->toEqual($expected);
+    })->with([
+        ['array' => [],                                   'keys' => [],                 'expected' => []],
+        ['array' => [],                                   'keys' => ['foo'],            'expected' => null],
+        ['array' => ['foo.bar' => ['baz' => 'qux']],      'keys' => ['foo.bar', 'baz'], 'expected' => 'qux'],
+        ['array' => ['foo' => ['qux', ['bar' => 'baz']]], 'keys' => ['foo', 1, 'bar'],  'expected' => 'baz'],
+    ]);
+});
+
 describe('array_interchange()', function () {
     test('interchanges array elements', function (
         array $array,
