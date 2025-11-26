@@ -12,6 +12,8 @@
     — exclude values from an array.
   - [array_extract()](https://usephul.empaphy.org/packages/Arrays.html#function_array_extract)
     — Extract values from an array.
+  - [array_get()](https://usephul.empaphy.org/packages/Arrays.html#function_array_get)
+    — Retrieve an element from an array that can be located several levels deep.
   - [array_interchange()](https://usephul.empaphy.org/packages/Arrays.html#function_array_interchange)
     — Interchange the values of two elements of an array.
   - [array_key_types()](https://usephul.empaphy.org/packages/Arrays.html#function_array_key_types)

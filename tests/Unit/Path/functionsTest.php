@@ -26,19 +26,50 @@ describe('Path', function () {
             $components = Path\components($path);
             expect($components)->toEqual($expected);
         })->with([
-            ['path' => '<cwd1>/<cwd2>//<cwd3>/<name>', 'expected' => ['<cwd1>', '<cwd2>',  null , '<cwd3>', '<name>']],
-            ['path' => '////<name>',                   'expected' => [  null  ,   null  ,  null ,   null  , '<name>']],
-            ['path' => '<cwd1>/<cwd2>//<cwd3>/',       'expected' => ['<cwd1>', '<cwd2>',  null , '<cwd3>',   null  ]],
-            ['path' => '////',                         'expected' => [  null  ,   null  ,  null ,   null  ,   null  ]],
-            ['path' => '/',                            'expected' => [  null  ,   null                              ]],
-            ['path' => '',                             'expected' => [  null                                        ]],
-            ['path' => '0',                            'expected' => [  '0'                                         ]],
-            ['path' => 'false',                        'expected' => ['false'                                         ]],
-            ['path' => '%2Fetc/motd',                  'expected' => ['%2Fetc',  'motd'                             ]],
-            ['path' => 'etc/motd',                     'expected' => [ 'etc'  ,  'motd'                             ]],
-            ['path' => '/etc/motd',                    'expected' => [  null  ,   'etc' , 'motd'                    ]],
-            ['path' => 'motd',                         'expected' => [ 'motd'                                       ]],
+            ['path' => '',                    'expected' => []],
+            ['path' => '.',                   'expected' => ['']],
+            ['path' => '..',                  'expected' => ['..']],
+            ['path' => '../',                 'expected' => ['..']],
+            ['path' => '../bar/baz/qux/ham',  'expected' => ['..', 'bar', 'baz', 'qux', 'ham']],
+            ['path' => './',                  'expected' => ['']],
+            ['path' => './.',                 'expected' => ['']],
+            ['path' => '././',                'expected' => ['']],
+            ['path' => './bar/baz/qux/ham',   'expected' => ['bar', 'baz', 'qux', 'ham']],
+            ['path' => '.foo',                'expected' => ['.foo']],
+            ['path' => '/',                   'expected' => ['']],
+            ['path' => '/..',                 'expected' => ['..']],
+            ['path' => '/./',                 'expected' => ['']],
+            ['path' => '/./.',                'expected' => ['']],
+            ['path' => '/bar/../qux/',        'expected' => ['bar', '..', 'qux']],
+            ['path' => '/bar/./qux/',         'expected' => ['bar', 'qux']],
+            ['path' => '/bar//qux/',          'expected' => ['bar', 'qux']],
+            ['path' => 'foo',                 'expected' => ['foo']],
+            ['path' => 'foo/bar/baz/qux/ham', 'expected' => ['foo', 'bar', 'baz', 'qux', 'ham']],
         ]);
+
+        test('uses `\\` as directory separator on Windows', function ($path, $expected) {
+            $components = Path\components($path);
+            expect($components)->toEqual($expected);
+        })->with([
+            ['path' => 'foo\\bar/baz\\qux/ham', 'expected' => ['foo', 'bar', 'baz', 'qux', 'ham']],
+            ['path' => '\\bar/\\qux/',          'expected' => ['bar', 'qux']],
+            ['path' => '/bar\\/qux\\',          'expected' => ['bar', 'qux']],
+            ['path' => '\\',                    'expected' => ['']],
+            ['path' => 'C:\\',                  'expected' => ['']],
+            ['path' => 'C:\\foo',               'expected' => ['foo']],
+        ])->onlyOnWindows();
+
+        test('returns `\\` on non-Windows platforms', function ($path, $expected) {
+            $components = Path\components($path);
+            expect($components)->toEqual($expected);
+        })->with([
+            ['path' => 'foo\\bar/baz\\qux/ham', 'expected' => ['foo\\bar', 'baz\\qux', 'ham']],
+            ['path' => '\\bar/\\qux/',          'expected' => ['\\bar', '\\qux']],
+            ['path' => '/bar\\/qux\\',          'expected' => ['bar\\', 'qux\\']],
+            ['path' => '\\',                    'expected' => ['\\']],
+            ['path' => 'C:\\',                  'expected' => ['C:\\']],
+            ['path' => 'C:\\foo',               'expected' => ['C:\\foo']],
+        ])->skipOnWindows();
     });
 
     describe('directory_separator()', function () {

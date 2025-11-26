@@ -13,7 +13,8 @@ namespace empaphy\usephul\Path;
 
 use ValueError;
 
-use function explode;
+use function array_reverse;
+use function assert;
 use function implode;
 use function is_string;
 use function pathinfo;
@@ -73,20 +74,35 @@ function basename(string $path, string $suffix = ''): string
 /**
  * Returns an array of path components for the given path.
  *
- * Empty components are represented as `null`. This includes the first empty
- * component if the __path__ starts with a directory separator. For example:
+ * Empty components (i.e., successive directory separators) are disregarded.
+ * Additionally, path seperators at the start or end of __path__ are also
+ * disregarded.
  *
- *     components('foo/bar')    === ['foo', 'bar'];
- *     components('/foo//bar/') === [null, 'foo', null, 'bar', null];
- *     components('/')          === [null, null];
- *     components('')           === [null];
+ * For example:
+ *
+ *     components('foo/bar');    // Will return ['foo', 'bar']
+ *     components('/foo//bar/'); // Will return ['foo', 'bar']
+ *     components('/');          // Will return ['']
+ *     components('');           // Will return [''];
  *
  * > __Note__:
  * >
- * > {@see components()} operates naively on the input string, and is not
- * > aware of the actual filesystem, or path components such as "..".
+ * > {@see components()} operates naively on the input string, and is not aware
+ * > of the actual filesystem, or path components such as "..".
  *
- * On other systems, dirname() assumes path to be encoded in an ASCII compatible encoding. Otherwise, the behavior of the function is undefined.
+ * > __Caution__:
+ * > {@see components()} is locale-aware, so for it to see the correct basename
+ * > with multibyte character paths, the matching locale must be set using
+ * > the {@see setlocale()} function. If __path__ contains characters which
+ * > are invalid for the current locale, the behavior of {@see components()} is
+ * > undefined.
+ *
+ * > __Caution__:
+ * > This function behaves differently on Windows compared to *nix.
+ * >
+ * >     components('\\');   // Will return [''] on Windows and ['\'] on *nix.
+ * >     components('C:\\'); // Will return [''] on Windows and ['C:\'] on *nix.
+ * >
  *
  * @param  string  $path
  *   A path to split into its components.
@@ -94,26 +110,45 @@ function basename(string $path, string $suffix = ''): string
  *   On Windows, both slash (`/`) and backslash (`\`) are used as directory
  *   separator characters. In other environments, it is the forward slash (`/`).
  *
- * @return non-empty-list<non-empty-string|null>
+ * @return (
+ *   $path is empty ? array{} : (
+ *   $path is "." ? array{''} : (
+ *   $path is "/" ? array{''} : (
+ *   non-empty-array<string>
+ * ))))
  *   An array containing the __path__ split up into its components.
  */
 function components(string $path): array
 {
-    $components = [];
-
-    if ('/' === DIRECTORY_SEPARATOR) {
-        foreach (explode('/', $path) as $v) {
-            $components[] = '' === $v ? null : $v;
-        }
-    } else {
-        foreach (explode('/', $path) as $v) {
-            foreach (explode(DIRECTORY_SEPARATOR, $v) as $u) {
-                $components[] = '' === $u ? null : $u;
-            }
-        }
+    if (empty($path)) {
+        return [];
     }
 
-    return $components;
+    $components = [];
+
+    do {
+        $last = $path;
+        $path = \dirname($last);
+        $component = \basename($last);
+
+        if ('.' === $component) {
+            continue;
+        }
+
+        $components[] = $component;
+    } while (! (
+        empty($path)
+        || '.' === $path
+        || '/' === $path
+        || DIRECTORY_SEPARATOR === $path
+        || $last === $path
+    ));
+
+    if (empty($components)) {
+        return [''];
+    }
+
+    return array_reverse($components);
 }
 
 /**
