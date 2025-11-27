@@ -302,6 +302,105 @@ function array_remap(callable $callback, array $array): array
 }
 
 /**
+ * Split an array by a value.
+ *
+ * Returns a list of arrays, each of which is a subset of __array__ formed by
+ * splitting it on boundaries formed by the value __separator__.
+ *
+ * Keys are preserved in the resulting arrays.
+ *
+ * > __Note__:
+ * >
+ * > For the ordering of the elements, PHP's array iteration order is used.
+ *
+ * @template TKey of array-key
+ * @template TValue
+ * @template TArray of array<TKey, TValue>
+ *
+ * @param  TArray  $array
+ *   The input array.
+ *
+ * @param  TValue  $separator
+ *   The boundary value.
+ *
+ * @param  int  $limit
+ *   If __limit__ is set and positive, the returned list will contain a maximum
+ *   of __limit__ arrays with the last array containing the rest of __array__.
+ *
+ *   If the __limit__ parameter is negative, all arrays except the last
+ *   -__limit__ are returned.
+ *
+ *   If the __limit__ parameter is zero, then this is treated as 1.
+ *
+ * @param  bool  $strict
+ *   By default {@see array_split()} will use strict comparisons (`===`) to
+ *   match __separator__ against the values of __array__. If __strict__ is
+ *   set to `false` then non-strict comparisons (`==`) will be used instead.
+ *
+ * @return ($array is empty ? ($limit is negative-int ? list{} : list<TArray>)
+ * : ($limit is int<1,1> ? list<TArray> : array<array-key, mixed>[]))
+ *   Returns a list of arrays created by splitting the __array__ parameter on
+ *   boundaries formed by the __separator__.
+ *
+ *   If __separator__ contains a value that is not contained in __array__ and
+ *   a negative __limit__ is used, then an empty list will be returned,
+ *   otherwise a list containing __array__ will be returned. If __separator__
+ *   values appear at the start or end of __array__, said values will be added
+ *   as an empty array either in the first or last position of the returned
+ *   list respectively.
+ *
+ * @noinspection SuspiciousBinaryOperationInspection
+ * @noinspection TypeUnsafeComparisonInspection
+ */
+function array_split(
+    array $array,
+    mixed $separator,
+    int   $limit  = PHP_INT_MAX,
+    bool  $strict = true,
+): array {
+    if (0 === $limit) {
+        $limit = 1;
+    } elseif ($limit < 0) {
+        foreach ($array as $value) {
+            if (! $strict && $value == $separator || $value === $separator) {
+                $limit++;
+            }
+        }
+        $limit++;
+
+        if ($limit <= 0) {
+            return [];
+        }
+
+        $limit = -$limit;
+    }
+
+    $list = [];
+    $item = [];
+
+    foreach ($array as $key => $value) {
+        if (
+            (! $strict && $value == $separator || $value === $separator)
+            && ($limit > 1 || $limit < 0)
+        ) {
+            $list[] = $item;
+            $item = [];
+            $limit > 1 ? $limit-- : $limit++;
+        } else {
+            $item[$key] = $value;
+        }
+
+        if (0 === $limit) {
+            return $list;
+        }
+    }
+
+    $list[] = $item;
+
+    return $list;
+}
+
+/**
  * Perform a zip operation on multiple arrays.
  *
  * @template TValue

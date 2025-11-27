@@ -17,6 +17,8 @@ use empaphy\usephul\Var\Type;
 
 use function array_flip;
 
+use const PHP_INT_MAX;
+
 describe('array_exclude()', function () {
     test('excludes values from an array', function (array $array, array $values, $expected) {
         $picked = usephul\array_exclude($array, ...$values);
@@ -150,6 +152,19 @@ describe('array_remap()', function () {
         'map'      => [ 'foo' => 'FOO', 'bar' => 'BAR' ],
         'expected' => [ 'foo' => 'foo', 'bar' => 'bar' ],
     ]]);
+});
+
+describe('array_split()', function () {
+    test('splits an array by separator value', function (
+        array $split,
+        array $array,
+        mixed $separator = '_',
+        int   $limit = PHP_INT_MAX,
+        bool  $strict = true,
+    ) {
+        $actual = usephul\array_split($array, $separator, $limit, $strict);
+        expect($actual)->toEqual($split);
+    })->with('array split');
 });
 
 describe('array_zip()', function () {
