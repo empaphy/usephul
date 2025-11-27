@@ -24,6 +24,8 @@
     — Pick keys from an array.
   - [array_remap()](https://usephul.empaphy.org/packages/Arrays.html#function_array_remap)
     — Applies a (generator) callback to the elements of a given array, allowing the remapping of its keys in the process.
+  - [array_split()](https://usephul.empaphy.org/packages/Arrays.html#function_array_split)
+    — Split an array by a value.
   - [array_zip()](https://usephul.empaphy.org/packages/Arrays.html#function_array_zip)
     — Perform a zip operation on multiple arrays.
 
