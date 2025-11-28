@@ -114,7 +114,7 @@ function basename(string $path, string $suffix = ''): string
  *   $path is empty ? array{} : (
  *   $path is "." ? array{''} : (
  *   $path is "/" ? array{''} : (
- *   non-empty-array<string>
+ *   non-empty-array<non-empty-string>
  * ))))
  *   An array containing the __path__ split up into its components.
  */
