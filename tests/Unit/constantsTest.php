@@ -5,6 +5,7 @@
  * @copyright 2025 The Empaphy Project
  * @license   MIT
  *
+ * @noinspection MultipleExpectChainableInspection
  * @noinspection StaticClosureCanBeUsedInspection
  */
 
@@ -12,14 +13,17 @@ declare(strict_types=1);
 
 namespace Pest\Unit\constants;
 
-use empaphy\usephul;
+use empaphy\usephul\Fallback;
 
-describe('E_EVERYTHING', function () {
-    it('is defined', function () {
-        expect(defined('empaphy\usephul\E_EVERYTHING'))->toBeTrue();
-    });
+use function constant;
+use function defined;
 
-    it('matches', function ($expected) {
-        expect(usephul\E_EVERYTHING)->toBe($expected);
-    })->with([[0x7FFFFFFF]]);
+describe('constant', function () {
+    it('is defined', function (string $constant_name, $expected) {
+        expect(defined($constant_name))->toBeTrue();
+        expect(constant($constant_name))->toBe($expected);
+    })->with([
+        ['empaphy\usephul\E_EVERYTHING', 0x7FFFFFFF],
+        ['empaphy\usephul\fallback', Fallback::default],
+    ]);
 });

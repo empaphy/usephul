@@ -173,3 +173,29 @@ const ZEND_KNOWN_STRINGS = [
     ZEND_STR_GET                    => ZEND_STR_GET,
     ZEND_STR_SET                    => ZEND_STR_SET,
 ];
+
+/**
+ * Represents a fallback value.
+ *
+ * It is actually just a reference to the {@see Fallback::default default}
+ * {@see Fallback} case.
+ *
+ * Conceptually, `fallback` indicates the lack of an operation having been
+ * performed on a variable. This is useful in cases where any value is
+ * considered valid (even `null`), and you need to distinguish between "no value
+ * provided" and "value explicitly set to `null`".
+ *
+ * One use case for `fallback` is as a default value for functions that attempt
+ * to retrieve a value without a guarantee and accept a "default" argument:
+ *
+ *     $value = config('some_key', fallback);
+ *     if ($value === fallback) {
+ *         // 'some_key' was not found
+ *     }
+ *
+ * You can also use the {@see Fallback} enum as a type hint:
+ *
+ *     function example(string|null|Fallback $param = fallback): void {}
+ *
+ */
+const fallback = Fallback::default;

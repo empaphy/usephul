@@ -2,9 +2,26 @@
 [![Tests](https://github.com/empaphy/usephul/actions/workflows/tests.yml/badge.svg)](https://github.com/empaphy/usephul/actions/workflows/tests.yml)
 [![Quality](https://github.com/empaphy/usephul/actions/workflows/quality.yml/badge.svg)](https://github.com/empaphy/usephul/actions/workflows/quality.yml)
 
-**Usephul** is a PHP library that provides useful classes and functions that extend the standard functionality of PHP.
+**Usephul** is a PHP library that provides useful classes and functions that
+extend the standard functionality of PHP.
 
-## Functions
+## Table of Contents
+
+  - [Overview](#overview)
+      - [Array Functions](#array-functions)
+      - [Attribute Functions](#attribute-functions)
+      - [Enumerations](#enumerations)
+      - [Error Handling Functions](#error-handling-functions)
+      - [Generators](#generators)
+      - [Math](#math)
+      - [Paths](#paths)
+      - [SPL Functions](#spl-functions)
+      - [Trait Functions](#trait-functions)
+      - [Types](#types)
+      - [Variable handling Functions](#variable-handling-functions)
+
+
+## Overview
 
 ### Array Functions
 
@@ -23,13 +40,57 @@
   - [array_pick()](https://usephul.empaphy.org/packages/Arrays.html#function_array_pick)
     — Pick keys from an array.
   - [array_remap()](https://usephul.empaphy.org/packages/Arrays.html#function_array_remap)
-    — Applies a (generator) callback to the elements of a given array, allowing the remapping of its keys in the process.
+    — Applies a (generator) callback to the elements of a given array, allowing
+    the remapping of its keys in the process.
   - [array_split()](https://usephul.empaphy.org/packages/Arrays.html#function_array_split)
     — Split an array by a value.
   - [array_zip()](https://usephul.empaphy.org/packages/Arrays.html#function_array_zip)
     — Perform a zip operation on multiple arrays.
 
-### Path Functions
+
+### Attribute Functions
+
+  - [applies()](https://usephul.empaphy.org/packages/Types-Attributes.html#function_applies)
+    — Finds whether an attribute has been applied to a given object, class,
+    interface, or trait.
+
+
+### Enumerations
+
+  - [EnumDynamicity](https://usephul.empaphy.org/classes/empaphy-usephul-Enumerations-EnumDynamicity.html)
+    — Adds dynamicity of case names to PHP Enumerations.
+
+
+### Error Handling Functions
+
+  - [debug_backtrace_depth()](https://usephul.empaphy.org/packages/Debug.html#function_debug_backtrace_depth)
+    — Returns the current stack trace depth.
+
+
+### Generators
+
+  - [seq()](https://usephul.empaphy.org/packages/Generators.html#function_seq)
+    — Sequences a value into a [Generator](https://www.php.net/generators).
+
+
+### Math
+
+  - [greatest()](https://usephul.empaphy.org/packages/Math.html#function_greatest)
+    — Finds the value that is greater than all the other values.
+  - [least()](https://usephul.empaphy.org/packages/Math.html#function_least)
+    — Finds the value that is less than all the other values.
+  - [rank()](https://usephul.empaphy.org/packages/Math.html#function_rank)
+    — Returns the ordinal rank for a given value.
+
+
+### Paths
+
+_Classes_:
+
+  - [PathInfo](http://localhost:63342/usephul/.phpdoc/build/classes/empaphy-usephul-Paths-PathInfo.html)
+    — Provides information about a file path.
+
+_Functions_:
 
   - [Path\basename()](https://usephul.empaphy.org/packages/Paths.html#function_basename)
     — Returns the trailing name component of a path.
@@ -50,24 +111,43 @@
   - [Path\suffix_replace()](https://usephul.empaphy.org/packages/Paths.html#function_suffix_replace)
     — Replaces a suffix in a path with a new value.
 
-### Generator Functions
 
-  - [seq()](https://usephul.empaphy.org/packages/Generators.html#function_seq)
-    — Sequences a value into a [Generator](https://www.php.net/generators).
+### SPL Functions
 
-### Math Functions
+  - [class_parents_uses()](https://usephul.empaphy.org/packages/Other-SPL.html#function_class_parents_uses)
+    — Return the traits used by the parent classes of the given class.
+  - [class_parents_traits_uses()](https://usephul.empaphy.org/packages/Other-SPL.html#function_class_parents_traits_uses)
+    — Return the traits used by the parent classes of the given class,
+    recursively.
+  - [class_traits_uses()](https://usephul.empaphy.org/packages/Other-SPL.html#function_class_traits_uses)
+    — Return the traits used by the given class or trait, recursively.
 
-  - [greatest()](https://usephul.empaphy.org/packages/Math.html#function_greatest)
-    — Finds the value that is greater than all the other values.
-  - [least()](https://usephul.empaphy.org/packages/Math.html#function_least)
-    — Finds the value that is less than all the other values.
-  - [rank()](https://usephul.empaphy.org/packages/Math.html#function_rank)
-    — Returns the ordinal rank for a given value.
+
+### Trait Functions
+
+  - [uses()](https://usephul.empaphy.org/packages/Types-Traits.html#function_uses)
+    — Checks whether an object or class uses a given trait.
+
+
+### Types
+
+_Enums_:
+
+  - [Fallback](http://localhost:63342/usephul/.phpdoc/build/classes/empaphy-usephul-Types-Fallback.html)
+    — A unit enum representing an fallback value.
+
+_Constants_:
+
+  - [fallback](https://usephul.empaphy.org/packages/Types.html#toc-constants)
+    — An alias to `Fallback::default`, representing a default fallback value.
+
+---
 
 ### Variable handling Functions
 
   - [is_closed_resource()](https://usephul.empaphy.org/packages/Types-Variables.html#function_is_closed_resource)
-    — Finds whether the given variable is a [resource](https://www.php.net/types.resource) that has been closed.
+    — Finds whether the given variable is a [resource](
+    https://www.php.net/types.resource) that has been closed.
   - [is_non_empty_string()](https://usephul.empaphy.org/packages/Types-Variables.html#function_is_non_empty_string)
     — Find whether a variable is a non-empty string.
   - [is_negative_int()](https://usephul.empaphy.org/packages/Types-Variables.html#function_is_negative_int)
@@ -84,41 +164,3 @@
     — Find whether a variable is an integer and greater than zero.
   - [is_zero()](https://usephul.empaphy.org/packages/Types-Variables.html#function_is_zero)
     — Finds whether the given number is (sufficiently close to) 0.
-
-### Attribute Functions
-
-  - [applies()](https://usephul.empaphy.org/packages/Types-Attributes.html#function_applies)
-    — Finds whether an attribute has been applied to a given object, class, interface, or trait.
-
-### Trait Functions
-
-  - [uses()](https://usephul.empaphy.org/packages/Types-Traits.html#function_uses)
-    — Checks whether an object or class uses a given trait.
-
-### SPL Functions
-
-  - [class_parents_uses()](https://usephul.empaphy.org/packages/Other-SPL.html#function_class_parents_uses)
-    — Return the traits used by the parent classes of the given class.
-  - [class_parents_traits_uses()](https://usephul.empaphy.org/packages/Other-SPL.html#function_class_parents_traits_uses)
-    — Return the traits used by the parent classes of the given class, recursively.
-  - [class_traits_uses()](https://usephul.empaphy.org/packages/Other-SPL.html#function_class_traits_uses)
-    — Return the traits used by the given class or trait, recursively.
-
-### Error Handling Functions
-
-  - [debug_backtrace_depth()](https://usephul.empaphy.org/packages/Debug.html#function_debug_backtrace_depth)
-    — Returns the current stack trace depth.
-
-## Classes
-
-### Paths
-
-  - [PathInfo](http://localhost:63342/usephul/.phpdoc/build/classes/empaphy-usephul-Paths-PathInfo.html)
-    — Provides information about a file path.
-
-## Traits
-
-### Enumerations
-
-  - [EnumDynamicity](https://usephul.empaphy.org/classes/empaphy-usephul-Enumerations-EnumDynamicity.html)
-    — Adds dynamicity of case names to PHP Enumerations.
