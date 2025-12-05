@@ -87,7 +87,7 @@ extend the standard functionality of PHP.
 
 _Classes_:
 
-  - [PathInfo](http://localhost:63342/usephul/.phpdoc/build/classes/empaphy-usephul-Paths-PathInfo.html)
+  - [PathInfo](https://usephul.empaphy.org/classes/empaphy-usephul-Path-PathInfo.html)
     — Provides information about a file path.
 
 _Functions_:
@@ -133,7 +133,7 @@ _Functions_:
 
 _Enums_:
 
-  - [Fallback](http://localhost:63342/usephul/.phpdoc/build/classes/empaphy-usephul-Types-Fallback.html)
+  - [Fallback](https://usephul.empaphy.org/classes/empaphy-usephul-Fallback.html)
     — A unit enum representing an fallback value.
 
 _Constants_:
