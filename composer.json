@@ -32,6 +32,7 @@
             "src/generators.php",
             "src/Math/functions.php",
             "src/other.php",
+            "src/pcre.php",
             "src/Path/functions.php",
             "src/Type/functions.php",
             "src/Var/functions.php"

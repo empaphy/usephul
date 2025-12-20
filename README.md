@@ -112,6 +112,13 @@ _Functions_:
     — Replaces a suffix in a path with a new value.
 
 
+### PCRE Functions
+
+  - [preg_escape()](https://usephul.empaphy.org/packages/PCRE.html#function_preg_escape)
+    — Escapes all instances of the given PCRE delimiter character in a raw
+    regular expression pattern.
+
+
 ### SPL Functions
 
   - [class_parents_uses()](https://usephul.empaphy.org/packages/Other-SPL.html#function_class_parents_uses)
