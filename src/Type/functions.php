@@ -39,19 +39,14 @@ use function is_string;
 function applies(object|string $object_or_class, string $attribute): bool
 {
     try {
-        $reflector = is_object($object_or_class)
-            ? new ReflectionObject($object_or_class)
-            : new ReflectionClass($object_or_class);
+        return ! empty((
+            is_object($object_or_class)
+                ? new ReflectionObject($object_or_class)
+                : new ReflectionClass($object_or_class)
+        )->getAttributes($attribute, ReflectionAttribute::IS_INSTANCEOF));
     } catch (ReflectionException) {
         return false;
     }
-
-    return ! empty(
-        $reflector->getAttributes(
-            $attribute,
-            ReflectionAttribute::IS_INSTANCEOF,
-        )
-    );
 }
 
 /**
