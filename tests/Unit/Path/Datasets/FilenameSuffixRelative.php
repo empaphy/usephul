@@ -1,0 +1,44 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Unit\Path\Datasets;
+
+final class FilenameSuffixRelative
+{
+    public static function dataProvider(): array
+    {
+        return [ //@formatter:off
+            ['path' => '-ffs/',            'suffix' => '-ffs', 'expected' => ''],
+            ['path' => './',               'suffix' => '----', 'expected' => ''],
+            ['path' => './.',              'suffix' => '----', 'expected' => ''],
+            ['path' => '.ext',             'suffix' => '----', 'expected' => ''],
+            ['path' => '.ext/',            'suffix' => '----', 'expected' => ''],
+            ['path' => '',                 'suffix' => '----', 'expected' => ''],
+            ['path' => '-ffu',             'suffix' => '-ffu', 'expected' => ''],
+            ['path' => '-ffx.ext',         'suffix' => '-ffx', 'expected' => ''],
+            ['path' => '-fix/',            'suffix' => '-fix', 'expected' => ''],
+            ['path' => '.',                'suffix' => '----', 'expected' => ''],
+            ['path' => '.-fus',            'suffix' => '-fus', 'expected' => ''],
+            ['path' => '.fux',             'suffix' => '.fux', 'expected' => ''],
+            ['path' => 'name',             'suffix' => '----', 'expected' => 'name'],
+            ['path' => 'name-fxs',         'suffix' => '-fxs', 'expected' => 'name'],
+            ['path' => 'name-sff.',        'suffix' => '-sff', 'expected' => 'name'],
+            ['path' => 'name-sfu.ext',     'suffix' => '-sfu', 'expected' => 'name'],
+            ['path' => 'name-sfx_foo.ext', 'suffix' => '-sfx', 'expected' => 'name-sfx_foo'],
+            ['path' => 'name.',            'suffix' => '----', 'expected' => 'name'],
+            ['path' => 'name.-six',        'suffix' => '-six', 'expected' => 'name'],
+            ['path' => 'name.-suf.',       'suffix' => '-suf', 'expected' => 'name.'],
+            ['path' => 'name.-sux.-sux',   'suffix' => '-sux', 'expected' => 'name.'],
+            ['path' => 'name.ext',         'suffix' => '----', 'expected' => 'name'],
+            ['path' => 'name.ffu',         'suffix' => '.ffu', 'expected' => 'name'],
+            ['path' => 'name.ffx.',        'suffix' => '.ffx', 'expected' => 'name'],
+            ['path' => 'name.fix.fix',     'suffix' => '.fix', 'expected' => 'name'],
+            ['path' => 'name.foo-suf',     'suffix' => '-suf', 'expected' => 'name'],
+            ['path' => 'name.foo.',        'suffix' => '----', 'expected' => 'name.foo'],
+            ['path' => 'name.foo.-ufx',    'suffix' => '-ufx', 'expected' => 'name.foo'],
+            ['path' => 'name.foo.ext',     'suffix' => '----', 'expected' => 'name.foo'],
+            ['path' => 'name.foo.ffs',     'suffix' => '.ffs', 'expected' => 'name.foo'],
+        ]; //@formatter:on
+    }
+}

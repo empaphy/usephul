@@ -1,37 +1,32 @@
 <?php
 
-/**
- * @author    Alwin Garside <alwin@garsi.de>
- * @copyright 2025 The Empaphy Project
- * @license   MIT
- *
- * @noinspection StaticClosureCanBeUsedInspection
- */
-
 declare(strict_types=1);
 
-namespace Pest\Unit\Path;
+namespace Tests\Unit\Path;
 
 use empaphy\usephul\Path\PathInfo;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\TestWith;
+use Tests\TestCase;
 
-describe('Path', function () {
-    describe('PathInfo', function () {
-        test('matches pathinfo()', function ($path) {
-            $pathInfo = new PathInfo($path);
-            $pathinfo = pathinfo($path);
+#[CoversClass(PathInfo::class)]
+class PathInfoTest extends TestCase
+{
+    #[TestWith([__FILE__])]
+    #[TestWith([__DIR__])]
+    #[TestWith(['foo'])]
+    #[TestWith(['.'])]
+    #[TestWith(['..'])]
+    #[TestWith([''])]
+    public function testMatchesPathinfo(string $path): void
+    {
+        $pathInfo = new PathInfo($path);
+        $pathinfo = pathinfo($path);
 
-            expect($pathInfo->path)->toEqual($path)
-                ->and($pathInfo->dirname)->toEqual($pathinfo['dirname'] ?? null)
-                ->and($pathInfo->basename)->toEqual($pathinfo['basename'] ?? null)
-                ->and($pathInfo->extension)->toEqual($pathinfo['extension'] ?? null)
-                ->and($pathInfo->filename)->toEqual($pathinfo['filename'] ?? null);
-        })->with([
-            [__FILE__],
-            [__DIR__],
-            ['foo'],
-            ['.'],
-            ['..'],
-            [''],
-        ]);
-    });
-});
+        $this->assertEquals($path, $pathInfo->path);
+        $this->assertEquals($pathinfo['dirname'] ?? null, $pathInfo->dirname);
+        $this->assertEquals($pathinfo['basename'] ?? null, $pathInfo->basename);
+        $this->assertEquals($pathinfo['extension'] ?? null, $pathInfo->extension);
+        $this->assertEquals($pathinfo['filename'] ?? null, $pathInfo->filename);
+    }
+}

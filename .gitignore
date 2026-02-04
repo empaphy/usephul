@@ -7,6 +7,8 @@
 /.php-cs-fixer.php
 /compose.override.yaml
 /composer.lock
+/composer.phar
+/package.xml
 /phpstan.neon
 /phpunit.xml
 

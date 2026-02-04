@@ -318,13 +318,18 @@ function extension(string $path): string
  *   always be replaced in __path__, even if the value of __path__ starts with
  *   __suffix__.
  *
+ * @param  non-empty-string  $directory_separator
+ *   By default, this is set to {@see DIRECTORY_SEPARATOR}, but you can override
+ *   it for testing purposes.
+ *
  * @return ($path is '' ? '' : string)
  *   The modified path.
  */
 function extension_replace(
-    string $path,
+    string  $path,
     ?string $replacement = null,
-    string $suffix = '',
+    string  $suffix = '',
+    string  $directory_separator = DIRECTORY_SEPARATOR,
 ): string {
     if ('' === $path) {
         return $path;
@@ -332,8 +337,8 @@ function extension_replace(
 
     $delimiter = '/';
     $separators = [preg_quote('/', $delimiter)];
-    if (DIRECTORY_SEPARATOR !== '/') {
-        $separators[] = preg_quote(DIRECTORY_SEPARATOR, $delimiter);
+    if ($directory_separator !== '/') {
+        $separators[] = preg_quote($directory_separator, $delimiter);
     }
 
     $sep = implode('', $separators);
@@ -463,11 +468,13 @@ function suffix(
     foreach ($separators as $key => $sep) {
         $i++;
         if (empty($sep)) {
-            throw new ValueError(sprintf(
-                'Argument #%d (...$separators[%s]) must not be empty',
-                $i,
-                is_string($key) ? "'$key'" : $key,
-            ));
+            throw new ValueError(
+                sprintf(
+                    'Argument #%d (...$separators[%s]) must not be empty',
+                    $i,
+                    is_string($key) ? "'$key'" : $key,
+                ),
+            );
         }
 
         $offset = strrpos($filename, $sep, (int) $offset) ?: $offset;
@@ -502,9 +509,9 @@ function suffix_replace(
 ): string {
     $pathinfo = pathinfo($path);
 
-    $filename  = $pathinfo['filename'];
+    $filename = $pathinfo['filename'];
     $extension = $pathinfo['extension'] ?? null;
-    $dir       = $pathinfo['dirname'] ?? '';
+    $dir = $pathinfo['dirname'] ?? '';
 
     $offset = null;
 
@@ -512,11 +519,13 @@ function suffix_replace(
     foreach ($separators as $key => $separator) {
         $i++;
         if (empty($separator)) {
-            throw new ValueError(sprintf(
-                'Argument #%d (...$separators[%s]) must not be empty',
-                $i,
-                is_string($key) ? "'$key'" : $key,
-            ));
+            throw new ValueError(
+                sprintf(
+                    'Argument #%d (...$separators[%s]) must not be empty',
+                    $i,
+                    is_string($key) ? "'$key'" : $key,
+                ),
+            );
         }
 
         $offset = strrpos($filename, $separator, (int) $offset)
@@ -533,7 +542,7 @@ function suffix_replace(
     if (str_contains($path, DIRECTORY_SEPARATOR)) {
         $directory_separator = DIRECTORY_SEPARATOR;
     } elseif (str_contains($path, '/')) {
-        $directory_separator = '/';
+        $directory_separator = '/'; // @codeCoverageIgnore
     }
 
     if ('.' === $dir && null === $directory_separator) {

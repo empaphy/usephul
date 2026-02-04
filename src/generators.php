@@ -57,17 +57,17 @@ function seq(mixed $value): Generator
             }
             break;
 
-        case Type::Object:
-        case Type::Array:
-        case Type::Unknown:
-            foreach ($value as $key => $item) {
-                yield $key => $item;
-            }
-            break;
-
         case Type::Resource:
             // I'm not sure how to sequence resources yet, so I'm simply not
             // supporting them for now.
             throw new RangeException('Sequencing resources is not supported.');
+
+        case Type::Object:
+        case Type::Array:
+        default:
+            foreach ($value as $key => $item) {
+                yield $key => $item;
+            }
+            break;
     }
 }

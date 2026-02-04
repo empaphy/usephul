@@ -1,0 +1,34 @@
+root = true
+
+[/*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[{.github/**,.idea/**,.run/**,docs/**,src/**,stubs/**,tests/**}]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[/.idea/**]
+indent_size = 2
+insert_final_newline = false
+
+[/.run/*.xml]
+indent_size = 2
+insert_final_newline = false
+
+[/docs/**.md]
+trim_trailing_whitespace = false
+
+[/*.md]
+trim_trailing_whitespace = false
+
+[*.{yml,yaml}]
+indent_size = 2

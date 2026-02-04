@@ -1,0 +1,43 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Unit\Path\Datasets;
+
+final class Suffix
+{
+    public static function dataProvider(): array
+    {
+        return [ //@formatter:off
+            ['path' => '',                 'separators' => ['----'],         'expected' => ''],
+            ['path' => '.',                'separators' => ['----'],         'expected' => ''],
+            ['path' => '.',                'separators' => ['.'],            'expected' => ''],
+            ['path' => '.ext',             'separators' => ['----'],         'expected' => ''],
+            ['path' => '.ext',             'separators' => ['.'],            'expected' => ''],
+            ['path' => '-suf',             'separators' => ['-'],            'expected' => '-suf'],
+            ['path' => '-suf',             'separators' => ['-suf'],         'expected' => '-suf'],
+            ['path' => '-suf.',            'separators' => ['-suf'],         'expected' => '-suf'],
+            ['path' => '-suf.ext',         'separators' => ['-suf'],         'expected' => '-suf'],
+            ['path' => 'name',             'separators' => ['----'],         'expected' => ''],
+            ['path' => 'name.',            'separators' => ['----'],         'expected' => ''],
+            ['path' => 'name.ext',         'separators' => ['----'],         'expected' => ''],
+            ['path' => 'name-suf.ext',     'separators' => ['-'],            'expected' => '-suf'],
+            ['path' => 'name-suf.ext',     'separators' => ['----', '----'], 'expected' => ''],
+            ['path' => 'name-suf.ext',     'separators' => ['-suf', '----'], 'expected' => '-suf'],
+            ['path' => 'name-suf.ext',     'separators' => ['----', '-suf'], 'expected' => '-suf'],
+            ['path' => 'name-suf.ext',     'separators' => ['-suf', '-suf'], 'expected' => '-suf'],
+            ['path' => 'name-suf.ext',     'separators' => ['-suf.'],        'expected' => ''],
+            ['path' => 'name-suf_',        'separators' => ['----', '-'],    'expected' => '-suf_'],
+            ['path' => 'name-suf_',        'separators' => ['----'],         'expected' => ''],
+            ['path' => 'name-suf_fix.ext', 'separators' => ['-', '_'],       'expected' => '_fix'],
+            ['path' => 'name-suf.ext',     'separators' => ['-', '_'],       'expected' => '-suf'],
+            ['path' => 'name-suf_fix.ext', 'separators' => ['-', '.'],       'expected' => '-suf_fix'],
+            ['path' => 'name-suf.ext',     'separators' => ['-', '.'],       'expected' => '-suf'],
+            ['path' => 'name-suf.ext',     'separators' => ['.', '-'],       'expected' => '-suf'],
+            ['path' => 'name-suf.ext',     'separators' => ['-suf', '-'],    'expected' => '-suf'],
+            ['path' => 'name-suf.ext',     'separators' => ['-suf', '.ext'], 'expected' => '-suf'],
+            ['path' => 'name.min.ext',     'separators' => ['.min', '.max'], 'expected' => '.min'],
+            ['path' => 'name.max.ext',     'separators' => ['.min', '.max'], 'expected' => '.max'],
+        ]; //@formatter:on
+    }
+}
