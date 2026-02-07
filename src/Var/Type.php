@@ -222,7 +222,7 @@ enum Type: string
     /**
      * Checks whether the type of the provided value matches this Type.
      *
-     * @param mixed $value
+     * @param  mixed  $value
      *   The value to check.
      *
      * @return bool
