@@ -30,6 +30,7 @@
             "src/array.php",
             "src/constants.php",
             "src/debug.php",
+            "src/functions.php",
             "src/generators.php",
             "src/Math/functions.php",
             "src/other.php",

@@ -12,6 +12,16 @@ use function fclose;
 use function fopen;
 use function is_resource;
 
+use const empaphy\usephul\ZEND_STR_ARRAY;
+use const empaphy\usephul\ZEND_STR_BOOLEAN;
+use const empaphy\usephul\ZEND_STR_CLOSED_RESOURCE;
+use const empaphy\usephul\ZEND_STR_DOUBLE;
+use const empaphy\usephul\ZEND_STR_INTEGER;
+use const empaphy\usephul\ZEND_STR_NULL;
+use const empaphy\usephul\ZEND_STR_OBJECT;
+use const empaphy\usephul\ZEND_STR_RESOURCE;
+use const empaphy\usephul\ZEND_STR_STRING;
+
 class TypeData
 {
     public static function casesProvider(): array
@@ -59,15 +69,15 @@ class TypeData
     public static function valuesProvider(): array
     {
         return [ //@formatter:off
-            [Type::Null,           'NULL'],
-            [Type::Boolean,        'boolean'],
-            [Type::Integer,        'integer'],
-            [Type::Float,          'double'],
-            [Type::String,         'string'],
-            [Type::Array,          'array'],
-            [Type::Object,         'object'],
-            [Type::Resource,       'resource'],
-            [Type::ClosedResource, 'resource (closed)'],
+            [Type::Null,           ZEND_STR_NULL],
+            [Type::Boolean,        ZEND_STR_BOOLEAN],
+            [Type::Integer,        ZEND_STR_INTEGER],
+            [Type::Float,          ZEND_STR_DOUBLE],
+            [Type::String,         ZEND_STR_STRING],
+            [Type::Array,          ZEND_STR_ARRAY],
+            [Type::Object,         ZEND_STR_OBJECT],
+            [Type::Resource,       ZEND_STR_RESOURCE],
+            [Type::ClosedResource, ZEND_STR_CLOSED_RESOURCE],
             [Type::Unknown,        'unknown type'],
         ]; //@formatter:on
     }
