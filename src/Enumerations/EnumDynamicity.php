@@ -11,10 +11,7 @@ declare(strict_types=1);
 
 namespace empaphy\usephul\Enumerations;
 
-use UnitEnum;
 use ValueError;
-
-use function array_find;
 
 /**
  * Adds dynamicity of case names to PHP Enumerations.
@@ -49,9 +46,12 @@ trait EnumDynamicity
             );
         }
 
-        return array_find(
-            self::cases(),
-            static fn(UnitEnum $case): bool => $case->name === $name,
-        );
+        foreach (self::cases() as $case) {
+            if ($case->name === $name) {
+                return $case;
+            }
+        }
+
+        return null;
     }
 }

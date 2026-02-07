@@ -1,0 +1,37 @@
+name: Static Analysis
+
+on:
+  workflow_call:
+
+permissions:
+  checks:        write
+  contents:      read
+  issues:        read
+  pull-requests: write
+
+jobs:
+  static-analysis:
+    name: PHPStan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup PHP and Install Composer Packages
+        uses: ./.github/actions/setup
+
+      - name: Cache PHPStan
+        uses: actions/cache@v5
+        with:
+          path:         var/cache/phpstan
+          key:          phpstan-${{ hashFiles('phpstan.dist.neon') }}-${{ hashFiles('composer.json') }}-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            phpstan-${{ hashFiles('phpstan.dist.neon') }}-${{ hashFiles('composer.json') }}-
+            phpstan-${{ hashFiles('phpstan.dist.neon') }}-
+            phpstan-
+
+      - name: Run PHPStan
+        id:   phpstan
+        shell: bash
+        #language=bash
+        run: vendor/bin/phpstan

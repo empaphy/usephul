@@ -1,6 +1,7 @@
 # Usephul
-[![Tests](https://github.com/empaphy/usephul/actions/workflows/tests.yml/badge.svg)](https://github.com/empaphy/usephul/actions/workflows/tests.yml)
-[![Quality](https://github.com/empaphy/usephul/actions/workflows/quality.yml/badge.svg)](https://github.com/empaphy/usephul/actions/workflows/quality.yml)
+[![Static Analysis](https://github.com/empaphy/usephul/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/empaphy/usephul/actions/workflows/static-analysis.yml)
+[![Unit Tests](https://github.com/empaphy/usephul/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/empaphy/usephul/actions/workflows/unit-tests.yml)
+![Code Coverage](https://img.shields.io/badge/Code%20Coverage-100%25-success?style=flat)
 
 **Usephul** is a PHP library that provides useful classes and functions that
 extend the standard functionality of PHP.

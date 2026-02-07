@@ -1,6 +1,5 @@
 includes:
-    - phar://phpstan.phar/conf/bleedingEdge.neon
-    - vendor/pestphp/pest/extension.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon
 
 parameters:
     checkFunctionNameCase:             true
@@ -17,21 +16,12 @@ parameters:
     reportWrongPhpDocTypeInVarTag: true
 
     resultCachePath: var/cache/phpstan/resultCache.php
-    stubFiles:
-        - stubs/Pest/Support/HigherOrderTapProxy.stub.php
-        - stubs/Pest/PendingCalls/TestCall.stub.php
     tipsOfTheDay: false
     treatPhpDocTypesAsCertain: false
 
     paths:
         - src/
         - tests/
-
-    # Pest
-    universalObjectCratesClasses:
-        - Pest\Expectation
-        - Pest\PendingCalls\TestCall
-        - Pest\Support\HigherOrderTapProxy
 
 services:
     cacheStorage:

@@ -13,6 +13,7 @@ namespace empaphy\usephul;
 
 use empaphy\usephul\Var\Type;
 use Generator;
+use JetBrains\PhpStorm\Pure;
 
 use function array_filter;
 use function array_is_list;
@@ -20,6 +21,7 @@ use function array_map;
 use function array_values;
 use function in_array;
 use function is_int;
+use function is_string;
 
 /**
  * Exclude from an array all the elements that match the provided values.
@@ -134,8 +136,8 @@ function array_get(array $array, string|int ...$keys): mixed
  * @template TValue
  *
  * @param  array<TKey, TValue>  $array
- * @param  TKey                 $key1
- * @param  TKey                 $key2
+ * @param  TKey  $key1
+ * @param  TKey  $key2
  * @return array<TKey, TValue>
  */
 function array_interchange(array $array, int|string $key1, int|string $key2): array
@@ -335,14 +337,14 @@ function array_remap(callable $callback, array $array): array
  * @param  bool  $strict
  *   By default {@see array_split()} will use strict comparisons (`===`) to
  *   match __separator__ against the values of __array__. If __strict__ is
- *   set to `false` then non-strict comparisons (`==`) will be used instead.
+ *   set to `false`, then non-strict comparisons (`==`) will be used instead.
  *
  * @return ($array is empty ? ($limit is negative-int ? list{} : list<TArray>)
  * : ($limit is int<1,1> ? list<TArray> : array<array-key, mixed>[]))
  *   Returns a list of arrays created by splitting the __array__ parameter on
  *   boundaries formed by the __separator__.
  *
- *   If __separator__ contains a value that is not contained in __array__ and
+ *   If __separator__ contains a value not contained in __array__ and
  *   a negative __limit__ is used, then an empty list will be returned,
  *   otherwise a list containing __array__ will be returned. If __separator__
  *   values appear at the start or end of __array__, said values will be added
@@ -403,15 +405,13 @@ function array_split(
 /**
  * Perform a zip operation on multiple arrays.
  *
- * @template TValue
- *
- * @param  array<array-key, TValue>  $array
+ * @param  array<array-key, mixed>  $array
  *   An array to zip.
  *
- * @param  array<array-key, TValue>  ...$arrays
+ * @param  array<array-key, mixed>  ...$arrays
  *   Supplementary list of array arguments to zip.
  *
- * @return list<array{TValue}>
+ * @return list<list<mixed>>
  *   Returns an array whose elements are each an array holding the elements
  *   of the input arrays at the same index.
  */

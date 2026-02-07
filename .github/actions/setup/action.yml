@@ -24,7 +24,7 @@ runs:
       run: composer validate --strict
 
     - name: Cache Composer Packages
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: vendor
         key: ${{ runner.os }}-php-${{ inputs.php-version }}-${{ hashFiles('composer.json') }}
@@ -35,4 +35,4 @@ runs:
     - name: Install Composer Packages
       shell: bash
       #language=bash
-      run: composer install --no-interaction --no-progress --prefer-dist --optimize-autoloader
+      run: composer --no-interaction install --no-progress --prefer-dist --optimize-autoloader

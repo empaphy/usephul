@@ -1,62 +1,62 @@
 <?php
 
-/**
- * @author    Alwin Garside <alwin@garsi.de>
- * @copyright 2025 The Empaphy Project
- * @license   MIT
- * @package   empaphy\usephul
- *
- * @noinspection StaticClosureCanBeUsedInspection
- */
-
 declare(strict_types=1);
 
-namespace Pest\Unit\Var;
+namespace Tests\Unit\Var;
 
 use empaphy\usephul\Var\Type;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProviderExternal;
+use Tests\TestCase;
 
-describe('Var', function () {
-    describe('Type', function () {
-        test('has the appropriate cases', function ($case, $expected) {
-            expect($case->value)->toBe($expected);
-        })->with('types / values');
-    });
+#[CoversClass(Type::class)]
+class TypeTest extends TestCase
+{
+    #[DataProviderExternal(TypeData::class, 'valuesProvider')]
+    public function testTypeHasTheAppropriateCases(Type $case, string $expected): void
+    {
+        $this->assertEquals($expected, $case->value);
+    }
 
-    describe('Type::of()', function () {
-        test('returns appropriate Type', function ($value, $expected) {
-            $type = Type::of($value);
+    #[DataProviderExternal(TypeData::class, 'casesProvider')]
+    public function testTypeOfReturnsAppropriateType(mixed $value, Type $expected): void
+    {
+        $actual = Type::of($value);
+        $this->assertSame($expected, $actual);
+    }
 
-            expect($type)->toBe($expected);
-        })->with('types / test cases');
+    #[DataProviderExternal(TypeData::class, 'failCasesProvider')]
+    public function testTypeOfDoesNotReturnWrongType(mixed $value, Type $expected): void
+    {
+        $actual = Type::of($value);
+        $this->assertNotSame($expected, $actual);
+    }
 
-        test("doesn't return wrong Type", function ($value, $unexpected) {
-            $type = Type::of($value);
+    #[DataProviderExternal(TypeData::class, 'casesProvider')]
+    public function testTypeTryOfReturnsAppropriateType(mixed $value, Type $expected): void
+    {
+        $actual = Type::tryOf($value);
+        $this->assertSame($expected, $actual);
+    }
 
-            expect($type)->not()->toBe($unexpected);
-        })->with('types / fail cases');
-    });
+    #[DataProviderExternal(TypeData::class, 'failCasesProvider')]
+    public function testTypeTryOfDoesNotReturnWrongType(mixed $value, Type $expected): void
+    {
+        $actual = Type::tryOf($value);
+        $this->assertNotSame($expected, $actual);
+    }
 
-    describe('Type::tryOf()', function () {
-        test('returns appropriate Type', function ($value, $expected) {
-            $type = Type::tryOf($value);
+    #[DataProviderExternal(TypeData::class, 'casesProvider')]
+    public function testTypeIsReturnsTrueWhenTypeMatches(mixed $value, Type $type): void
+    {
+        $condition = $type->is($value);
+        $this->assertTrue($condition);
+    }
 
-            expect($type)->toBe($expected);
-        })->with('types / test cases');
-
-        test("doesn't return wrong Type", function ($value, $unexpected) {
-            $type = Type::tryOf($value);
-
-            expect($type)->not()->toBe($unexpected);
-        })->with('types / fail cases');
-    });
-
-    describe('Type->is()', function () {
-        test('returns true when type matches', function ($value, Type $type) {
-            expect($type->is($value))->toBeTrue();
-        })->with('types / test cases');
-
-        test('returns false', function ($value, Type $type) {
-            expect($type->is($value))->toBeFalse();
-        })->with('types / fail cases');
-    });
-});
+    #[DataProviderExternal(TypeData::class, 'failCasesProvider')]
+    public function testTypeIsReturnsFalse(mixed $value, Type $type): void
+    {
+        $condition = $type->is($value);
+        $this->assertFalse($condition);
+    }
+}
