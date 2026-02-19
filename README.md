@@ -56,6 +56,20 @@ extend the standard functionality of PHP.
     interface, or trait.
 
 
+### Control Structures
+
+_Exceptions_:
+
+  - [UnhandledFitException](https://usephul.empaphy.org/classes/empaphy-usephul-Control-Exceptions-UnhandledFitException.html)
+    — A base exception for control flow exceptions.
+
+_Functions_:
+
+  - [fit()](https://usephul.empaphy.org/packages/Control-Functions.html#function_fit)
+    — Returns the result of the first callback with a parameter type that fits
+    the __subject__.
+
+
 ### Enumerations
 
   - [EnumDynamicity](https://usephul.empaphy.org/classes/empaphy-usephul-Enumerations-EnumDynamicity.html)

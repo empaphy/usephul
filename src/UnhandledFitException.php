@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @author    Alwin Garside <alwin@garsi.de>
+ * @copyright 2025 The Empaphy Project
+ * @license   MIT
+ * @package   Control
+ */
+
 declare(strict_types=1);
 
 namespace empaphy\usephul;
@@ -11,6 +18,8 @@ use Stringable;
 /**
  * An UnhandledFitException is thrown when the subject passed to the fit()
  * function is not a fit for any callback argument.
+ *
+ * @package Control\Exceptions
  */
 class UnhandledFitException extends Exception
 {

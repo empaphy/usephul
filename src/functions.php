@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @author    Alwin Garside <alwin@garsi.de>
+ * @copyright 2025 The Empaphy Project
+ * @license   MIT
+ * @package   Control
+ *
  * @noinspection DuplicatedCode
  * @noinspection SuspiciousBinaryOperationInspection
  */
@@ -47,6 +52,8 @@ use function sprintf;
  *
  * {@see fit()} is optimized for performance and makes no recursive calls, or
  * calls to any other helper functions; it's completely self-contained.
+ *
+ * @package Control\Functions
  *
  * @template TFit
  * @template TResult
@@ -100,6 +107,11 @@ function fit(mixed $subject, Closure $callback, Closure ...$callbacks): mixed
         foreach ($reflectionFunction->getParameters() as $parameter) {
             $types[0][] = $parameter->getType();
         }
+
+        // Please forgive me for the hard-to-read code that follows. To avoid
+        // using recursion or helper functions, I implemented a custom
+        // stack-based algorithm to traverse the type graph of the callback
+        // parameters.
 
         $modes = [true];
         $inits = [false];
