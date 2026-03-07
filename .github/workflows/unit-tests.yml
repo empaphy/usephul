@@ -1,9 +1,13 @@
 name: Unit Tests
 
 on:
-  push:
-    branches: [main]
   workflow_call:
+    inputs:
+      os:
+        description: Operating System
+        required: false
+        type: string
+        default: ubuntu
 
 permissions:
   checks:        write
@@ -14,11 +18,11 @@ permissions:
 jobs:
   unit-tests:
     name: PHPUnit
-    runs-on: ubuntu-latest
     strategy:
-      fail-fast: false
       matrix:
         php-version: ['8.1', '8.2', '8.3', '8.4', '8.5']
+      fail-fast: false
+    runs-on: ${{ inputs.os }}-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -26,38 +30,38 @@ jobs:
       - name: Setup PHP and Install Composer Packages
         uses: ./.github/actions/setup
         with:
-          php-version: ${{ matrix.php-version }}
+          php-version: '${{ matrix.php-version }}'
 
       - name: Run PHPUnit
         shell: bash
         env:
-          XDEBUG_MODE: "coverage"
+          XDEBUG_MODE: 'coverage'
         #language=bash
         run: |
           vendor/bin/paratest \
-            --log-junit          'var/test-results/php${{ matrix.php-version }}.junit.xml' \
-            --coverage-cobertura 'var/coverage/php${{ matrix.php-version }}/coverage.cobertura.xml'
+            --log-junit          'var/test-results/${{ inputs.os }}-php${{ matrix.php-version }}.junit.xml' \
+            --coverage-cobertura 'var/coverage/${{ inputs.os }}-php${{ matrix.php-version }}/coverage.cobertura.xml'
 
       - if: success() || failure()
         name: Upload Test Results
         uses: actions/upload-artifact@v6
         with:
-          name: test-results-php${{ matrix.php-version }}
+          name: 'test-results-${{ inputs.os }}-php${{ matrix.php-version }}'
           path: 'var/test-results'
-          if-no-files-found: error
+          if-no-files-found: 'error'
 
       - if: success() || failure()
         name: Upload Code Coverage
         uses: actions/upload-artifact@v6
         with:
-          name: code-coverage-php${{ matrix.php-version }}
+          name: 'code-coverage-${{ inputs.os }}-php${{ matrix.php-version }}'
           path: 'var/coverage'
-          if-no-files-found: error
+          if-no-files-found: 'error'
 
   generate-test-report:
     name: Generate Test Report
     needs: unit-tests
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.os }}-latest
     if: success() || failure()
     continue-on-error: true
     steps:
@@ -65,21 +69,21 @@ jobs:
         id:   download-test-results
         uses: actions/download-artifact@v7
         with:
-          path: var/test-results
-          pattern: test-results-*
+          path: 'var/test-results'
+          pattern: 'test-results-${{ inputs.os }}-*'
           merge-multiple: true
 
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v6
         with:
-          report_paths:   '${{ steps.download-test-results.outputs.download-path }}/*.junit.xml'
-          check_name:     'Unit Test Report'
-          require_tests:  true
+          report_paths: '${{ steps.download-test-results.outputs.download-path }}/*.junit.xml'
+          check_name: 'Unit Test Report (${{ inputs.os }})'
+          require_tests: true
 
   generate-coverage-report:
     name: Generate Coverage Report
     needs: unit-tests
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.os }}-latest
     if: success() || failure()
     steps:
       - name: Checkout
@@ -89,8 +93,8 @@ jobs:
         id:   download-code-coverage
         uses: actions/download-artifact@v7
         with:
-          path: var/coverage
-          pattern: code-coverage-*
+          path: 'var/coverage'
+          pattern: 'code-coverage-${{ inputs.os }}-*'
           merge-multiple: true
 
       - name: ReportGenerator
@@ -103,12 +107,25 @@ jobs:
       - name: Upload coverage report artifact
         uses: actions/upload-artifact@v6
         with:
-          name: CoverageReport
-          path: var/coverage-report
+          name: 'coverage-report-${{ inputs.os }}'
+          path: 'var/coverage-report'
+
+  prepare-code-coverage-summary:
+    name: Code Coverage Summary Preparation
+    runs-on: ubuntu-latest
+    if: (success() || failure()) && github.event_name == 'pull_request'
+    steps:
+      - name: (Re)create Sticky Pull Request Comment
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: 'code-coverage-summary-${{ inputs.os }}'
+          recreate: true
+          message: |
+            ### Code Coverage Summary (${{ inputs.os }})
 
   code-coverage-summary:
     name: Code Coverage Summary
-    needs: generate-coverage-report
+    needs: [generate-coverage-report, prepare-code-coverage-summary]
     runs-on: ubuntu-latest
     if: success() || failure()
     steps:
@@ -118,22 +135,24 @@ jobs:
       - name: Download Coverage Report
         uses: actions/download-artifact@v7
         with:
-          name: CoverageReport
-          path: var/coverage-report
+          name: 'coverage-report-${{ inputs.os }}'
+          path: 'var/coverage-report'
 
       - name: Generate Code Coverage Summary
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
-          filename:       'var/coverage-report/Cobertura.xml'
-          badge:          true
-          fail_below_min: 100%
-          format:         markdown
-          output:         both
-          thresholds:     '75 100'
+          filename: 'var/coverage-report/Cobertura.xml'
+          badge: true
+          fail_below_min: '100%'
+          format: 'markdown'
+          hide_complexity: true
+          output: 'both'
+          thresholds: '75 100'
 
-      - name: Sticky Pull Request Comment
+      - name: Update Sticky Pull Request Comment
         uses: marocchino/sticky-pull-request-comment@v2
-        if:   github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request'
         with:
-          recreate: true
-          path: code-coverage-results.md
+          header: 'code-coverage-summary-${{ inputs.os }}'
+          append: true
+          path: 'code-coverage-results.md'
