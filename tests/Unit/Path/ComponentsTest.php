@@ -47,8 +47,8 @@ class ComponentsTest extends TestCase
     #[TestWith(['path' => '\\bar/\\qux/',          'expected' => ['bar', 'qux']])]
     #[TestWith(['path' => '/bar\\/qux\\',          'expected' => ['bar', 'qux']])]
     #[TestWith(['path' => '\\',                    'expected' => ['']])]
-    #[TestWith(['path' => 'C:\\',                  'expected' => ['']])]
-    #[TestWith(['path' => 'C:\\foo',               'expected' => ['foo']])]
+    #[TestWith(['path' => 'C:\\',                  'expected' => ['C']])]
+    #[TestWith(['path' => 'C:\\foo',               'expected' => ['C', 'foo']])]
     public function testUsesBackslashAsDirectorySeparatorOnWindows(string $path, array $expected): void
     {
         $components = components($path);

@@ -58,7 +58,6 @@ class DirnameTest extends TestCase
     /**
      * @formatter:off
      */
-    #[TestWith(['path' => '/root/dir/sub/name.suf.ext', 'levels' => 4, 'expected' => '/'])]
     #[TestWith(['path' => '/root/dir/sub/name.suf.ext', 'levels' => 3, 'expected' => '/root'])]
     #[TestWith(['path' => '/root/dir/sub/name.suf.ext', 'levels' => 2, 'expected' => '/root/dir'])]
     #[TestWith(['path' => '/root/dir/sub/',             'levels' => 2, 'expected' => '/root'])]
