@@ -78,7 +78,7 @@ function is_negative_int(mixed $value): bool
  */
 function is_non_empty_string(mixed $value): bool
 {
-    return ! empty($value) && is_string($value);
+    return is_string($value) && $value !== '';
 }
 
 /**
