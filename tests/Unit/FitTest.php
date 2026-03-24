@@ -12,6 +12,7 @@ namespace Tests\Unit;
 
 use ArgumentCountError;
 use Closure;
+use empaphy\usephul\Fallback;
 use empaphy\usephul\UnhandledFitException;
 use Exception;
 use InvalidArgumentException;
@@ -41,6 +42,7 @@ class FitTest extends TestCase
         return [
             ['foo', [fn(string $v) => $v], 'foo'],
             ['foo', [fn(string|int $v) => $v], 'foo'],
+            ['foo', [fn(string|int $v) => $v], 'foo'],
             [0, [fn(string|int $v) => $v], 0],
             [0, [fn(string $s) => $s, fn(int $i) => $i], 0],
             [$myFoo, [fn(FooInterface $v) => $v], $myFoo],
@@ -49,6 +51,7 @@ class FitTest extends TestCase
             [$fooBar, [fn(FooInterface&BarInterface $v) => $v], $fooBar],
             ['foo', [fn(Foo $v) => throw new Exception(), fn(mixed $v) => 'bar'], 'bar'],
             ['foo', [fn(string $v) => $v, fn(string $v) => $v], 'foo'],
+            [Fallback::default, [fn(Fallback $v) => $v], Fallback::default],
         ];
     }
 

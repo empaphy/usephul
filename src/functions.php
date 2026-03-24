@@ -35,7 +35,6 @@ use function sprintf;
  * This function functions similar to a `match` or `switch` statement but uses
  * type checks to gauge which expression to evaluate for __subject__.
  *
- *     use empaphy\usephul\Fallback;
  *     use function empaphy\usephul\fit;
  *
  *     $result = fit(
@@ -44,11 +43,8 @@ use function sprintf;
  *         fn(int|float $v)           => "value is an integer or float",
  *         fn(array $v, object $w)    => "value is an array or an object",
  *         fn(Foo&(Bar|(Baz&Qux)) $v) => "both `Foo` & `Bar` or `Baz` & `Qux`",
- *         fn(Fallback $default)      => "value is of some other type",
+ *         fn(mixed $default)         => "value is of some other type",
  *     );
- *
- * This function supports {@see \empaphy\usephul\Fallback} as callback argument
- * type to indicate a default case. Alternatively, you can use `mixed`.
  *
  * {@see fit()} is optimized for performance and makes no recursive calls, or
  * calls to any other helper functions; it's completely self-contained.
@@ -151,6 +147,9 @@ function fit(mixed $subject, Closure $callback, Closure ...$callbacks): mixed
             $typeName = (string) $type;
             $fit = $subjectType === $typeName
                 || $subject instanceof $typeName
+                || 'bool' === $subjectType && (
+                    'false' === $typeName || 'true' === $typeName
+                )
                 || 'mixed' === $typeName;
 
             while ($l > -1 && ($fit === $modes[$l] || $pos[$l] === $nums[$l])) {
