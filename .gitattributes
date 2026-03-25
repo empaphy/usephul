@@ -1,0 +1,18 @@
+/.github                export-ignore
+/.idea                  export-ignore
+/.run                   export-ignore
+/tests                  export-ignore
+
+/.editorconfig          export-ignore
+/.gitignore             export-ignore
+/.php-cs-fixer.dist.php export-ignore
+/composer.lock          export-ignore
+/docker-compose.yaml    export-ignore
+/phpdoc.dist.xml        export-ignore
+/phpstan.dist.neon      export-ignore
+/phpstan.neon.example   export-ignore
+/phpunit.dist.xml       export-ignore
+/README.md              export-ignore
+
+*.php diff=php
+*.phar -diff
