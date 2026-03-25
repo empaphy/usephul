@@ -4,4 +4,4 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Fit;
 
-class Foo implements FooInterface {}
+class Foo implements IFoo {}

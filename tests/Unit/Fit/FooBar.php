@@ -4,4 +4,4 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Fit;
 
-class FooBar implements FooInterface, BarInterface {}
+class FooBar implements IFoo, IBar {}

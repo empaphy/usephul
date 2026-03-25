@@ -147,9 +147,8 @@ function fit(mixed $subject, Closure $callback, Closure ...$callbacks): mixed
             $typeName = (string) $type;
             $fit = $subjectType === $typeName
                 || $subject instanceof $typeName
-                || 'bool' === $subjectType && (
-                    'false' === $typeName || 'true' === $typeName
-                )
+                || true === $subject && 'true' === $typeName
+                || false === $subject && 'false' === $typeName
                 || 'mixed' === $typeName;
 
             while ($l > -1 && ($fit === $modes[$l] || $pos[$l] === $nums[$l])) {
