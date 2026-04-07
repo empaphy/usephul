@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Static Analysis" pattern="file[usephul]:src//*||file[usephul]:tests//*" />
+</component>
