@@ -2,6 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Fit;
+namespace Tests\fixtures\Fit;
 
 interface IBar {}

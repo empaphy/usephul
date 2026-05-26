@@ -19,12 +19,12 @@ use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\UsesClass;
+use Tests\fixtures\Fit\Bar;
+use Tests\fixtures\Fit\Foo;
+use Tests\fixtures\Fit\FooBar;
+use Tests\fixtures\Fit\IBar;
+use Tests\fixtures\Fit\IFoo;
 use Tests\TestCase;
-use Tests\Unit\Fit\Bar;
-use Tests\Unit\Fit\Foo;
-use Tests\Unit\Fit\FooBar;
-use Tests\Unit\Fit\IBar;
-use Tests\Unit\Fit\IFoo;
 
 use function empaphy\usephul\fit;
 
