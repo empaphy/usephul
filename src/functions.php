@@ -51,29 +51,26 @@ use function sprintf;
  *
  * @package Control\Functions
  *
- * @template TFit
  * @template TResult
- * @template TSubject of TFit
  *
- * @param  TSubject  $subject
+ * @param  mixed  $subject
  *   The value to gauge.
  *
- * @param  Closure(TFit $arg, TFit ...$args): TResult  $callback
+ * @param  Closure(mixed $arg, mixed ...$args): TResult  $callback
  *   A callback function. The first callback argument with a parameter type
  *   that fits __subject__ will be called and its result returned.
  *
- * @param  Closure(TFit $arg, TFit ...$args): TResult  ...$callbacks
+ * @param  Closure(mixed $arg, mixed ...$args): TResult  ...$callbacks
  *   Additional callback functions. The first callback function with a parameter
  *   type that fits __subject__ will be called and its result returned.
  *
  * @return TResult
  *   The result of the first of the __callbacks__ that fits __subject__.
  *
- * @throws (TFit is empty ? InvalidArgumentException : never)
- *   Thrown if a callback has no parameters, or if any callback parameter is
- *   missing a type declaration.
+ * @throws InvalidArgumentException
+ *   Thrown if a callback has no parameters, or if any callback parameter is missing a type declaration.
  *
- * @throws ($subject is TFit ? never : UnhandledFitException)
+ * @throws UnhandledFitException
  *   Thrown when no callback function can fit the subject.
  */
 function fit(mixed $subject, Closure $callback, Closure ...$callbacks): mixed
