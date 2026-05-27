@@ -2,6 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Tests\Samples;
+namespace Tests\Fixtures;
 
 class SampleAttributeTargetChildClass extends SampleAttributeTargetClass {}

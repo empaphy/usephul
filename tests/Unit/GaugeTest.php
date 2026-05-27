@@ -2,7 +2,6 @@
 
 /**
  * @noinspection PhpDocMissingThrowsInspection
- * @noinspection PhpParamsInspection
  * @noinspection PhpUnhandledExceptionInspection
  */
 
@@ -16,9 +15,7 @@ use empaphy\usephul\Gauge;
 use empaphy\usephul\UnhandledFitException;
 use Exception;
 use InvalidArgumentException;
-use LogicException;
-use Mockery;
-use PHPUnit\Framework\Attributes\CoversFunction;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\UsesClass;
 use Tests\Fixtures\Fit\Bar;
@@ -28,14 +25,11 @@ use Tests\Fixtures\Fit\IBar;
 use Tests\Fixtures\Fit\IFoo;
 use Tests\TestCase;
 
-use function empaphy\usephul\fit;
-
 use const empaphy\usephul\fallback;
 
-#[CoversFunction('empaphy\usephul\fit')]
-#[UsesClass(Gauge::class)]
+#[CoversClass(Gauge::class)]
 #[UsesClass(UnhandledFitException::class)]
-class FitTest extends TestCase
+class GaugeTest extends TestCase
 {
     /**
      * @formatter:off
@@ -74,45 +68,67 @@ class FitTest extends TestCase
      * @formatter:on
      *
      * @template TResult
+     * @template TSubject
+     * @template TFit of TSubject
      *
-     * @param  mixed  $subject
-     * @param  array<Closure(mixed $arg, mixed ...$args): TResult>  $callbacks
+     * @param  TSubject  $subject
+     * @param  array<Closure(TFit $arg, TFit ...$args): TResult>  $callbacks
      * @param  TResult  $expected
      */
     #[DataProvider('fitArgumentsProvider')]
     public function testFit(mixed $subject, array $callbacks, mixed $expected): void
     {
-        $gauge = Mockery::mock('overload:empaphy\usephul\Gauge');
-        $gauge
-            ->shouldReceive('__construct')
-            ->once()
-            ->with($subject);
-        $gauge
-            ->shouldReceive('is')
-            ->once()
-            ->with(...$callbacks)
-            ->andReturn($expected);
-        $actual = fit($subject, ...$callbacks);
+        $gauge = new Gauge($subject);
+        $actual = $gauge->is(...$callbacks);
         $this->assertSame($expected, $actual);
     }
 
     /**
-     * @formatter:on
+     * @formatter:off
      */
-    public function testFitThrowsInvalidArgumentException(): void
+    public static function unfitArgumentsProvider(): array
     {
-        $gauge = Mockery::mock('overload:empaphy\usephul\Gauge');
-        $gauge->shouldReceive('__construct')->never();
-        $this->expectException(InvalidArgumentException::class);
+        $myFoo = new class implements IFoo {};
+        $foo = new Foo();
+        $bar = new Bar();
 
-        fit('foo', null, fn(mixed $_) => throw new LogicException());
+        return [
+            ['foo',  [fn(int        $v) => $v]],
+            [$foo,   [fn(string|int $v) => $v]],
+            [1031,   [fn(string     $v) => $v]],
+            [1033,   [fn(string     $v) => $v, fn(string $v) => $v]],
+            [$myFoo, [fn(IBar       $v) => $v]],
+            [$foo,   [fn(Bar        $v) => $v]],
+            [$bar,   [fn(Foo        $v) => $v]],
+            [$foo,   [fn(IFoo&IBar  $v) => $v]],
+            ['foo',  [fn(Foo        $v) => throw new Exception()]],
+        ];
     }
 
-    public function testFitReturnsGaugeIfCallbackMissing(): void
+    /**
+     * @formatter:on
+     *
+     * @param  array<Closure(mixed $arg, mixed ...$args): mixed>  $callbacks
+     */
+    #[DataProvider('unfitArgumentsProvider')]
+    public function testFitThrowsExceptionWhenSubjectIsUnfit(mixed $subject, array $callbacks): void
     {
-        $gauge = Mockery::mock('overload:empaphy\usephul\Gauge');
-        $gauge->shouldReceive('__construct')->once()->with('foo');
-        $gauge = fit('foo');
-        $this->assertInstanceOf(Gauge::class, $gauge);
+        $this->expectException(UnhandledFitException::class);
+        $gauge = new Gauge($subject);
+        $gauge->is(...$callbacks);
+    }
+
+    public function testFitThrowsExceptionWhenTypeDeclarationIsMissing(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $gauge = new Gauge('foo');
+        $gauge->is(fn($v) => $v);
+    }
+
+    public function testFitThrowsExceptionWhenCallbackHasNoParameters(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $gauge = new Gauge('foo');
+        $gauge->is(fn() => 'bar');
     }
 }

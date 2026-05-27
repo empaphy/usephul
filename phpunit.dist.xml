@@ -22,9 +22,6 @@
          requireCoverageMetadata="true">
 
     <testsuites>
-        <testsuite name="Types">
-            <directory>tests/Types</directory>
-        </testsuite>
         <testsuite name="Unit">
             <directory>tests/Unit</directory>
         </testsuite>

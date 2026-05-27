@@ -6,15 +6,15 @@ namespace Tests\Unit\Type;
 
 use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\Attributes\UsesFunction;
-use Tests\Samples\SampleChildTrait;
-use Tests\Samples\SampleClass;
-use Tests\Samples\SampleParentTrait;
-use Tests\Samples\SampleParentTraitUsingTrait;
-use Tests\Samples\SampleTraitInheritingChildClass;
-use Tests\Samples\SampleTraitUsingChildClass;
-use Tests\Samples\SampleTraitUsingClass;
-use Tests\Samples\SampleTraitUsingParentClass;
-use Tests\Samples\SampleTraitUsingTrait;
+use Tests\Fixtures\SampleChildTrait;
+use Tests\Fixtures\SampleClass;
+use Tests\Fixtures\SampleParentTrait;
+use Tests\Fixtures\SampleParentTraitUsingTrait;
+use Tests\Fixtures\SampleTraitInheritingChildClass;
+use Tests\Fixtures\SampleTraitUsingChildClass;
+use Tests\Fixtures\SampleTraitUsingClass;
+use Tests\Fixtures\SampleTraitUsingParentClass;
+use Tests\Fixtures\SampleTraitUsingTrait;
 use Tests\TestCase;
 
 use function empaphy\usephul\Type\uses;

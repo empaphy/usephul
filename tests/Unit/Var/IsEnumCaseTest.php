@@ -6,7 +6,7 @@ namespace Tests\Unit\Var;
 
 use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\Attributes\TestWith;
-use Tests\Samples\SampleUnitEnum;
+use Tests\Fixtures\SampleUnitEnum;
 use Tests\TestCase;
 
 use function empaphy\usephul\Var\is_enum_case;

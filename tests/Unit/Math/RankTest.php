@@ -14,11 +14,11 @@ use DateTimeImmutable;
 use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Tests\Samples\SampleCountable;
-use Tests\Samples\SampleIntBackedEnum;
-use Tests\Samples\SampleStringable;
-use Tests\Samples\SampleStringBackedEnum;
-use Tests\Samples\SampleUnitEnum;
+use Tests\Fixtures\SampleCountable;
+use Tests\Fixtures\SampleIntBackedEnum;
+use Tests\Fixtures\SampleStringable;
+use Tests\Fixtures\SampleStringBackedEnum;
+use Tests\Fixtures\SampleUnitEnum;
 use Tests\TestCase;
 
 use function empaphy\usephul\Math\rank;

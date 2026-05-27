@@ -6,7 +6,7 @@ namespace Tests\Unit\Var;
 
 use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\Attributes\TestWith;
-use Tests\Samples\SampleClass;
+use Tests\Fixtures\SampleClass;
 use Tests\TestCase;
 
 use function empaphy\usephul\Var\is_non_negative_int;

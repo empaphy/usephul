@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Var;
 
 use empaphy\usephul\Var\Type;
-use Tests\Samples\SampleClass;
+use Tests\Fixtures\SampleClass;
 
 use function assert;
 use function fclose;

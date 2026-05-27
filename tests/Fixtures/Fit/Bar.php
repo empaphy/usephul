@@ -2,6 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Tests\fixtures\Fit;
+namespace Tests\Fixtures\Fit;
 
 class Bar implements IBar {}

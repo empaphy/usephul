@@ -20,8 +20,13 @@
     "require-dev": {
         "brianium/paratest": "^7.2",
         "empaphy/filharmonic": "^1",
-        "friendsofphp/php-cs-fixer": "^3",
+        "empaphy/polyphill": "^1",
+        "empaphy/polyphill-php": "^1.801",
+        "friendsofphp/php-cs-fixer": "^3.10",
+        "mockery/mockery": "^1.6.10",
+        "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "^2",
+        "phpstan/phpstan-mockery": "^2",
         "phpstan/phpstan-phpunit": "^2",
         "phpunit/phpunit": "^10 <10.5.32 || >=11.2"
     },
@@ -49,6 +54,9 @@
         }
     },
     "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        },
         "audit": {
             "ignore": {
                 "PKSA-z3gr-8qht-p93v": "'PHPUnit Vulnerable to Unsafe Deserialization in PHPT Code Coverage Handling' – We don't use PHPT"
@@ -56,9 +64,22 @@
         }
     },
     "scripts": {
-        "cs": "vendor/bin/php-cs-fixer check",
-        "stan": "vendor/bin/phpstan --memory-limit=1G",
-        "test": "vendor/bin/phpunit"
+        "check": ["@composer install", "@cs", "@stan", "@test"],
+        "cs": "@php vendor/bin/php-cs-fixer check",
+        "cs-fix": "@php vendor/bin/php-cs-fixer fix",
+        "stan": "@php vendor/bin/phpstan --memory-limit=1G",
+        "test": "@php -d xdebug.mode=coverage vendor/bin/paratest --passthru-php=\"'-d' 'xdebug.mode=coverage'\" --coverage-text",
+        "test-lowest": [
+            "cp -f composer.lock composer.lock.bak | true",
+            "echo 'Downgrading composer packages to their lowest possible versions...'",
+            "@composer update --prefer-lowest --no-interaction --no-progress --quiet",
+            "@test",
+            "cp -f composer.lock.bak composer.lock | true",
+            "echo 'Installing previously installed versions of composer packages...'",
+            "@composer install --no-interaction --no-progress --quiet",
+            "rm composer.lock.bak"
+        ],
+        "ci": ["@check", "@test-lowest"]
     },
     "extra": {
         "branch-alias": {

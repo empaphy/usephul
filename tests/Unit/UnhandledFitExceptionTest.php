@@ -7,7 +7,7 @@ namespace Tests\Unit;
 use empaphy\usephul\UnhandledFitException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Tests\Samples\SampleStringable;
+use Tests\Fixtures\SampleStringable;
 use Tests\TestCase;
 
 #[CoversClass(UnhandledFitException::class)]

@@ -13,7 +13,7 @@ use Tests\Unit\Enumerations\EnumDynamicity\SampleDynamicEnum;
 use ValueError;
 
 #[CoversClass(EnumDynamicity::class)]
-#[RequiresPhpunit('<11.2')]
+#[RequiresPhpunit('<11.2.0')]
 class EnumDynamicityCoversClassTest extends TestCase
 {
     #[TestWith(['mock' => SampleDynamicEnum::Foo])]

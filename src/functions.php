@@ -16,24 +16,13 @@ namespace empaphy\usephul;
 
 use Closure;
 use InvalidArgumentException;
-use ReflectionException;
-use ReflectionFunction;
-use ReflectionIntersectionType;
-use ReflectionType;
-use ReflectionUnionType;
-
-use function assert;
-use function count;
-use function get_debug_type;
-use function is_string;
-use function sprintf;
 
 /**
  * Returns the result of the first callback with a parameter type that fits
  * the type of the given value.
  *
- * This function functions similar to a `match` or `switch` statement but uses
- * type checks to gauge which expression to evaluate for __subject__.
+ * This function functions similar to a `match` or `switch` statement but
+ * uses type checks to gauge which expression to evaluate for __subject__.
  *
  *     use function empaphy\usephul\fit;
  *
@@ -46,17 +35,32 @@ use function sprintf;
  *         fn(mixed $default)         => "value is of some other type",
  *     );
  *
- * {@see fit()} is optimized for performance and makes no recursive calls, or
- * calls to any other helper functions; it's completely self-contained.
+ * If no callback parameters are provided, {@see fit()} will return an instance
+ * of the {@see Gauge} class:
+ *
+ *     $gauge = fit('foo');
+ *     $result = $gauge->as(
+ *         fn(string $v): string => "value '$v' is a string",
+ *     );
+ *
+ * Which allows for a more readable format:
+ *
+ *     $result = fit('foo')->as(
+ *         fn(string $v): string => "value '$v' is a string",
+ *     );
+ *
+ * {@see fit()} is optimized for performance and makes no recursive calls,
+ * or calls to any other helper functions; it's completely self-contained.
  *
  * @package Control\Functions
  *
+ * @template TSubject
  * @template TResult
  *
- * @param  mixed  $subject
+ * @param  TSubject  $subject
  *   The value to gauge.
  *
- * @param  Closure(mixed $arg, mixed ...$args): TResult  $callback
+ * @param  ?Closure(mixed $arg, mixed ...$args): TResult  $callback
  *   A callback function. The first callback argument with a parameter type
  *   that fits __subject__ will be called and its result returned.
  *
@@ -64,106 +68,30 @@ use function sprintf;
  *   Additional callback functions. The first callback function with a parameter
  *   type that fits __subject__ will be called and its result returned.
  *
- * @return TResult
+ * @return ($callback is null ? Gauge<TSubject> : TResult)
  *   The result of the first of the __callbacks__ that fits __subject__.
  *
  * @throws InvalidArgumentException
- *   Thrown if a callback has no parameters, or if any callback parameter is missing a type declaration.
+ *   Thrown if invalid callback arguments are provided.
  *
  * @throws UnhandledFitException
  *   Thrown when no callback function can fit the subject.
  */
-function fit(mixed $subject, Closure $callback, Closure ...$callbacks): mixed
-{
-    $subjectType = get_debug_type($subject);
-
-    $argumentPosition = 2;
-    foreach ([$callback, ...$callbacks] as $key => $fn) {
-        try {
-            $reflectionFunction = new ReflectionFunction($fn);
-        } catch (ReflectionException) {  // @codeCoverageIgnore
-            continue;                    // @codeCoverageIgnore
-        }
-
-        if ($reflectionFunction->getNumberOfParameters() === 0) {
+function fit(
+    mixed    $subject,
+    ?Closure $callback = null,
+    Closure  ...$callbacks,
+): mixed {
+    if ($callback === null) {
+        if ($callbacks) {
             throw new InvalidArgumentException(
-                sprintf(
-                    'Argument #%d (...$callbacks[%s])'
-                    . ' must have at least one parameter',
-                    $argumentPosition,
-                    is_string($key) ? "'$key'" : $key,
-                ),
+                'Argument #3 (...$callbacks) is not allowed if argument #2'
+                . ' ($callback) is null',
             );
         }
 
-        $types = [[]];
-        foreach ($reflectionFunction->getParameters() as $parameter) {
-            $types[0][] = $parameter->getType();
-        }
-
-        // Please forgive me for the hard-to-read code that follows. To avoid
-        // using recursion or helper functions, I implemented a custom
-        // stack-based algorithm to traverse the type graph of the callback
-        // parameters.
-
-        $modes = [true];
-        $inits = [false];
-        $nums = [count($types[0])];
-        $pos = [0];
-        $fit = false;
-
-        for ($l = 0; $l > -1;) {
-            $type = $types[$l][$pos[$l]++];
-            $mode = $type instanceof ReflectionUnionType;
-            $init = $type instanceof ReflectionIntersectionType;
-
-            if ($mode || $init) {
-                $l++;
-                $types[$l] = $type->getTypes();
-                $inits[$l] = $init;
-                $modes[$l] = $mode;
-                $nums[$l] = count($types[$l]);
-                $pos[$l] = 0;
-
-                continue;
-            }
-
-            if ($type === null) {
-                throw new InvalidArgumentException(
-                    sprintf(
-                        'Argument #%d (...$callbacks[%s])'
-                        . ' must have a type declaration',
-                        $argumentPosition,
-                        is_string($key) ? "'$key'" : $key,
-                    ),
-                );
-            }
-
-            assert($type instanceof ReflectionType);
-
-            $typeName = (string) $type;
-            $fit = $subjectType === $typeName
-                || $subject instanceof $typeName
-                || true === $subject && 'true' === $typeName
-                || false === $subject && 'false' === $typeName
-                || 'mixed' === $typeName;
-
-            while ($l > -1 && ($fit === $modes[$l] || $pos[$l] === $nums[$l])) {
-                if ($pos[$l] === $nums[$l] && $fit !== $modes[$l]) {
-                    $fit = $inits[$l];
-                }
-
-                unset($types[$l], $modes[$l], $nums[$l], $pos[$l], $inits[$l]);
-                $l--;
-            }
-        }
-
-        if ($fit) {
-            return $fn($subject);
-        }
-
-        $argumentPosition++;
+        return new Gauge($subject);
     }
 
-    throw new UnhandledFitException($subject, [$callback, ...$callbacks]);
+    return (new Gauge($subject))->is($callback, ...$callbacks);
 }

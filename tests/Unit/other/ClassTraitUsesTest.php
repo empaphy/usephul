@@ -6,11 +6,11 @@ namespace Tests\Unit\other;
 
 use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\Attributes\TestWith;
-use Tests\Samples\SampleChildTrait;
-use Tests\Samples\SampleParentTrait;
-use Tests\Samples\SampleParentTraitUsingTrait;
-use Tests\Samples\SampleTraitUsingChildClass;
-use Tests\Samples\SampleTraitUsingParentClass;
+use Tests\Fixtures\SampleChildTrait;
+use Tests\Fixtures\SampleParentTrait;
+use Tests\Fixtures\SampleParentTraitUsingTrait;
+use Tests\Fixtures\SampleTraitUsingChildClass;
+use Tests\Fixtures\SampleTraitUsingParentClass;
 use Tests\TestCase;
 
 use function empaphy\usephul\class_traits_uses;

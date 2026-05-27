@@ -31,7 +31,7 @@ class PathInfo
     /**
      * The path of the directory or file.
      */
-    public readonly string|null $dirname;
+    public readonly ?string $dirname;
 
     /**
      * The name of the directory or the name and extension of the file.
@@ -41,7 +41,7 @@ class PathInfo
     /**
      * The extension of the file.
      */
-    public readonly string|null $extension;
+    public readonly ?string $extension;
 
     /**
      * The name of the file (without the extension) or directory.

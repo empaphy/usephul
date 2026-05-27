@@ -1,8 +1,14 @@
 <?php
 
+/**
+ * @noinspection PhpUnhandledExceptionInspection
+ */
+
 declare(strict_types=1);
 
 namespace Tests;
+
+use Mockery;
 
 use function assert;
 use function restore_error_handler;
@@ -87,6 +93,8 @@ class TestCase extends \PHPUnit\Framework\TestCase
                 $this->fail("An unexpected warning was triggered: $errstr");
             }
         }
+
+        Mockery::close();
 
         parent::tearDown();
     }

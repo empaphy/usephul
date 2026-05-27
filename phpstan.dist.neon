@@ -1,7 +1,6 @@
-includes:
-    - vendor/phpstan/phpstan-phpunit/extension.neon
-
 parameters:
+    bootstrapFiles:
+        - tests/bootstrap.php
     checkFunctionNameCase:             true
     checkInternalClassCaseSensitivity: true
     checkUninitializedProperties:      true
@@ -13,6 +12,8 @@ parameters:
         - identifier: missingType.iterableValue
 
     level: 8
+    parallel:
+        maximumNumberOfProcesses: 4
     reportWrongPhpDocTypeInVarTag: true
 
     resultCachePath: var/cache/phpstan/resultCache.php

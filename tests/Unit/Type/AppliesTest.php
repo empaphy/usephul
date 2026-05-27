@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Tests\Unit\Type;
 
 use PHPUnit\Framework\Attributes\CoversFunction;
-use Tests\Samples\SampleAttributeTargetChildClass;
-use Tests\Samples\SampleAttributeTargetClass;
-use Tests\Samples\SampleClass;
-use Tests\Samples\SampleClassAttribute;
+use Tests\Fixtures\SampleAttributeTargetChildClass;
+use Tests\Fixtures\SampleAttributeTargetClass;
+use Tests\Fixtures\SampleClass;
+use Tests\Fixtures\SampleClassAttribute;
 use Tests\TestCase;
 
 use function empaphy\usephul\Type\applies;
