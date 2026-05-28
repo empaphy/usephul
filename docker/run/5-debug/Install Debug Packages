@@ -1,0 +1,46 @@
+#!/bin/bash
+# shellcheck disable=SC2068
+
+set -e
+
+export DEBIAN_FRONTEND="noninteractive"
+
+function install_debug_packages() {
+  local packages=(
+    bash-completion
+    curl
+    dnsutils
+    fd-find
+    gh
+    git
+    iputils-ping
+    jq
+    man-db
+    manpages
+    manpages-posix
+    nano
+    sudo
+    telnet
+    tree
+    unzip
+    wget
+    zip
+  )
+
+  # No need for custom APT and DPkg configuration any more.
+  rm --verbose /etc/apt/apt.conf.d/zz-*
+
+  set -x
+
+  # Disable the diversion of man pages.
+  dpkg-divert --rename --remove /usr/bin/man
+
+  apt-get --yes --quiet update
+  apt-get --yes --quiet install "${packages[@]}"
+
+  mandb
+
+  { set +x; } 2> /dev/null
+}
+
+install_debug_packages

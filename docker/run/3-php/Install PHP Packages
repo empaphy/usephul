@@ -1,0 +1,39 @@
+#!/bin/bash
+
+set -e
+
+export DEBIAN_FRONTEND='noninteractive'
+
+function install_php_packages() {
+  local packages=(
+    "php$PHP_VERSION-bcmath"
+    "php$PHP_VERSION-cli"
+    "php$PHP_VERSION-curl"
+    "php$PHP_VERSION-dom"
+    "php$PHP_VERSION-intl"
+    "php$PHP_VERSION-mbstring"
+    "php$PHP_VERSION-xml"
+    "php$PHP_VERSION-xdebug"
+  )
+
+  set -x
+  apt-get --yes --quiet update
+  apt-get --yes --quiet install --no-install-recommends "${packages[@]}"
+  { set +x; } 2> /dev/null
+
+  rm --verbose --force /var/cache/debconf/*-old
+
+  # Create an empty default conf.d, so we can set that as the default `PHP_INI_SCAN_DIR`.
+  mkdir --verbose --parents /usr/local/etc/php/conf.d
+
+  # Move Xdebug configs to separate dirs, so they're disabled by default but can optionally be enabled.
+  mkdir --verbose --parents /usr/local/etc/php/xdebug-conf.d
+  mv --verbose "$PHP_INI_DIR"/conf.d/[0-9][0-9]-xdebug.ini /usr/local/etc/php/xdebug-conf.d
+
+  # php: Create pid directory.
+  mkdir --verbose --parents /run/php
+  chown --changes root:www-data /run/php
+  chmod --changes g+rws /run/php
+}
+
+install_php_packages

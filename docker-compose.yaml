@@ -1,6 +1,20 @@
 services:
+  php8.1:
+    image: "empaphy/php:${PHP_VERSION:-8.1}-${DMP_BUILD_TARGET:-debug}"
+    build:
+      context: ./docker
+      target: "${DMP_BUILD_TARGET:-debug}"
+      args:
+        PHP_VERSION: '8.1'
+    init: true
+    command: ['sleep', 'infinity']
+    volumes:
+      - { type: bind, source: $PWD, target: $PWD }
+    working_dir: $PWD
+
   phpdoc:
     image: phpdoc/phpdoc:3
     init: true
     volumes:
       - { type: bind, source: ./, target: /data }
+    profiles: ['docs']

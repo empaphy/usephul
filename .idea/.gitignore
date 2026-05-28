@@ -6,6 +6,7 @@
 !/dictionaries/project.xml
 !/inspectionProfiles
 !/inspectionProfiles/Project_Default.xml
+!/jsonSchemas.xml
 !/runConfigurations
 !/runConfigurations/*.xml
 !/scopes
