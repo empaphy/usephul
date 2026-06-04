@@ -1,4 +1,6 @@
 {
+    "$schema": "https://getcomposer.org/schema.json",
+
     "name": "empaphy/usephul",
     "description": "Provides useful classes and functions that extend the standard functionality of PHP.",
     "type": "library",
@@ -20,6 +22,7 @@
     },
     "require-dev": {
         "brianium/paratest": "^7.2",
+        "composer/composer": "^2",
         "empaphy/filharmonic": "^1",
         "empaphy/polyphill": "^1",
         "empaphy/polyphill-php": "~1.801.801",
@@ -81,6 +84,15 @@
             "rm composer.lock.bak"
         ],
         "ci": ["@check", "@test-lowest"]
+    },
+    "scripts-descriptions": {
+        "check": "Run all checks",
+        "cs": "Check whether coding style conforms to PER-CS using PHP-CS-Fixer",
+        "cs-fix": "Fixes coding style so it conforms to PER-CS using PHP-CS-Fixer",
+        "stan": "Perform static analysis using PHPStan at level 8",
+        "test": "Run unit tests with coverage enabled using PHPUnit and Xdebug",
+        "test-lowest": "Run `test` with the lowest possible versions of composer packages",
+        "ci": "Runs all checks and tests"
     },
     "extra": {
         "branch-alias": {
