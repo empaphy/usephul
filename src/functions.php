@@ -15,7 +15,14 @@ declare(strict_types=1);
 namespace empaphy\usephul;
 
 use Closure;
+use Generator;
 use InvalidArgumentException;
+use SplStack;
+
+use function assert;
+use function get_error_handler;
+use function restore_error_handler;
+use function set_error_handler;
 
 /**
  * Returns the result of the first callback with a parameter type that fits
@@ -94,4 +101,58 @@ function fit(
     }
 
     return (new Gauge($subject))->is($callback, ...$callbacks);
+}
+
+/**
+ * Removes a user-defined error handler function from the error handler stack.
+ *
+ * If the handler is defined multiple times in the stack, only the most recent
+ * one will be removed.
+ *
+ * @package ErrorHandling
+ *
+ * @param  ?callable(int, string, ?string, ?int): bool  $callback
+ * @return bool
+ */
+function remove_error_handler(?callable $callback): bool
+{
+    $stack = new SplStack();
+    $count = 0;
+    $found = false;
+
+    do {
+        $handler = get_error_handler();
+        restore_error_handler();
+
+        if ($handler === null) {
+            $count++;
+            $stack[] = $handler;
+        } else {
+            $count = 0;
+
+            if ($handler === $callback) {
+                $found = true;
+            } else {
+                // Collect the error handlers that are not the one we are looking
+                // for.
+                $stack[] = $handler;
+            }
+        }
+    } while (! $found && $count < 10);
+    // Unfortunately, there is no 100% reliable way to determine the number
+    // of error handlers in the stack, so we assume that when we hit `null`
+    // ten times in a row, we have reached the end of the stack.
+
+    // Remove the counted `null` handlers from the stack.
+    for ($i = 0; $i < $count; $i++) {
+        $handler = $stack->pop();
+        assert(null === $handler);
+    }
+
+    // Re-set the error handlers we have collected.
+    foreach ($stack as $handler) {
+        set_error_handler($handler);
+    }
+
+    return $found;
 }
