@@ -156,3 +156,29 @@ function remove_error_handler(?callable $callback): bool
 
     return $found;
 }
+
+/**
+ * Sets a user-defined error handler function with a fallback.
+ *
+ * @package ErrorHandling
+ *
+ * @param  callable(int, string, ?string, ?int): bool  $callback
+ * @param  int  $error_levels
+ * @return void
+ */
+function push_error_handler(callable $callback, int $error_levels = E_ALL): void
+{
+    $next = get_error_handler();
+    if (null === $next) {
+        set_error_handler($callback, $error_levels);
+
+        return;
+    }
+
+    set_error_handler(
+        fn(int $errno, string $errstr, ?string $errfile, ?int $errline): bool
+            => call_user_func($callback, ...func_get_args())
+            ?: call_user_func($next, ...func_get_args()),
+        $error_levels,
+    );
+}
